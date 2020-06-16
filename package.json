@@ -1,0 +1,23 @@
+{
+  "name": "manga",
+  "version": "1.0.0",
+  "description": "microservice for manga",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "manga",
+    "manga-eden",
+    "open-source"
+  ],
+  "author": "Tushar Singh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2"
+  }
+}
