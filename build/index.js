@@ -7,6 +7,7 @@ var express = require("express");
 var mongoose = require("mongoose");
 var user_1 = __importDefault(require("./Routers/user"));
 require('dotenv').config();
+mongoose.Promise = global.Promise;
 var PORT = process.env.PORT || 50;
 var app = express();
 app.set('json spaces', 4);
@@ -18,3 +19,4 @@ mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }
 app.listen(PORT, function () {
     console.log("Started at port no " + PORT);
 });
+exports.default = mongoose;

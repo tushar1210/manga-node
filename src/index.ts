@@ -1,7 +1,9 @@
 import express = require ('express');
 import mongoose = require("mongoose");
-import user from './Routers/user'
+import user from './Routers/user';
 require('dotenv').config()
+
+mongoose.Promise = global.Promise ;
 
 const PORT = process.env.PORT || 50;
 const app = express() ;
@@ -17,3 +19,5 @@ mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()
 app.listen(PORT,()=>{
     console.log("Started at port no "+PORT);
 });
+
+export default mongoose;
