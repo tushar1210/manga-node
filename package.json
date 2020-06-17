@@ -4,8 +4,8 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node build/index.js"
+    "test": "node ./build/src/test.js",
+    "run": "node ./build/src/index.js"
   },
   "keywords": [
     "manga",
@@ -18,6 +18,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@types/node": "^14.0.13",
     "del": "^5.1.0",
     "gulp": "^4.0.2"
   }
