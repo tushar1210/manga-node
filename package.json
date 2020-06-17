@@ -15,6 +15,7 @@
   "author": "Tushar Singh",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.6",
     "express": "^4.17.1"
   },
   "devDependencies": {
