@@ -35,16 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var express_1 = require("express");
-var handler = __importStar(require("../Handlers/user"));
+var handler = require("../Handlers/user");
 var router = express_1.Router();
 router.post('/login', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var user, pass, a;
@@ -76,7 +69,7 @@ router.post('/login', function (request, response) { return __awaiter(void 0, vo
                                 message: "Invalid User"
                             });
                         }
-                    }).catch(function (e) {
+                    })["catch"](function (e) {
                         response.status(501).json({
                             success: false,
                             message: "Server Error",
@@ -114,8 +107,7 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
                             success: true,
                             user: data
                         });
-                    })
-                        .catch(function (e) {
+                    })["catch"](function (e) {
                         console.log(e);
                         response.status(210).json({
                             success: false,
@@ -128,4 +120,4 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
         }
     });
 }); });
-exports.default = router;
+exports["default"] = router;
