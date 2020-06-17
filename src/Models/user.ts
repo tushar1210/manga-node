@@ -2,14 +2,15 @@ import mongoose = require('mongoose');
 
 var Schema = mongoose.Schema
 
-var User = new Schema({
-    name : {
+var user = new Schema({
+    id : {
         type:String,
         required:true,
         minlength:1,
-        trim:true
+        trim:true,
+        unique:true
     },
-    password : {
+    pass : {
         type:String,
         required:true,
         minlength:1,
@@ -20,3 +21,4 @@ var User = new Schema({
         required : false 
     }
 });
+export var User = mongoose.model('User',user) ;

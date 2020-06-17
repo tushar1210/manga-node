@@ -5,7 +5,8 @@ function defaultTask(cb) {
   // place code for your default task here
   
   del([
-        'src/*.js'
+        'src/*.js',
+        'src/*/*.js'
       ]);
   cb();
 }

@@ -36,12 +36,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var user_1 = require("../Models/user");
 function login(id, pass) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            console.log('login ', id, pass);
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_1.User.findOne({ id: id, pass: pass }).exec()];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
         });
     });
 }
 exports.login = login;
+function register(id, pass) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    user_1.User.findOne({ id: id, pass: pass }, function (err, user) {
+                        if (err) {
+                            reject(err);
+                        }
+                        if (user) {
+                            reject(user);
+                        }
+                        else {
+                            var u = new user_1.User({
+                                id: id,
+                                pass: pass
+                            });
+                            resolve(u.save());
+                        }
+                    });
+                })];
+        });
+    });
+}
+exports.register = register;
