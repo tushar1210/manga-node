@@ -4,8 +4,8 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    "test": "node ./build/src/test.js",
-    "run": "node ./build/src/index.js",
+    "test": "node ./build/test.js",
+    "run": "node ./build/index.js",
     "build": "tsc ./src/index.ts"
   },
   "keywords": [

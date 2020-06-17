@@ -1,5 +1,6 @@
-import * as mongoose from 'mongoose';
+
 
 export async function login(id:String,pass:String){
-    console.log('login ',login,pass);
+    console.log('login ',id,pass);
+
 }

@@ -7,6 +7,9 @@ router.post('/login',async (request:Request, response:Response)=>{
     const pass = request.query.pass;
     if(user !== null && pass!==null){
         await handler.login(String(user),String(pass));
-    };
+        
+    }
 
 });
+
+export default router;

@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function login(id, pass) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            console.log('login ', login, pass);
+            console.log('login ', id, pass);
             return [2 /*return*/];
         });
     });
