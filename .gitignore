@@ -1,5 +1,5 @@
 .DS_Store
-
+.vscode
 #js files in src
 src/*.js
 # Logs
