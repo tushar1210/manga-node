@@ -117,9 +117,9 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
                     })
                         .catch(function (e) {
                         console.log(e);
-                        response.status(501).json({
+                        response.status(210).json({
                             success: false,
-                            message: "Server Error"
+                            message: "User Exists"
                         });
                     })];
             case 1:

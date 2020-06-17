@@ -4,10 +4,8 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    // "test": "node ./build/test.js",
     "build": "node ./build/index.js"
-    // "build": "tsc ./src/index.ts"
-  },
+    },
   "keywords": [
     "manga",
     "manga-eden",
