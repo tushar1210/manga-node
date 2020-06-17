@@ -1,4 +1,17 @@
-import * as express from 'express';
+import express = require ('express');
+import mongoose = require("mongoose");
+require('dotenv').config()
 
+const PORT = process.env.PORT || 50;
 const app = express() ;
 app.set('json spaces', 4);
+
+const connString = String(process.env.CONNECTION_STRING);
+
+mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
+    console.log('Connected');
+});
+
+// app.listen(PORT,()=>{
+//     console.log("Started at port no "+PORT);
+// });
