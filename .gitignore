@@ -1,4 +1,7 @@
 .DS_Store
+
+#js files in src
+src/*.js
 # Logs
 logs
 *.log
