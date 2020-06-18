@@ -11,7 +11,9 @@ const app = express() ;
 app.set('json spaces', 4);
 
 const connString = String(process.env.CONNECTION_STRING);
-app.use('/')
+app.use("/",(req, res) =>{
+    res.send("<h1>Manga Node</h1>");
+});
 app.use('/user',userRouter);
 app.use('/manga',mangaRouter);
 app.set('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
