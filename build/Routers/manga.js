@@ -96,7 +96,6 @@ router.get('/image/:sourceId/:dir/:imageId', function (request, response) { retu
                         response.download('./build/temp/thumbnail/image.jpg', 'image.jpg', function () {
                             Fs.unlinkSync('./build/temp/thumbnail/image.jpg');
                         });
-                        //  Fs.unlinkSync('./build/temp/thumbnail/image.jpg')
                     })
                         .catch(function () {
                         response.status(500).json({
