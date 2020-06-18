@@ -4,8 +4,10 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    "build": "node ./build/index.js"
-    },
+    "test": "node ./build/src/test.js",
+    "run": "node ./build/src/index.js",
+    "build": "tsc ./src/index.ts"
+  },
   "keywords": [
     "manga",
     "manga-eden",
@@ -16,6 +18,7 @@
   "dependencies": {
     "@types/express": "^4.17.6",
     "@types/mongoose": "^5.7.24",
+    "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.19"

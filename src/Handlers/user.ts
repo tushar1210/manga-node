@@ -1,6 +1,5 @@
 import mongoose from "../index";
 import { User } from "../Models/user"
-import { resolve } from "dns";
 
 
 export async function login(id:string,pass:string){
