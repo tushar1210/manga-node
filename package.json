@@ -4,8 +4,8 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    "test": "node ./build/src/test.js",
-    "run": "node ./build/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./build/src/index.js",
     "build": "tsc ./src/index.ts"
   },
   "keywords": [
@@ -21,7 +21,9 @@
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.19"
+    "mongoose": "^5.9.19",
+    "ts-node": "^8.5.3",
+    "typescript": "^3.9.5"
   },
   "devDependencies": {
     "@types/node": "^14.0.13",
