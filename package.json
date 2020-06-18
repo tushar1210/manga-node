@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
-    "build": "tsc ./src/index.ts",
-    "dev": "nodemon -x ts-node src/index.ts"
+    "start": "node build/index.ts",
+    "build": "tsc src/index.ts",
+    "dev": "nodemon -x ts-node build/index.ts"
   },
   "keywords": [
     "manga",
