@@ -44,12 +44,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios = __importStar(require("axios"));
+var Fs = __importStar(require("fs"));
+var Path = __importStar(require("path"));
 var headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 };
-// export async function login(){
-// }
 function mangaEdenList() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -60,17 +60,26 @@ function mangaEdenList() {
 exports.mangaEdenList = mangaEdenList;
 function mangaEdenGetImage(dir, imgPath) {
     return __awaiter(this, void 0, void 0, function () {
+        var url, path, writer, response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios.default.get('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png', {
-                        headers: headers
-                    })];
-                case 1: 
-                // return await axios.default.get('https://cdn.mangaeden.com/mangasimg/'+dir+"/"+imgPath,
-                // {
-                //     headers: headers
-                // });
-                return [2 /*return*/, _a.sent()];
+                case 0:
+                    url = 'https://cdn.mangaeden.com/mangasimg/' + dir + "/" + imgPath;
+                    path = Path.resolve('./build/temp/thumbnail', 'image.jpg');
+                    writer = Fs.createWriteStream(path);
+                    return [4 /*yield*/, axios.default({
+                            url: url,
+                            method: 'GET',
+                            responseType: 'stream',
+                            headers: headers
+                        })];
+                case 1:
+                    response = _a.sent();
+                    response.data.pipe(writer);
+                    return [2 /*return*/, new Promise(function (resolve, reject) {
+                            writer.on('finish', resolve);
+                            writer.on('error', reject);
+                        })];
             }
         });
     });

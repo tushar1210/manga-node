@@ -45,6 +45,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var handler = __importStar(require("../Handlers/manga"));
+var Fs = __importStar(require("fs"));
 var router = express_1.Router();
 var sources = [0];
 router.get('/mangaList/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
@@ -82,7 +83,7 @@ router.get('/mangaList/:sourceId', function (request, response) { return __await
     });
 }); });
 router.get('/image/:sourceId/:dir/:imageId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId, dir, imageId, img;
+    var sourceId, dir, imageId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -91,21 +92,16 @@ router.get('/image/:sourceId/:dir/:imageId', function (request, response) { retu
                 imageId = request.params.imageId;
                 if (!(sourceId === '0')) return [3 /*break*/, 2];
                 return [4 /*yield*/, handler.mangaEdenGetImage(dir, imageId)
-                        .then(function (data) {
-                        var b64 = "data:" + data.headers["content-type"] + ";base64," + Buffer.from(data.data).toString('base64');
-                        console.log(data);
-                        img = Buffer.from(b64.split(',')[1], 'base64');
-                        response.writeHead(200, {
-                            'Content-Type': 'image/png',
-                            'Content-Length': data.data.length
+                        .then(function () {
+                        response.download('./build/temp/thumbnail/image.jpg', 'image.jpg', function () {
+                            Fs.unlinkSync('./build/temp/thumbnail/image.jpg');
                         });
-                        response.end(data.data);
+                        //  Fs.unlinkSync('./build/temp/thumbnail/image.jpg')
                     })
-                        .catch(function (e) {
+                        .catch(function () {
                         response.status(500).json({
                             success: false,
                             message: "Unable to fetch Image",
-                            error: e
                         });
                     })];
             case 1:
