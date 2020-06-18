@@ -35,13 +35,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var user_1 = require("../Models/user");
+var Models = __importStar(require("../Models/user.js"));
+var User = Models.User;
 function login(id, pass) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_1.User.findOne({ id: id, pass: pass }).exec()];
+                case 0: return [4 /*yield*/, User.findOne({ id: id, pass: pass }).exec()];
                 case 1: return [2 /*return*/, _a.sent()];
             }
         });
@@ -52,7 +60,7 @@ function register(id, pass) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
-                    user_1.User.findOne({ id: id, pass: pass }, function (err, user) {
+                    User.findOne({ id: id, pass: pass }, function (err, user) {
                         if (err) {
                             reject(err);
                         }
@@ -60,7 +68,7 @@ function register(id, pass) {
                             reject(user);
                         }
                         else {
-                            var u = new user_1.User({
+                            var u = new User({
                                 id: id,
                                 pass: pass
                             });

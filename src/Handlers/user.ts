@@ -1,6 +1,7 @@
 import mongoose from "../index";
-import { User } from "../Models/user"
+import * as Models from "../Models/user"
 
+const User = Models.User;
 
 export async function login(id:string,pass:string){
     
