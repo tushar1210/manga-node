@@ -53,7 +53,7 @@ var headers = {
 function mangaEdenList() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })];
+            return [2, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })];
         });
     });
 }
@@ -67,7 +67,7 @@ function mangaEdenGetImage(dir, imgPath) {
                     url = 'https://cdn.mangaeden.com/mangasimg/' + dir + "/" + imgPath;
                     path = Path.resolve('./build/temp/thumbnail', 'image.jpg');
                     writer = Fs.createWriteStream(path);
-                    return [4 /*yield*/, axios.default({
+                    return [4, axios.default({
                             url: url,
                             method: 'GET',
                             responseType: 'stream',
@@ -76,7 +76,7 @@ function mangaEdenGetImage(dir, imgPath) {
                 case 1:
                     response = _a.sent();
                     response.data.pipe(writer);
-                    return [2 /*return*/, new Promise(function (resolve, reject) {
+                    return [2, new Promise(function (resolve, reject) {
                             writer.on('finish', resolve);
                             writer.on('error', reject);
                         })];

@@ -1,5 +1,6 @@
 import * as Models from "../Models/user"
 
+
 const User = Models.User;
 
 export async function login(id:string,pass:string){
@@ -7,7 +8,6 @@ export async function login(id:string,pass:string){
     return await User.findOne({id:id,pass:pass}).exec()
     
 }
-
 export async function register(id:string,pass:string){
 
     return new Promise((resolve,reject)=>{
@@ -26,6 +26,4 @@ export async function register(id:string,pass:string){
             }
       })  
     })
-      
-    
 }

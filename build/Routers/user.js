@@ -53,17 +53,17 @@ router.post('/login', function (request, response) { return __awaiter(void 0, vo
             case 0:
                 user = request.query.userId;
                 pass = request.query.pass;
-                if (!((user === null || pass === null) || (user === undefined || pass === undefined) || (user === '' || pass === ''))) return [3 /*break*/, 1];
+                if (!((user === null || pass === null) || (user === undefined || pass === undefined) || (user === '' || pass === ''))) return [3, 1];
                 response.status(400).json({
                     success: false,
                     error: 'Bad Request',
                     message: 'invalid Parameters'
                 });
-                return [2 /*return*/];
+                return [2];
             case 1:
                 user = String(request.query.userId);
                 pass = String(request.query.pass);
-                return [4 /*yield*/, handler.login(user, pass).then(function (data) {
+                return [4, handler.login(user, pass).then(function (data) {
                         if (data !== null) {
                             response.json({
                                 success: true,
@@ -87,7 +87,7 @@ router.post('/login', function (request, response) { return __awaiter(void 0, vo
                 _a.sent();
                 a = 0;
                 _a.label = 3;
-            case 3: return [2 /*return*/];
+            case 3: return [2];
         }
     });
 }); });
@@ -104,11 +104,11 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
                         error: 'Bad Request',
                         message: 'invalid Parameters'
                     });
-                    return [2 /*return*/];
+                    return [2];
                 }
                 user = String(request.query.userId);
                 pass = String(request.query.pass);
-                return [4 /*yield*/, handler.register(user, pass).then(function (data) {
+                return [4, handler.register(user, pass).then(function (data) {
                         response.json({
                             success: true,
                             user: data
@@ -122,7 +122,7 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
                     })];
             case 1:
                 _a.sent();
-                return [2 /*return*/];
+                return [2];
         }
     });
 }); });
