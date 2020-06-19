@@ -43,7 +43,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Models = __importStar(require("../Models/user.js"));
+var Models = __importStar(require("../Models/user"));
 var User = Models.User;
 function login(id, pass) {
     return __awaiter(this, void 0, void 0, function () {
