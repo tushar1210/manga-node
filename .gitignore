@@ -1,8 +1,8 @@
 .DS_Store
 .vscode
 
-build/temp/*.jpg
-build/temp/*/*.jpg
+# build/temp/*.jpg
+# build/temp/*/*.jpg
 
 #js files in src
 src/*/*.js
