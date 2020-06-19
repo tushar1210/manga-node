@@ -31,5 +31,7 @@
   "devDependencies": {
     "del": "^5.1.0",
     "gulp": "^4.0.2"
+  },"engines": {
+    "node": "12.x"
   }
 }
