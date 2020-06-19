@@ -6,7 +6,6 @@ router.post('/login',async(request:Request, response:Response)=>{
     var user = request.query.userId;
     var pass = request.query.pass;
 
-    // console.log(typeof(user),pass);
 
     if((user === null || pass ===null)||(user===undefined || pass === undefined)||(user==='' || pass==='')){
         response.status(400).json({
@@ -57,14 +56,12 @@ router.post('/register',async(request:Request, response:Response)=>{
     user = String(request.query.userId);
     pass = String(request.query.pass);
     await handler.register(user,pass).then((data)=>{
-        console.log(data);
         response.json({
             success:true,
             user:data
         });
     })
     .catch((e)=>{
-        console.log(e);
         response.status(210).json({
             success:false,
             message:"User Exists"

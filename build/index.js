@@ -18,11 +18,9 @@ app.use("/", function (req, res) {
     res.sendFile(__dirname + '/Routers/index.html');
 });
 app.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36');
-// const connString = String(process.env.CONNECTION_STRING);
-// mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-//     console.log('Connected');
-// });
+var connString = String(process.env.CONNECTION_STRING);
+mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }, function () {
+});
 app.listen(PORT, function () {
-    console.log("Started at port no " + PORT);
 });
 exports.default = mongoose;

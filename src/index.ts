@@ -18,13 +18,11 @@ app.use("/",(req,res)=>{
 
 app.set('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
 
-// const connString = String(process.env.CONNECTION_STRING);
-// mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-//     console.log('Connected');
-// });
+const connString = String(process.env.CONNECTION_STRING);
+mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
+});
 
 app.listen(PORT,()=>{
-    console.log("Started at port no "+PORT);
 });
 
 export default mongoose;
