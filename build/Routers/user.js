@@ -109,14 +109,12 @@ router.post('/register', function (request, response) { return __awaiter(void 0,
                 user = String(request.query.userId);
                 pass = String(request.query.pass);
                 return [4 /*yield*/, handler.register(user, pass).then(function (data) {
-                        console.log(data);
                         response.json({
                             success: true,
                             user: data
                         });
                     })
                         .catch(function (e) {
-                        console.log(e);
                         response.status(210).json({
                             success: false,
                             message: "User Exists"

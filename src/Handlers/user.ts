@@ -1,4 +1,3 @@
-import mongoose from "../index";
 import * as Models from "../Models/user"
 
 const User = Models.User;

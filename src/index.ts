@@ -10,19 +10,19 @@ const PORT = process.env.PORT || 50;
 const app = express() ;
 app.set('json spaces', 4);
 
-const connString = String(process.env.CONNECTION_STRING);
-app.use("/",(req, res) =>{
-    res.send("<h1>Manga Node</h1>");
-});
 app.use('/user',userRouter);
 app.use('/manga',mangaRouter);
+app.use("/",(req,res)=>{
+    res.sendFile(__dirname+'/Routers/index.html');
+});
+
 app.set('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
-// mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-//     console.log('Connected');
-// });
+
+const connString = String(process.env.CONNECTION_STRING);
+mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
+});
 
 app.listen(PORT,()=>{
-    console.log("Started at port no "+PORT);
 });
 
 export default mongoose;
