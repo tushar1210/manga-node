@@ -60,8 +60,8 @@ router.get('/mangaList/:sourceId', function (request, response) { return __await
                         error: "Invalid/Insufficient Parameters"
                     });
                 }
-                if (!(sourceId === '0')) return [3 /*break*/, 2];
-                return [4 /*yield*/, handler.mangaEdenList()
+                if (!(sourceId === '0')) return [3, 2];
+                return [4, handler.mangaEdenList()
                         .then(function (data) {
                         response.json({
                             success: true,
@@ -78,7 +78,7 @@ router.get('/mangaList/:sourceId', function (request, response) { return __await
             case 1:
                 _a.sent();
                 _a.label = 2;
-            case 2: return [2 /*return*/];
+            case 2: return [2];
         }
     });
 }); });
@@ -90,8 +90,8 @@ router.get('/image/:sourceId/:dir/:imageId', function (request, response) { retu
                 sourceId = request.params.sourceId;
                 dir = request.params.dir;
                 imageId = request.params.imageId;
-                if (!(sourceId === '0')) return [3 /*break*/, 2];
-                return [4 /*yield*/, handler.mangaEdenGetImage(dir, imageId)
+                if (!(sourceId === '0')) return [3, 2];
+                return [4, handler.mangaEdenGetImage(dir, imageId)
                         .then(function () {
                         response.download('./build/temp/thumbnail/image.jpg', 'image.jpg', function () {
                             Fs.unlinkSync('./build/temp/thumbnail/image.jpg');
@@ -106,7 +106,7 @@ router.get('/image/:sourceId/:dir/:imageId', function (request, response) { retu
             case 1:
                 _a.sent();
                 _a.label = 2;
-            case 2: return [2 /*return*/];
+            case 2: return [2];
         }
     });
 }); });
