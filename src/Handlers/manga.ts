@@ -60,3 +60,4 @@ export async function getChapter(chapterId:String){
     url:"https://www.mangaeden.com/api/chapter/"+chapterId
   });
 }
+

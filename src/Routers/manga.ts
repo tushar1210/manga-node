@@ -1,4 +1,4 @@
-import {Request,Response,Router, response} from 'express';
+import {Request,Response,Router} from 'express';
 import * as handler from '../Handlers/manga';
 import * as Fs from 'fs'  ;
 

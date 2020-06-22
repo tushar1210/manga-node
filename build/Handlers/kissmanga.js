@@ -44,78 +44,29 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios = __importStar(require("axios"));
-var Fs = __importStar(require("fs"));
-var Path = __importStar(require("path"));
+var cheerio = __importStar(require("cheerio"));
 var headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 };
-function mangaEdenList() {
+function scrapeKissMangaAll() {
     return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })];
-        });
-    });
-}
-exports.mangaEdenList = mangaEdenList;
-function mangaEdenGetImage(dir, imgPath) {
-    return __awaiter(this, void 0, void 0, function () {
-        var url, path, writer, response;
+        var pageCtr, url;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    url = 'https://cdn.mangaeden.com/mangasimg/' + dir + "/" + imgPath;
-                    path = Path.resolve('./build/temp/thumbnail', 'image.jpg');
-                    writer = Fs.createWriteStream(path);
-                    return [4, axios.default({
-                            url: url,
+                    pageCtr = 0;
+                    url = 'https://kissmanga.in/manga-list/page/' + pageCtr + '/?m_orderby=alphabet';
+                    return [4, axios.default.request({
                             method: 'GET',
-                            responseType: 'stream',
-                            headers: headers
+                            headers: headers,
+                            url: url
+                        }).then(function (data) {
+                            var $ = cheerio.load(data.data);
+                        })
+                            .catch(function (e) {
+                            console.log(e);
                         })];
-                case 1:
-                    response = _a.sent();
-                    response.data.pipe(writer);
-                    return [2, new Promise(function (resolve, reject) {
-                            writer.on('finish', resolve);
-                            writer.on('error', reject);
-                        })];
-            }
-        });
-    });
-}
-exports.mangaEdenGetImage = mangaEdenGetImage;
-function mangaEdenChapterList(mangaID) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, axios.default.request({
-                        method: 'GET',
-                        headers: headers,
-                        url: "https://www.mangaeden.com/api/manga/" + mangaID
-                    })];
-                case 1: return [2, _a.sent()];
-            }
-        });
-    });
-}
-exports.mangaEdenChapterList = mangaEdenChapterList;
-function updateMangaEdenListJSON() {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })
-                        .then(function (data) {
-                        console.log('1');
-                        var obj = JSON.stringify(data.data.manga);
-                        Fs.writeFileSync('./build/temp/eden-list.json', obj);
-                        var now = new Date();
-                        Fs.appendFileSync('.log', '[Manga Eden] Succeessful MangaList Update at :    ' + now + '\n');
-                    })
-                        .catch(function (e) {
-                        console.log(e);
-                        return;
-                    })];
                 case 1:
                     _a.sent();
                     return [2];
@@ -123,19 +74,4 @@ function updateMangaEdenListJSON() {
         });
     });
 }
-exports.updateMangaEdenListJSON = updateMangaEdenListJSON;
-function getChapter(chapterId) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, axios.default.request({
-                        method: 'GET',
-                        headers: headers,
-                        url: "https://www.mangaeden.com/api/chapter/" + chapterId
-                    })];
-                case 1: return [2, _a.sent()];
-            }
-        });
-    });
-}
-exports.getChapter = getChapter;
+exports.scrapeKissMangaAll = scrapeKissMangaAll;
