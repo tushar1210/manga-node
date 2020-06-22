@@ -47,39 +47,54 @@ var express_1 = require("express");
 var handler = __importStar(require("../Handlers/manga"));
 var Fs = __importStar(require("fs"));
 var router = express_1.Router();
-var sources = [0];
+var sources = {
+    0: "mangaEden",
+    1: "kissmanga.in"
+};
 router.get('/mangaList/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId;
+    var sourceId, raw, data;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                sourceId = request.params.sourceId;
-                if (sourceId === null) {
-                    response.status(400).json({
-                        success: false,
-                        error: "Invalid/Insufficient Parameters"
-                    });
-                }
-                if (!(sourceId === '0')) return [3, 2];
-                return [4, handler.mangaEdenList()
-                        .then(function (data) {
-                        response.json({
-                            success: true,
-                            data: data.data
-                        });
-                    })
-                        .catch(function (e) {
-                        response.status(502).json({
-                            success: false,
-                            message: "Unexpected Error",
-                            error: e
-                        });
-                    })];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2];
+        sourceId = request.params.sourceId;
+        if (sourceId === null) {
+            response.status(400).json({
+                success: false,
+                error: "Invalid/Insufficient Parameters"
+            });
         }
+        if (sourceId === '0') {
+            raw = Fs.readFileSync('./build/temp/eden-list.json');
+            data = JSON.parse(raw.toString());
+            response.json({
+                success: true,
+                data: data
+            });
+        }
+        return [2];
+    });
+}); });
+router.get('/mangaList/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var sourceId, query, raw, data, res;
+    return __generator(this, function (_a) {
+        sourceId = request.params.sourceId;
+        query = request.params.query;
+        if (sourceId === null || query === null) {
+            response.status(400).json({
+                success: false,
+                error: "Invalid/Insufficient Parameters"
+            });
+        }
+        if (sourceId === '0') {
+            raw = Fs.readFileSync('./build/temp/eden-list.json');
+            data = JSON.parse(raw.toString());
+            res = data.filter(function (d) {
+                return d.a.indexOf(query) > -1;
+            });
+            response.json({
+                success: true,
+                data: res
+            });
+        }
+        return [2];
     });
 }); });
 router.get('/image/:sourceId/:dir/:imageId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
