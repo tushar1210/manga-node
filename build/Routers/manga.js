@@ -170,7 +170,11 @@ router.get('/chapter/image/:sourceId/:chapterId', function (request, response) {
                         });
                     })
                         .catch(function (e) {
-                        console.log(e);
+                        response.status(404).json({
+                            success: false,
+                            error: 'NOT Found',
+                            message: 'check chapterId'
+                        });
                     })];
             case 1:
                 _a.sent();
