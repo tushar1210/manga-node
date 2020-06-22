@@ -85,6 +85,21 @@ function mangaEdenGetImage(dir, imgPath) {
     });
 }
 exports.mangaEdenGetImage = mangaEdenGetImage;
+function mangaEdenChapterList(mangaID) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, axios.default.request({
+                        method: 'GET',
+                        headers: headers,
+                        url: "https://www.mangaeden.com/api/manga/" + mangaID
+                    })];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+exports.mangaEdenChapterList = mangaEdenChapterList;
 function updateMangaEdenListJSON() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -107,3 +122,18 @@ function updateMangaEdenListJSON() {
     });
 }
 exports.updateMangaEdenListJSON = updateMangaEdenListJSON;
+function getChapter(chapterId) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, axios.default.request({
+                        method: 'GET',
+                        headers: headers,
+                        url: "https://www.mangaeden.com/api/chapter/" + chapterId
+                    })];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+exports.getChapter = getChapter;

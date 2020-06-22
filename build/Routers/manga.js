@@ -51,7 +51,7 @@ var sources = {
     0: "mangaEden",
     1: "kissmanga.in"
 };
-router.get('/mangaList/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+router.get('/list/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var sourceId, raw, data;
     return __generator(this, function (_a) {
         sourceId = request.params.sourceId;
@@ -72,7 +72,7 @@ router.get('/mangaList/:sourceId', function (request, response) { return __await
         return [2];
     });
 }); });
-router.get('/mangaList/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+router.get('/list/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var sourceId, query, raw, data, res;
     return __generator(this, function (_a) {
         sourceId = request.params.sourceId;
@@ -117,6 +117,60 @@ router.get('/image/:sourceId/:dir/:imageId', function (request, response) { retu
                             success: false,
                             message: "Unable to fetch Image",
                         });
+                    })];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2: return [2];
+        }
+    });
+}); });
+router.get('/chapter/list/:sourceId/:mangaId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var mangaId, sourceId;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                mangaId = request.params.mangaId;
+                sourceId = request.params.sourceId;
+                if (!(sourceId === '0')) return [3, 2];
+                return [4, handler.mangaEdenChapterList(mangaId)
+                        .then(function (data) {
+                        response.json({
+                            success: true,
+                            data: data.data.chapters
+                        });
+                    })
+                        .catch(function (e) {
+                        response.status(404).json({
+                            success: false,
+                            error: 'NOT Found',
+                            message: 'check mangaId'
+                        });
+                    })];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2: return [2];
+        }
+    });
+}); });
+router.get('/chapter/image/:sourceId/:chapterId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var chapterId, sourceId;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                chapterId = request.params.chapterId;
+                sourceId = request.params.sourceId;
+                if (!(sourceId === '0')) return [3, 2];
+                return [4, handler.getChapter(chapterId)
+                        .then(function (data) {
+                        response.json({
+                            success: true,
+                            data: data.data.images
+                        });
+                    })
+                        .catch(function (e) {
+                        console.log(e);
                     })];
             case 1:
                 _a.sent();

@@ -30,6 +30,14 @@ export async function mangaEdenGetImage(dir:String,imgPath:String){
     })
 }
 
+export async function mangaEdenChapterList(mangaID:String){
+  return await axios.default.request({
+    method:'GET',
+    headers:headers,
+    url:"https://www.mangaeden.com/api/manga/"+mangaID
+  });
+}
+
 export async function updateMangaEdenListJSON(){
   await axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers})
   .then((data)=>{
@@ -41,4 +49,12 @@ export async function updateMangaEdenListJSON(){
     console.log(e)
     return;
   })
+}
+
+export async function getChapter(chapterId:String){
+  return await axios.default.request({
+    method:'GET',
+    headers:headers,
+    url:"https://www.mangaeden.com/api/chapter/"+chapterId
+  });
 }
