@@ -44,6 +44,8 @@ export async function updateMangaEdenListJSON(){
     console.log('1')
     let obj = JSON.stringify(data.data.manga);
     Fs.writeFileSync('./build/temp/eden-list.json', obj);
+    var now = new Date()
+    Fs.appendFileSync('.log','[Manga Eden] Succeessful MangaList Update at :    '+now+'\n');
   })
   .catch((e)=>{
     console.log(e)

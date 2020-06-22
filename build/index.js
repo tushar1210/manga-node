@@ -29,7 +29,8 @@ app.use("/", function (req, res) {
 app.set('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36');
 var connString = String(process.env.CONNECTION_STRING);
 app.listen(PORT, function () {
-    cron.schedule('0 0 * * * *', function () {
+    cron.schedule('*/5 * * * * *', function () {
+        console.log(1);
         mangaHandler.updateMangaEdenListJSON();
     });
 });
