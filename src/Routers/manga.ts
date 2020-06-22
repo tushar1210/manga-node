@@ -9,30 +9,22 @@ const sources=[0]
 
 router.get('/mangaList/:sourceId',async(request:Request,response:Response)=>{
     var sourceId = request.params.sourceId;
+    
     if(sourceId===null){
         response.status(400).json({
             success:false,
             error:"Invalid/Insufficient Parameters"
         });
     }
+    //returns all manga list
     if(sourceId==='0'){
-        await handler.mangaEdenList()
-        .then((data)=>{
-            response.json({
-                success:true,
-                data:data.data
-            })
-        })
-        .catch((e)=>{
-            response.status(502).json({
-                success:false,
-                message:"Unexpected Error",
-                error:e
-            })
+        const raw = Fs.readFileSync('./build/temp/eden-list.json');
+        var data = JSON.parse(raw.toString());
+        response.json({
+            success:true,
+            data:data
         });
     }
-
-
 });
 
 

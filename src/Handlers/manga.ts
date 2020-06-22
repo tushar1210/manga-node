@@ -28,6 +28,17 @@ export async function mangaEdenGetImage(dir:String,imgPath:String){
       writer.on('finish', resolve)
       writer.on('error', reject)
     })
-    
+}
 
+export async function updateMangaEdenListJSON(){
+  await axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers})
+  .then((data)=>{
+    console.log('1')
+    let obj = JSON.stringify(data.data.manga);
+    Fs.writeFileSync('./build/temp/eden-list.json', obj);
+  })
+  .catch((e)=>{
+    console.log(e)
+    return;
+  })
 }
