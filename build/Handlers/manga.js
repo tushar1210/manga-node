@@ -85,3 +85,55 @@ function mangaEdenGetImage(dir, imgPath) {
     });
 }
 exports.mangaEdenGetImage = mangaEdenGetImage;
+function mangaEdenChapterList(mangaID) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, axios.default.request({
+                        method: 'GET',
+                        headers: headers,
+                        url: "https://www.mangaeden.com/api/manga/" + mangaID
+                    })];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+exports.mangaEdenChapterList = mangaEdenChapterList;
+function updateMangaEdenListJSON() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })
+                        .then(function (data) {
+                        console.log('1');
+                        var obj = JSON.stringify(data.data.manga);
+                        Fs.writeFileSync('./build/temp/eden-list.json', obj);
+                    })
+                        .catch(function (e) {
+                        console.log(e);
+                        return;
+                    })];
+                case 1:
+                    _a.sent();
+                    return [2];
+            }
+        });
+    });
+}
+exports.updateMangaEdenListJSON = updateMangaEdenListJSON;
+function getChapter(chapterId) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, axios.default.request({
+                        method: 'GET',
+                        headers: headers,
+                        url: "https://www.mangaeden.com/api/chapter/" + chapterId
+                    })];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+exports.getChapter = getChapter;
