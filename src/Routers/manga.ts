@@ -10,7 +10,7 @@ const sources={
     1:"kissmanga.in"
 }
 
-router.get('/mangaList/:sourceId',async(request:Request,response:Response)=>{
+router.get('/list/:sourceId',async(request:Request,response:Response)=>{
     var sourceId = request.params.sourceId;
     
     if(sourceId===null){
@@ -29,7 +29,7 @@ router.get('/mangaList/:sourceId',async(request:Request,response:Response)=>{
         });
     }
 });
-router.get('/mangaList/:sourceId/search/:query',async(request:Request,response:Response)=>{
+router.get('/list/:sourceId/search/:query',async(request:Request,response:Response)=>{
     var sourceId = request.params.sourceId;
     var query = request.params.query;
     if(sourceId===null || query===null){
@@ -50,8 +50,6 @@ router.get('/mangaList/:sourceId/search/:query',async(request:Request,response:R
         });
     }
 });
-
-
 router.get('/image/:sourceId/:dir/:imageId',async(request:Request,response:Response)=>{
     const sourceId=request.params.sourceId;
     const dir = request.params.dir;
