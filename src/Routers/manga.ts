@@ -1,4 +1,4 @@
-import {Request,Response,Router} from 'express';
+import {Request,Response,Router, response} from 'express';
 import * as handler from '../Handlers/manga';
 import * as Fs from 'fs'  ;
 
@@ -76,5 +76,48 @@ router.get('/image/:sourceId/:dir/:imageId',async(request:Request,response:Respo
 
 
 });
+router.get('/chapter/list/:sourceId/:mangaId',async(request:Request,response:Response)=>{
+    const mangaId = request.params.mangaId;
+    const sourceId = request.params.sourceId;
+    if(sourceId==='0'){
+        await handler.mangaEdenChapterList(mangaId)
+        .then((data)=>{
+            response.json({
+                success:true,
+                data:data.data.chapters
+            });
+            
+        })
+        .catch((e)=>{
+            response.status(404).json({
+                success:false,
+                error:'NOT Found',
+                message:'check mangaId'
+            })
+        });
+    }
+    
+});
+router.get('/chapter/image/:sourceId/:chapterId',async(request:Request,response:Response)=>{
+    const chapterId = request.params.chapterId;
+    const sourceId = request.params.sourceId;
+    if(sourceId==='0'){
+        await handler.getChapter(chapterId)
+        .then((data)=>{
+            response.json({
+                success:true,
+                data:data.data.images
+            });
+        })
+        .catch((e)=>{
+            response.status(404).json({
+                success:false,
+                error:'NOT Found',
+                message:'check chapterId'
+            });
+        });
+    }
+});
 
 export default router;
+
