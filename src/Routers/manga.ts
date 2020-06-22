@@ -5,7 +5,10 @@ import * as Fs from 'fs'  ;
 
 const router = Router();
 
-const sources=[0]
+const sources={
+    0:"mangaEden",
+    1:"kissmanga.in"
+}
 
 router.get('/mangaList/:sourceId',async(request:Request,response:Response)=>{
     var sourceId = request.params.sourceId;
@@ -26,7 +29,27 @@ router.get('/mangaList/:sourceId',async(request:Request,response:Response)=>{
         });
     }
 });
-
+router.get('/mangaList/:sourceId/search/:query',async(request:Request,response:Response)=>{
+    var sourceId = request.params.sourceId;
+    var query = request.params.query;
+    if(sourceId===null || query===null){
+        response.status(400).json({
+            success:false,
+            error:"Invalid/Insufficient Parameters"
+        });
+    }
+    if(sourceId==='0'){
+        const raw = Fs.readFileSync('./build/temp/eden-list.json');
+        const data = JSON.parse(raw.toString());
+        var res = data.filter((d:any)=>{
+            return d.a.indexOf(query)>-1;
+        });
+        response.json({
+            success:true,
+            data:res
+        });
+    }
+});
 
 
 router.get('/image/:sourceId/:dir/:imageId',async(request:Request,response:Response)=>{

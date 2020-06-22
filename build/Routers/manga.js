@@ -47,7 +47,10 @@ var express_1 = require("express");
 var handler = __importStar(require("../Handlers/manga"));
 var Fs = __importStar(require("fs"));
 var router = express_1.Router();
-var sources = [0];
+var sources = {
+    0: "mangaEden",
+    1: "kissmanga.in"
+};
 router.get('/mangaList/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
     var sourceId, raw, data;
     return __generator(this, function (_a) {
@@ -64,6 +67,31 @@ router.get('/mangaList/:sourceId', function (request, response) { return __await
             response.json({
                 success: true,
                 data: data
+            });
+        }
+        return [2];
+    });
+}); });
+router.get('/mangaList/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var sourceId, query, raw, data, res;
+    return __generator(this, function (_a) {
+        sourceId = request.params.sourceId;
+        query = request.params.query;
+        if (sourceId === null || query === null) {
+            response.status(400).json({
+                success: false,
+                error: "Invalid/Insufficient Parameters"
+            });
+        }
+        if (sourceId === '0') {
+            raw = Fs.readFileSync('./build/temp/eden-list.json');
+            data = JSON.parse(raw.toString());
+            res = data.filter(function (d) {
+                return d.a.indexOf(query) > -1;
+            });
+            response.json({
+                success: true,
+                data: res
             });
         }
         return [2];
