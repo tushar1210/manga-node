@@ -1,18 +1,24 @@
 import * as kissManga from '../src/Handlers/kissmanga'
-
-kissManga.scrapeKissMangaAll();
-
-// var h=$('.page-content-listing')
-        // id=h.children('.page-listing-item').children('.row').children('.col-12').children('.page-item-detail').children('.item-thumb').attr('data-post-id');
-        
-        // link=h.children('.page-listing-item').children('.row').children('.col-12').children('.page-item-detail').
-        // children('.item-thumb').children().first().attr('href');
-
-        // title=h.children('.page-listing-item').children('.row').children('.col-12').children('.page-item-detail').
-        // children('.item-thumb').children().first().attr('title');
-
-        // image=h.children('.page-listing-item').children('.row').children('.col-12').children('.page-item-detail').
-        // children('.item-thumb').children().children().first().attr('src');
+import * as Fs from 'fs'
+import {mangaList} from '../src/Interfaces/kissManga-mangaList'
 
 
-        // <a href="https://kissmanga.in/kissmanga/temporary-circumstances-of-a-bride-get-divorced-to-get-rich/chapter-2/" class="btn-link"> chapter 2 </a>
+var list:mangaList[] = [];
+
+kissManga.scrapeKissMangaAll('0')
+.then((data:mangaList[])=>{
+        if(data.length==0){
+                console.log('hello')
+        } 
+
+        data.forEach(element => {
+                list.push(element);
+        });
+})
+.catch((e)=>{
+        console.log(e);
+        return;
+});   
+
+
+
