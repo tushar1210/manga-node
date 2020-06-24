@@ -46,6 +46,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var handler = __importStar(require("../Handlers/manga"));
 var Fs = __importStar(require("fs"));
+var mangaEdenScrapper = __importStar(require("../Scrapper/mangaeden"));
+var kissMangaScrapper = __importStar(require("../Scrapper/kissmanga"));
 var router = express_1.Router();
 var sources = {
     0: "mangaEden",
@@ -73,28 +75,54 @@ router.get('/list/:sourceId', function (request, response) { return __awaiter(vo
     });
 }); });
 router.get('/list/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId, query, raw, data, res;
+    var sourceId, query;
     return __generator(this, function (_a) {
-        sourceId = request.params.sourceId;
-        query = request.params.query;
-        if (sourceId === null || query === null) {
-            response.status(400).json({
-                success: false,
-                error: "Invalid/Insufficient Parameters"
-            });
+        switch (_a.label) {
+            case 0:
+                sourceId = request.params.sourceId;
+                query = request.params.query;
+                if (sourceId === null || query === null) {
+                    response.status(400).json({
+                        success: false,
+                        error: "Invalid/Insufficient Parameters"
+                    });
+                }
+                if (!(sourceId === '0')) return [3, 2];
+                return [4, mangaEdenScrapper.search(query).then(function (data) {
+                        response.json({
+                            success: true,
+                            data: data
+                        });
+                    })
+                        .catch(function (err) {
+                        response.status(404).json({
+                            success: false,
+                            data: []
+                        });
+                    })];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2:
+                if (!(sourceId === '1')) return [3, 4];
+                return [4, kissMangaScrapper.search(query)
+                        .then(function (data) {
+                        response.json({
+                            success: true,
+                            data: data
+                        });
+                    })
+                        .catch(function (err) {
+                        response.status(404).json({
+                            success: false,
+                            data: []
+                        });
+                    })];
+            case 3:
+                _a.sent();
+                _a.label = 4;
+            case 4: return [2];
         }
-        if (sourceId === '0') {
-            raw = Fs.readFileSync('./build/temp/eden-list.json');
-            data = JSON.parse(raw.toString());
-            res = data.filter(function (d) {
-                return d.a.indexOf(query) > -1;
-            });
-            response.json({
-                success: true,
-                data: res
-            });
-        }
-        return [2];
     });
 }); });
 router.get('/image/:sourceId/:dir/:imageId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
