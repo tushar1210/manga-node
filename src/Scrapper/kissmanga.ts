@@ -4,13 +4,6 @@ import * as cheerio from 'cheerio';
 import {mangaList,searchResult} from '../Interfaces/manga'
 import {searchKissManga,searchKissMangaData} from '../Interfaces/response'
 
-// const headers = { 
-//     'Accept':'application/json, text/javascript, */*; q=0.01',
-//     'DNT':'1',
-//     'X-Requested-With':'XMLHttpRequest',
-//     'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
-//     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
-// }  
 const headers = { 
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
     'DNT':'1',
@@ -89,7 +82,6 @@ export async function scrapeKissMangaAll(pageCtr:string):Promise<mangaList[]>{
         }
     })
     .catch((e)=>{
-        console.log(e);
     });
     
     return list
@@ -107,7 +99,6 @@ export async function search(key:string):Promise<searchResult[]>{
         headers:headers,
         data:params
     }).then((data)=>{
-        console.log(data.data);
         var list:searchResult[] = [];
         var result:searchKissMangaData[] = data.data.data;
         result.forEach(element => {
@@ -120,7 +111,6 @@ export async function search(key:string):Promise<searchResult[]>{
        return list;
     })
     .catch((err:axios.AxiosError)=>{
-        // console.log(err.response)
         var list:searchResult[] = []
         let failureResult:searchResult={
             success:false,

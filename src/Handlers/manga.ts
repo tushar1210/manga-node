@@ -51,14 +51,12 @@ export async function mangaEdenChapterList(mangaID:String){
 export async function updateMangaEdenListJSON(){
   await axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers})
   .then((data)=>{
-    console.log('1')
     let obj = JSON.stringify(data.data.manga);
     Fs.writeFileSync('./build/temp/eden-list.json', obj);
     var now = new Date()
     Fs.appendFileSync('.log','[Manga Eden] Succeessful MangaList Update at :    '+now+'\n');
   })
   .catch((e)=>{
-    console.log(e)
     return;
   })
 }
