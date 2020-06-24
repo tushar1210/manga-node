@@ -10,7 +10,17 @@ const headers = {
 export async function mangaEdenList(){
     return axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers});
     
-}
+}        
+//search manga in mangaeden.json
+// const raw = Fs.readFileSync('./build/temp/eden-list.json');
+// const data = JSON.parse(raw.toString());
+// var res = data.filter((d:any)=>{
+//     return d.a.indexOf(query)>-1;
+// });
+// response.json({
+//     success:true,
+//     data:res
+// });
 
 export async function mangaEdenGetImage(dir:String,imgPath:String){
     const url = 'https://cdn.mangaeden.com/mangasimg/'+dir+"/"+imgPath;
@@ -41,14 +51,12 @@ export async function mangaEdenChapterList(mangaID:String){
 export async function updateMangaEdenListJSON(){
   await axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers})
   .then((data)=>{
-    console.log('1')
     let obj = JSON.stringify(data.data.manga);
     Fs.writeFileSync('./build/temp/eden-list.json', obj);
     var now = new Date()
     Fs.appendFileSync('.log','[Manga Eden] Succeessful MangaList Update at :    '+now+'\n');
   })
   .catch((e)=>{
-    console.log(e)
     return;
   })
 }

@@ -1,12 +1,16 @@
 import * as axios from 'axios'
 import * as Fs from 'fs'  ;
 import * as cheerio from 'cheerio';
-import {mangaList} from '../Interfaces/kissManga-mangaList'
+import {mangaList,searchResult} from '../Interfaces/manga'
+import {searchKissManga,searchKissMangaData} from '../Interfaces/response'
 
 const headers = { 
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
-    'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    }  
+    'DNT':'1',
+    'X-Requested-With':'XMLHttpRequest',
+    'Accept':'application/json, text/javascript, */*; q=0.01',
+    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+} 
 
 export async function scrapeKissMangaAll(pageCtr:string):Promise<mangaList[]>{
     const url  = 'https://kissmanga.in/manga-list/page/'+'9'+'/?m_orderby=alphabet'
@@ -78,9 +82,41 @@ export async function scrapeKissMangaAll(pageCtr:string):Promise<mangaList[]>{
         }
     })
     .catch((e)=>{
-        console.log(e);
     });
     
     return list
 
+}
+
+export async function search(key:string):Promise<searchResult[]>{
+    const base:string = 'https://kissmanga.in/wp-admin/admin-ajax.php'
+    const params:URLSearchParams = new URLSearchParams();
+    params.append('action','wp-manga-search-manga');
+    params.append('title',key);
+    return await axios.default.request({
+        method:'POST',
+        url:base,
+        headers:headers,
+        data:params
+    }).then((data)=>{
+        var list:searchResult[] = [];
+        var result:searchKissMangaData[] = data.data.data;
+        result.forEach(element => {
+            let succsessResult:searchResult = {
+                title:element.title,
+                url:element.url,
+            }
+            list.push(succsessResult);
+        });
+       return list;
+    })
+    .catch((err:axios.AxiosError)=>{
+        var list:searchResult[] = []
+        let failureResult:searchResult={
+            success:false,
+            error:err.message
+        }
+        list.push(failureResult)
+        return list;
+    })
 }
