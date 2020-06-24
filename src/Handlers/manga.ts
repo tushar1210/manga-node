@@ -10,7 +10,17 @@ const headers = {
 export async function mangaEdenList(){
     return axios.default.get('https://www.mangaeden.com/api/list/0',{headers:headers});
     
-}
+}        
+//search manga in mangaeden.json
+// const raw = Fs.readFileSync('./build/temp/eden-list.json');
+// const data = JSON.parse(raw.toString());
+// var res = data.filter((d:any)=>{
+//     return d.a.indexOf(query)>-1;
+// });
+// response.json({
+//     success:true,
+//     data:res
+// });
 
 export async function mangaEdenGetImage(dir:String,imgPath:String){
     const url = 'https://cdn.mangaeden.com/mangasimg/'+dir+"/"+imgPath;

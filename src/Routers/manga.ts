@@ -1,8 +1,9 @@
 import {Request,Response,Router} from 'express';
 import * as handler from '../Handlers/manga';
 import * as Fs from 'fs'  ;
-
-
+import {mangaList,searchResult} from '../Interfaces/manga';
+import * as mangaEdenScrapper from '../Scrapper/mangaeden';
+import * as kissMangaScrapper from '../Scrapper/kissmanga';
 const router = Router();
 
 const sources={
@@ -23,6 +24,18 @@ router.get('/list/:sourceId',async(request:Request,response:Response)=>{
     if(sourceId==='0'){
         const raw = Fs.readFileSync('./build/temp/eden-list.json');
         var data = JSON.parse(raw.toString());
+        
+        // var res:mangaList={
+
+        //     id:data.i,
+        //     title:data.t,
+        //     category:data.c,
+        //     link:'getmangaURL'+data.i,
+        //     thumbnail:'cdnURL'+data.im,
+        //     lastChapterDate:data.ld
+            
+        // }
+        
         response.json({
             success:true,
             data:data
@@ -39,16 +52,36 @@ router.get('/list/:sourceId/search/:query',async(request:Request,response:Respon
         });
     }
     if(sourceId==='0'){
-        const raw = Fs.readFileSync('./build/temp/eden-list.json');
-        const data = JSON.parse(raw.toString());
-        var res = data.filter((d:any)=>{
-            return d.a.indexOf(query)>-1;
-        });
-        response.json({
-            success:true,
-            data:res
+        await mangaEdenScrapper.search(query).then((data:searchResult[])=>{
+            response.json({
+                success:true,
+                data:data
+            });
+        })
+        .catch((err)=>{
+            response.status(404).json({
+                success:false,
+                data:[]
+            });
         });
     }
+
+    if(sourceId==='1'){
+        await kissMangaScrapper.search(query)
+        .then((data:searchResult[])=>{
+            response.json({
+                success:true,
+                data:data
+            });
+        })
+        .catch((err)=>{
+            response.status(404).json({
+                success:false,
+                data:[]
+            });
+        });
+    }
+
 });
 router.get('/image/:sourceId/:dir/:imageId',async(request:Request,response:Response)=>{
     const sourceId=request.params.sourceId;
