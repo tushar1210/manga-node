@@ -106,14 +106,12 @@ function updateMangaEdenListJSON() {
             switch (_a.label) {
                 case 0: return [4, axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })
                         .then(function (data) {
-                        console.log('1');
                         var obj = JSON.stringify(data.data.manga);
                         Fs.writeFileSync('./build/temp/eden-list.json', obj);
                         var now = new Date();
                         Fs.appendFileSync('.log', '[Manga Eden] Succeessful MangaList Update at :    ' + now + '\n');
                     })
                         .catch(function (e) {
-                        console.log(e);
                         return;
                     })];
                 case 1:

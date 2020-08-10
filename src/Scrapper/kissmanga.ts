@@ -120,3 +120,5 @@ export async function search(key:string):Promise<searchResult[]>{
         return list;
     })
 }
+
+// export async function manga(manga:string):Promise<ma 

@@ -152,5 +152,11 @@ router.get('/chapter/image/:sourceId/:chapterId',async(request:Request,response:
     }
 });
 
+//get all resources
+router.get('/sources',async(request:Request,response:Response)=>{
+    response.json(sources);
+});
+
+
 export default router;
 

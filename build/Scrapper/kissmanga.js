@@ -124,7 +124,6 @@ function scrapeKissMangaAll(pageCtr) {
                             }
                         })
                             .catch(function (e) {
-                            console.log(e);
                         })];
                 case 1:
                     _a.sent();
@@ -143,7 +142,6 @@ function search(key) {
                     base = 'https://kissmanga.in/wp-admin/admin-ajax.php';
                     params = new URLSearchParams();
                     params.append('action', 'wp-manga-search-manga');
-                    console.log(key);
                     params.append('title', key);
                     return [4, axios.default.request({
                             method: 'POST',
@@ -151,7 +149,6 @@ function search(key) {
                             headers: headers,
                             data: params
                         }).then(function (data) {
-                            console.log(data.data);
                             var list = [];
                             var result = data.data.data;
                             result.forEach(function (element) {

@@ -211,4 +211,10 @@ router.get('/chapter/image/:sourceId/:chapterId', function (request, response) {
         }
     });
 }); });
+router.get('/sources', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        response.json(sources);
+        return [2];
+    });
+}); });
 exports.default = router;
