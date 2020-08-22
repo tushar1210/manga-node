@@ -102,9 +102,6 @@ router.get('/image/:sourceId/:dir/:imageId',async(request:Request,response:Respo
                 message:"Unable to fetch Image",
             });
         });
-        
-
-
     }
 
 

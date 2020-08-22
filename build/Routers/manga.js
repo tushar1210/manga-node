@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,213 +27,134 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var handler = __importStar(require("../Handlers/manga"));
-var Fs = __importStar(require("fs"));
-var mangaEdenScrapper = __importStar(require("../Scrapper/mangaeden"));
-var kissMangaScrapper = __importStar(require("../Scrapper/kissmanga"));
-var router = express_1.Router();
-var sources = {
+const express_1 = require("express");
+const handler = __importStar(require("../Handlers/manga"));
+const Fs = __importStar(require("fs"));
+const mangaEdenScrapper = __importStar(require("../Scrapper/mangaeden"));
+const kissMangaScrapper = __importStar(require("../Scrapper/kissmanga"));
+const router = express_1.Router();
+const sources = {
     0: "mangaEden",
     1: "kissmanga.in"
 };
-router.get('/list/:sourceId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId, raw, data;
-    return __generator(this, function (_a) {
-        sourceId = request.params.sourceId;
-        if (sourceId === null) {
-            response.status(400).json({
-                success: false,
-                error: "Invalid/Insufficient Parameters"
-            });
-        }
-        if (sourceId === '0') {
-            raw = Fs.readFileSync('./build/temp/eden-list.json');
-            data = JSON.parse(raw.toString());
+router.get('/list/:sourceId', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    var sourceId = request.params.sourceId;
+    if (sourceId === null) {
+        response.status(400).json({
+            success: false,
+            error: "Invalid/Insufficient Parameters"
+        });
+    }
+    if (sourceId === '0') {
+        const raw = Fs.readFileSync('./build/temp/eden-list.json');
+        var data = JSON.parse(raw.toString());
+        response.json({
+            success: true,
+            data: data
+        });
+    }
+}));
+router.get('/list/:sourceId/search/:query', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    var sourceId = request.params.sourceId;
+    var query = request.params.query;
+    if (sourceId === null || query === null) {
+        response.status(400).json({
+            success: false,
+            error: "Invalid/Insufficient Parameters"
+        });
+    }
+    if (sourceId === '0') {
+        yield mangaEdenScrapper.search(query).then((data) => {
             response.json({
                 success: true,
                 data: data
             });
-        }
-        return [2];
-    });
-}); });
-router.get('/list/:sourceId/search/:query', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId, query;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                sourceId = request.params.sourceId;
-                query = request.params.query;
-                if (sourceId === null || query === null) {
-                    response.status(400).json({
-                        success: false,
-                        error: "Invalid/Insufficient Parameters"
-                    });
-                }
-                if (!(sourceId === '0')) return [3, 2];
-                return [4, mangaEdenScrapper.search(query).then(function (data) {
-                        response.json({
-                            success: true,
-                            data: data
-                        });
-                    })
-                        .catch(function (err) {
-                        response.status(404).json({
-                            success: false,
-                            data: []
-                        });
-                    })];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2:
-                if (!(sourceId === '1')) return [3, 4];
-                return [4, kissMangaScrapper.search(query)
-                        .then(function (data) {
-                        response.json({
-                            success: true,
-                            data: data
-                        });
-                    })
-                        .catch(function (err) {
-                        response.status(404).json({
-                            success: false,
-                            data: []
-                        });
-                    })];
-            case 3:
-                _a.sent();
-                _a.label = 4;
-            case 4: return [2];
-        }
-    });
-}); });
-router.get('/image/:sourceId/:dir/:imageId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var sourceId, dir, imageId;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                sourceId = request.params.sourceId;
-                dir = request.params.dir;
-                imageId = request.params.imageId;
-                if (!(sourceId === '0')) return [3, 2];
-                return [4, handler.mangaEdenGetImage(dir, imageId)
-                        .then(function () {
-                        response.download('./build/temp/thumbnail/image.jpg', 'image.jpg', function () {
-                            Fs.unlinkSync('./build/temp/thumbnail/image.jpg');
-                        });
-                    })
-                        .catch(function () {
-                        response.status(500).json({
-                            success: false,
-                            message: "Unable to fetch Image",
-                        });
-                    })];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2];
-        }
-    });
-}); });
-router.get('/chapter/list/:sourceId/:mangaId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var mangaId, sourceId;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                mangaId = request.params.mangaId;
-                sourceId = request.params.sourceId;
-                if (!(sourceId === '0')) return [3, 2];
-                return [4, handler.mangaEdenChapterList(mangaId)
-                        .then(function (data) {
-                        response.json({
-                            success: true,
-                            data: data.data.chapters
-                        });
-                    })
-                        .catch(function (e) {
-                        response.status(404).json({
-                            success: false,
-                            error: 'NOT Found',
-                            message: 'check mangaId'
-                        });
-                    })];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2];
-        }
-    });
-}); });
-router.get('/chapter/image/:sourceId/:chapterId', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var chapterId, sourceId;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                chapterId = request.params.chapterId;
-                sourceId = request.params.sourceId;
-                if (!(sourceId === '0')) return [3, 2];
-                return [4, handler.getChapter(chapterId)
-                        .then(function (data) {
-                        response.json({
-                            success: true,
-                            data: data.data.images
-                        });
-                    })
-                        .catch(function (e) {
-                        response.status(404).json({
-                            success: false,
-                            error: 'NOT Found',
-                            message: 'check chapterId'
-                        });
-                    })];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2: return [2];
-        }
-    });
-}); });
-router.get('/sources', function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        response.json(sources);
-        return [2];
-    });
-}); });
+        })
+            .catch((err) => {
+            response.status(404).json({
+                success: false,
+                data: []
+            });
+        });
+    }
+    if (sourceId === '1') {
+        yield kissMangaScrapper.search(query)
+            .then((data) => {
+            response.json({
+                success: true,
+                data: data
+            });
+        })
+            .catch((err) => {
+            response.status(404).json({
+                success: false,
+                data: []
+            });
+        });
+    }
+}));
+router.get('/image/:sourceId/:dir/:imageId', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const sourceId = request.params.sourceId;
+    const dir = request.params.dir;
+    const imageId = request.params.imageId;
+    if (sourceId === '0') {
+        yield handler.mangaEdenGetImage(dir, imageId)
+            .then(() => {
+            response.download('./build/temp/thumbnail/image.jpg', 'image.jpg', () => {
+                Fs.unlinkSync('./build/temp/thumbnail/image.jpg');
+            });
+        })
+            .catch(() => {
+            response.status(500).json({
+                success: false,
+                message: "Unable to fetch Image",
+            });
+        });
+    }
+}));
+router.get('/chapter/list/:sourceId/:mangaId', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const mangaId = request.params.mangaId;
+    const sourceId = request.params.sourceId;
+    if (sourceId === '0') {
+        yield handler.mangaEdenChapterList(mangaId)
+            .then((data) => {
+            response.json({
+                success: true,
+                data: data.data.chapters
+            });
+        })
+            .catch((e) => {
+            response.status(404).json({
+                success: false,
+                error: 'NOT Found',
+                message: 'check mangaId'
+            });
+        });
+    }
+}));
+router.get('/chapter/image/:sourceId/:chapterId', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const chapterId = request.params.chapterId;
+    const sourceId = request.params.sourceId;
+    if (sourceId === '0') {
+        yield handler.getChapter(chapterId)
+            .then((data) => {
+            response.json({
+                success: true,
+                data: data.data.images
+            });
+        })
+            .catch((e) => {
+            response.status(404).json({
+                success: false,
+                error: 'NOT Found',
+                message: 'check chapterId'
+            });
+        });
+    }
+}));
+router.get('/sources', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    response.json(sources);
+}));
 exports.default = router;
+//# sourceMappingURL=manga.js.map

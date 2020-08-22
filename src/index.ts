@@ -9,7 +9,7 @@ require('dotenv').config()
 
 mongoose.Promise = global.Promise ;
 
-const PORT = process.env.PORT || 50;
+const PORT = process.env.PORT || 5000;
 const app = express() ;
 app.set('json spaces', 4);
 
@@ -26,6 +26,7 @@ const connString = String(process.env.CONNECTION_STRING);
 // });
 
 app.listen(PORT,()=>{
+    console.log("Server's up on " + PORT)
     cron.schedule('0 0 * * * *',()=>{
         mangaHandler.updateMangaEdenListJSON()
     });
