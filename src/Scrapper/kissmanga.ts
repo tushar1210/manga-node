@@ -1,6 +1,6 @@
 import * as axios from 'axios'
-import * as Fs from 'fs'  ;
-import * as cheerio from 'cheerio';
+import * as Fs from 'fs'
+import * as cheerio from 'cheerio'
 import {mangaList,searchResult} from '../Interfaces/manga'
 import {searchKissManga,searchKissMangaData} from '../Interfaces/response'
 
