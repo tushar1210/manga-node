@@ -1,4 +1,4 @@
-export interface mangaseeResult{
+export interface hotUpdates{
     id:string;
     source:string;
     sourceSpecificName:string;
