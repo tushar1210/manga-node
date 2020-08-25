@@ -21,7 +21,17 @@ class scraper{
             headers:this.defaultHeaders,
             url:url
         }).then((data)=>{
-            console.log(data.data);
+            var str,$=cheerio.load(data.data,{xmlMode: true});
+            str=$('script:not([src])')[4].children[0].data?.toString()
+            
+            var parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
+            var valid=JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
+            
+
+            console.log(valid)
+            
+            
+
         }).catch((e)=>{
             console.log(e);
         })

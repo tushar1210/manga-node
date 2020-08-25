@@ -19,7 +19,7 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
     var mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
         var mangasee = new mangasee123_1.scraper();
-        var results = yield mangasee.hotUpdates();
+        yield mangasee.hotUpdates();
     }
 }));
 exports.default = router;

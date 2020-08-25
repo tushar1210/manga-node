@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var axios = require("axios");
+var cheerio = require("cheerio");
 var scraper = /** @class */ (function () {
     function scraper() {
         this.defaultHeaders = {
@@ -58,7 +59,12 @@ var scraper = /** @class */ (function () {
                     headers: this.defaultHeaders,
                     url: url
                 }).then(function (data) {
-                    console.log(data.data);
+                    var _a;
+                    var str, $ = cheerio.load(data.data, { xmlMode: true });
+                    str = (_a = $('script:not([src])')[4].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                    var parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
+                    var valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
+                    console.log(valid);
                 })["catch"](function (e) {
                     console.log(e);
                 });
