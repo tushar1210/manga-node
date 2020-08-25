@@ -1,5 +1,5 @@
 import {Request,Response,Router} from 'express';
-import {scrapper as mangasee123Scrapper} from '../Scrapper/mangasee123';
+import {scraper as mangasee123Scrapper} from '../Interfaces/Scrapper/mangasee123';
 const router = Router();
 
 const sources={
@@ -10,8 +10,8 @@ router.get('/:mangaId/hot-updates',async(request:Request, response:Response)=>{
     var mangaId = request.params.mangaId.toString();
 
     if(mangaId=='0'){
-        var results= await mangasee123Scrapper.hotUpdates();
-
+        var mangasee = new mangasee123Scrapper();
+        var results= await mangasee.hotUpdates();
     }
 
 });

@@ -18,5 +18,9 @@ app.use("/", (req, res) => {
     res.sendFile(__dirname + '/Routers/index.html');
 });
 const connString = String(process.env.CONNECTION_STRING);
+mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+});
+app.listen(PORT, () => {
+});
 exports.default = mongoose;
 //# sourceMappingURL=index.js.map

@@ -15,6 +15,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const axios = __importStar(require("axios"));
 class scraper {
     constructor() {
@@ -42,5 +43,5 @@ class scraper {
         });
     }
 }
-module.exports = scraper;
+exports.scraper = scraper;
 //# sourceMappingURL=mangasee123.js.map

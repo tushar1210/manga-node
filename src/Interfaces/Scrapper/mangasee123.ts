@@ -28,4 +28,4 @@ class scraper{
     }
 }
 
-export default scraper ;
+export  {scraper} ;
