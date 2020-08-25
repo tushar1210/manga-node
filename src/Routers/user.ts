@@ -30,7 +30,6 @@ router.post('/login', async (request: Request, response: Response) => {
                         message: "Invalid User"
                     })
                 }
-
             })
             .catch(e => {
                 response.status(501).json({
