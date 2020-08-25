@@ -12,8 +12,6 @@ router.get('/:mangaId/hot-updates',async(request:Request, response:Response)=>{
     if(mangaId=='0'){
         var mangasee = new mangasee123Scrapper();
         await mangasee.hotUpdates()
-        
-
     }
 
 });
