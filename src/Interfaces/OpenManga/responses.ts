@@ -4,7 +4,7 @@ export interface mangaseeResult{
     sourceSpecificName:string;
     mangaName:string;
     imageURL:string;
-    Date:string;
+    date:string;
     currentChapter:string;
     ended:boolean;
 }

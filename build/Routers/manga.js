@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const mangasee123_1 = require("../Interfaces/Scrapper/mangasee123");
+const mangasee123_1 = require("../Scrapper/mangasee123");
 const router = express_1.Router();
 const sources = {
     0: "https://mangasee123.com"
@@ -19,7 +19,13 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
     var mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
         var mangasee = new mangasee123_1.scraper();
-        yield mangasee.hotUpdates();
+        yield mangasee.hotUpdates()
+            .then((dat) => {
+            response.json(dat);
+        })
+            .catch((e) => {
+            response.status(500).json(e);
+        });
     }
 }));
 exports.default = router;
