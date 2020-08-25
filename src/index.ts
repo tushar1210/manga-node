@@ -2,8 +2,6 @@ import express = require ('express');
 import mongoose = require("mongoose");
 import userRouter from './Routers/user';
 import mangaRouter from './Routers/manga';
-import * as mangaHandler from './Handlers/manga';
-import * as cron from 'node-cron';
 
 require('dotenv').config()
 
@@ -20,14 +18,11 @@ app.use("/",(req,res)=>{
 });
 
 const connString = String(process.env.CONNECTION_STRING);
-// mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-// });
+
+mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
+});
 
 app.listen(PORT,()=>{
-    console.log("Server's up on " + PORT)
-    cron.schedule('0 0 * * * *',()=>{
-        mangaHandler.updateMangaEdenListJSON()
-    });
 });
 
 export default mongoose;
