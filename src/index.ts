@@ -19,8 +19,10 @@ app.use("/",(req,res)=>{
 
 const connString = String(process.env.CONNECTION_STRING);
 
-// mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-// });
+mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
+});
 
+app.listen(PORT,()=>{
+});
 
 export default mongoose;
