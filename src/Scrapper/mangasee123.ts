@@ -1,8 +1,8 @@
 import * as axios from 'axios';
 import * as Fs from 'fs';
 import * as cheerio from 'cheerio';
-import {mangaseeResult as resultInterface} from '../Interfaces/OpenManga/responses'
-import {mangaseeRequest as requestInterface} from '../Interfaces/OpenManga/requests'
+import {hotUpdates as hotUpdatesResultInterface} from '../Interfaces/OpenManga/Responses/mangasee'
+import {hotUpdates as hotUpdatesRequestInterface} from '../Interfaces/OpenManga/Requests/mangasee'
 class scraper{
     defaultHeaders:object;
     baseURL:string;
@@ -16,8 +16,8 @@ class scraper{
         };
         this.baseURL="https://mangasee123.com";
     }
-    async hotUpdates():Promise<resultInterface[]>{
-        var res:resultInterface[]=[]
+    async hotUpdates():Promise<hotUpdatesResultInterface[]>{
+        var res:hotUpdatesResultInterface[]=[]
         const url = this.baseURL+'/hot.php';
         await axios.default.request({
             method:'GET',
@@ -28,10 +28,10 @@ class scraper{
             str=$('script:not([src])')[4].children[0].data?.toString()
             
             var parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
-            var valid:requestInterface[]=JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
+            var valid:hotUpdatesRequestInterface[]=JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
             const imageBaseURL = "https://cover.mangabeast01.com/cover/"
             valid.forEach(element => {
-                var mangaData:resultInterface={
+                var mangaData:hotUpdatesResultInterface={
                     id:element.SeriesID,
                     sourceSpecificName:element.IndexName,
                     source:'https://mangasee123.com/',

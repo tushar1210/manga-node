@@ -1,4 +1,4 @@
-export interface mangaseeRequest{
+export interface hotUpdates{
     SeriesID:string;
     IndexName:string;
     SeriesName:string;
