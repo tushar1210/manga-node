@@ -16,14 +16,15 @@ const sources = {
     0: "https://mangasee123.com"
 };
 router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    var mangaId = request.params.mangaId.toString();
+    let mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
-        var mangasee = new mangasee123_1.scraper();
-        yield mangasee.hotUpdates()
-            .then((dat) => {
+        let mangasee = new mangasee123_1.scraper();
+        yield mangasee
+            .hotUpdates()
+            .then(dat => {
             response.json(dat);
         })
-            .catch((e) => {
+            .catch(e => {
             response.status(500).json(e);
         });
     }

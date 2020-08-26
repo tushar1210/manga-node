@@ -1,28 +1,31 @@
-import express = require ('express');
-import mongoose = require("mongoose");
-import userRouter from './Routers/user';
-import mangaRouter from './Routers/manga';
+import express from "express"
+import mongoose from "mongoose"
+import userRouter from './Routers/user'
+import mangaRouter from './Routers/manga'
 
 require('dotenv').config()
 
-mongoose.Promise = global.Promise ;
+mongoose.Promise = global.Promise
 
-const PORT = process.env.PORT || 5000;
-const app = express() ;
-app.set('json spaces', 4);
+const PORT = process.env.PORT || 5000
+const app = express()
 
-app.use('/user',userRouter);
-app.use('/manga',mangaRouter);
-app.use("/",(req,res)=>{
-    res.sendFile(__dirname+'/Routers/index.html');
-});
+app.set('json spaces', 4)
 
-const connString = String(process.env.CONNECTION_STRING);
+app.use('/user', userRouter)
+app.use('/manga', mangaRouter)
 
-mongoose.connect(connString,{useNewUrlParser: true, useUnifiedTopology: true},()=>{
-});
+app.use("/", (req, res) => {
+    res.sendFile(__dirname + '/Routers/index.html')
+})
 
-app.listen(PORT,()=>{
-});
+const connString = String(process.env.CONNECTION_STRING)
 
-export default mongoose;
+mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+})
+
+app.listen(PORT, () => {
+    console.log("Server's on @" + PORT)
+})
+
+export default mongoose
