@@ -1,8 +1,8 @@
 import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
-import { hotUpdates as hotUpdatesResultInterface, latestUpRes } from '../Interfaces/OpenManga/Responses/mangasee'
-import { hotUpdates as hotUpdatesRequestInterface, latestUpReq } from '../Interfaces/OpenManga/Requests/mangasee'
+import { hotUpRes , latestUpRes,allRes } from '../Interfaces/OpenManga/Responses/mangasee'
+import { hotUpReq , latestUpReq,allReq } from '../Interfaces/OpenManga/Requests/mangasee'
 
 class scraper {
     defaultHeaders: object
@@ -18,8 +18,8 @@ class scraper {
         this.baseURL = "https://mangasee123.com"
     }
 
-    async hotUpdates(): Promise<hotUpdatesResultInterface[]> {
-        let res: hotUpdatesResultInterface[] = []
+    async hotUpdates(): Promise<hotUpRes[]> {
+        let res: hotUpRes[] = []
         const url = this.baseURL
         await axios.default
             .request({
@@ -32,11 +32,11 @@ class scraper {
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
                 str = $('script:not([src])')[6].children[0].data?.toString()
                 let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
-                let valid: hotUpdatesRequestInterface[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
+                let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
 
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/"
                 valid.forEach(element => {
-                    let mangaData: hotUpdatesResultInterface = {
+                    let mangaData: hotUpRes = {
                         id: element.SeriesID,
                         sourceSpecificName: element.IndexName,
                         source: 'https://mangasee123.com/',
@@ -95,6 +95,39 @@ class scraper {
             })
         return res
     }
+
+    async all(){
+        const url:string = this.baseURL+"/_search.php"
+        let res:allRes[] = []
+        await axios.default
+            .request({
+                method: 'POST',
+                headers: this.defaultHeaders,
+                url: url
+            })
+            .then(data=>{
+                var valid:allReq[] = data.data
+                var res:allRes[] = []
+                const imageBaseURL = "https://cover.mangabeast01.com/cover/"
+                valid.forEach(element=>{
+                    let obj:allRes = {
+                        source: 'https://mangasee123.com',
+                        mangaName:element.s,
+                        imageURL: imageBaseURL+element.i+'.jpg',
+                        mangaURL: this.baseURL+'/manga/'+element.i,
+                        sourceSpecificName:element.i,
+                        alternateNames:element.a
+                    }
+                    res.push(obj);
+                })
+
+            })
+            .catch(e=>{
+                console.log(e)
+            })
+
+    }
+    
 }
 
 export { scraper } 

@@ -118,6 +118,39 @@ class scraper {
             return res;
         });
     }
+    all() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = this.baseURL + "/_search.php";
+            let res = [];
+            yield axios.default
+                .request({
+                method: 'POST',
+                headers: this.defaultHeaders,
+                url: url
+            })
+                .then(data => {
+                var valid = data.data;
+                var res = [];
+                const imageBaseURL = "https://cover.mangabeast01.com/cover/";
+                console.log(valid.length);
+                valid.forEach(element => {
+                    let obj = {
+                        source: 'https://mangasee123.com',
+                        mangaName: element.s,
+                        imageURL: imageBaseURL + element.i + '.jpg',
+                        mangaURL: this.baseURL + '/manga/' + element.i,
+                        sourceSpecificName: element.i,
+                        alternateNames: element.a
+                    };
+                    res.push(obj);
+                });
+                console.log(res.length);
+            })
+                .catch(e => {
+                console.log(e);
+            });
+        });
+    }
 }
 exports.scraper = scraper;
 //# sourceMappingURL=mangasee123.js.map
