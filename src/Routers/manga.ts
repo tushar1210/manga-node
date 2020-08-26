@@ -1,6 +1,5 @@
 import { Request, Response, Router, json } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-import { request } from 'http'
 
 const router = Router()
 
