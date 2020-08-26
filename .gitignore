@@ -123,3 +123,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# misc 
+.editorconfig
+note.js
+package-lock.json
