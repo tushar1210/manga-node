@@ -44,5 +44,17 @@ router.get('/:mangaId/latest-updates', (req, res) => __awaiter(void 0, void 0, v
         });
     }
 }));
+router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    let mangaId = request.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangasee = new mangasee123_1.scraper();
+        yield mangasee
+            .all()
+            .then(data => {
+        })
+            .catch(e => {
+        });
+    }
+}));
 exports.default = router;
 //# sourceMappingURL=manga.js.map

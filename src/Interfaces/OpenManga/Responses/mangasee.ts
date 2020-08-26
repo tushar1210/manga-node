@@ -1,4 +1,4 @@
-export interface hotUpdates {
+export interface hotUpRes {
     id: string
     source: string
     sourceSpecificName: string
@@ -19,4 +19,13 @@ export interface latestUpRes {
     date: string
     newChapter: string
     ended: boolean
+}
+
+export interface allRes{
+    source:string
+    mangaName:string
+    imageURL:string
+    mangaURL:string
+    sourceSpecificName:string
+    alternateNames:string[]
 }

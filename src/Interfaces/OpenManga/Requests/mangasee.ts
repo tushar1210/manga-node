@@ -1,4 +1,4 @@
-export interface hotUpdates {
+export interface hotUpReq {
     SeriesID: string
     IndexName: string
     SeriesName: string
@@ -16,4 +16,10 @@ export interface latestUpReq {
     IsEdd: boolean
     Genres: string
     ScanStatus: string
+}
+
+export interface allReq{
+    i:string,
+    s:string,
+    a:string[]
 }
