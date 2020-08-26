@@ -4,8 +4,9 @@
   "description": "microservice for manga",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec node build/index.js",
-    "build": "tsc"
+    "start": "npm run build && node -r tsconfig-paths/register build/index.js",
+    "dev": "nodemon",
+    "build": "rm -rf ./build && npx tsc"
   },
   "keywords": [
     "manga",
@@ -28,6 +29,7 @@
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   },
   "devDependencies": {

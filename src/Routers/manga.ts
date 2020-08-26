@@ -14,11 +14,28 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
         let mangasee = new mangasee123Scrapper()
         await mangasee
             .hotUpdates()
-            .then(dat => {
-                response.json(dat)
+            .then(data => {
+                response.json(data)
             })
             .catch(e => {
                 response.status(500).json(e)
+            })
+    }
+})
+
+router.get('/:mangaId/latest-updates', async (req: Request, res: Response) => {
+    let mangaId = req.params.mangaId.toString()
+
+    if (mangaId == '0') {
+        let mangaseeSc = new mangasee123Scrapper()
+        await mangaseeSc
+            .latestUpdates()
+            .then(data => {
+                res.json(data)
+            })
+            .catch(e => {
+                console.log(e)
+                res.status(400).status(e)
             })
     }
 })

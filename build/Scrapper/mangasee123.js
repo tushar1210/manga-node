@@ -67,7 +67,7 @@ class scraper {
                         mangaName: element.SeriesName,
                         imageURL: imageBaseURL + element.IndexName + '.jpg',
                         date: element.Date,
-                        currentChapter: element.Chapter,
+                        currentChapter: element.Chapter.substring(2, 5),
                         ended: element.IsEdd
                     };
                     res.push(mangaData);
