@@ -30,6 +30,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scraper = void 0;
 const axios = __importStar(require("axios"));
+const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
 class scraper {
     constructor() {
@@ -132,7 +133,6 @@ class scraper {
                 var valid = data.data;
                 var res = [];
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
-                console.log(valid.length);
                 valid.forEach(element => {
                     let obj = {
                         source: 'https://mangasee123.com',
@@ -144,11 +144,17 @@ class scraper {
                     };
                     res.push(obj);
                 });
-                console.log(res.length);
+                Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res));
             })
                 .catch(e => {
-                console.log(e);
+                return;
             });
+        });
+    }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let data = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString());
+            return data;
         });
     }
 }

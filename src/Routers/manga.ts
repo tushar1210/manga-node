@@ -46,12 +46,12 @@ router.get('/:mangaId/get-all',async (request:Request, response:Response)=>{
     if(mangaId == '0'){
         let mangasee = new mangasee123Scrapper()
         await mangasee
-            .all()
+            .getAll()
             .then(data=>{
-                
+                response.json(data)
             })
             .catch(e=>{
-
+                response.status(500).json(e)
             })
     }
     

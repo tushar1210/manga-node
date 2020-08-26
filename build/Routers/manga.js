@@ -49,10 +49,12 @@ router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0,
     if (mangaId == '0') {
         let mangasee = new mangasee123_1.scraper();
         yield mangasee
-            .all()
+            .getAll()
             .then(data => {
+            response.json(data);
         })
             .catch(e => {
+            response.status(500).json(e);
         });
     }
 }));
