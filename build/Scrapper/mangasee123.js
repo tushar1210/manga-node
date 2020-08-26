@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -45,7 +45,7 @@ class scraper {
     hotUpdates() {
         return __awaiter(this, void 0, void 0, function* () {
             let res = [];
-            const url = this.baseURL + '/hot.php';
+            const url = this.baseURL;
             yield axios.default
                 .request({
                 method: 'GET',
@@ -55,7 +55,7 @@ class scraper {
                 .then(data => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
-                str = (_a = $('script:not([src])')[4].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
@@ -68,6 +68,44 @@ class scraper {
                         imageURL: imageBaseURL + element.IndexName + '.jpg',
                         date: element.Date,
                         currentChapter: element.Chapter.substring(2, 5),
+                        ended: element.IsEdd
+                    };
+                    res.push(mangaData);
+                });
+                return res;
+            })
+                .catch(e => {
+                return res;
+            });
+            return res;
+        });
+    }
+    latestUpdates() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = [];
+            const url = this.baseURL;
+            yield axios.default
+                .request({
+                method: 'GET',
+                headers: this.defaultHeaders,
+                url: url
+            })
+                .then(data => {
+                var _a;
+                let str, $ = cheerio.load(data.data, { xmlMode: true });
+                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                let parse = str === null || str === void 0 ? void 0 : str.match(/vm.LatestJSON = (\[.*?\])/);
+                let valid = JSON.parse(parse[0].split('vm.LatestJSON = ')[1]);
+                valid.forEach(element => {
+                    let mangaData = {
+                        id: element.SeriesID,
+                        sourceSpecificName: element.IndexName,
+                        source: 'https://mangasee123.com/',
+                        mangaName: element.SeriesName,
+                        genres: element.Genres,
+                        date: element.Date,
+                        newChapter: element.Chapter.substring(2, 5),
+                        scanStatus: element.ScanStatus,
                         ended: element.IsEdd
                     };
                     res.push(mangaData);

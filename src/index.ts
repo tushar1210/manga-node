@@ -15,8 +15,8 @@ app.set('json spaces', 4)
 app.use('/user', userRouter)
 app.use('/manga', mangaRouter)
 
-app.use("/", (req, res) => {
-    res.sendFile(__dirname + '/Routers/index.html')
+app.use("/", (request:express.Request, response:express.Response) => {
+    response.sendFile(__dirname + '/Routers/index.html')
 })
 
 const connString = String(process.env.CONNECTION_STRING)

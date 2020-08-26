@@ -14,8 +14,8 @@ const app = express_1.default();
 app.set('json spaces', 4);
 app.use('/user', user_1.default);
 app.use('/manga', manga_1.default);
-app.use("/", (req, res) => {
-    res.sendFile(__dirname + '/Routers/index.html');
+app.use("/", (request, response) => {
+    response.sendFile(__dirname + '/Routers/index.html');
 });
 const connString = String(process.env.CONNECTION_STRING);
 mongoose_1.default.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
