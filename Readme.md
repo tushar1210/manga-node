@@ -7,6 +7,8 @@
 
 ```
 - manga/0/hot-updates
+- manga/0/latest-updates
+- manga/0/get-all
 ```
 
 ## Sources:
