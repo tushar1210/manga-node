@@ -21,7 +21,6 @@ class scraper {
     async hotUpdates(): Promise<hotUpdatesResultInterface[]> {
         let res: hotUpdatesResultInterface[] = []
         const url = this.baseURL
-
         await axios.default
             .request({
                 method: 'GET',
@@ -29,14 +28,13 @@ class scraper {
                 url: url
             })
             .then(data => {
+                
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
-                str = $('script:not([src])')[4].children[0].data?.toString()
-
+                str = $('script:not([src])')[6].children[0].data?.toString()
                 let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
                 let valid: hotUpdatesRequestInterface[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
 
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-
                 valid.forEach(element => {
                     let mangaData: hotUpdatesResultInterface = {
                         id: element.SeriesID,
@@ -71,7 +69,7 @@ class scraper {
             })
             .then(data => {
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
-                str = $('script:not([src])')[4].children[0].data?.toString()
+                str = $('script:not([src])')[6].children[0].data?.toString()
 
                 let parse = str?.match(/vm.LatestJSON = (\[.*?\])/)
                 let valid: latestUpReq[] = JSON.parse(parse[0].split('vm.LatestJSON = ')[1])
