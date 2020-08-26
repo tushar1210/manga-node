@@ -118,14 +118,19 @@ class scraper {
                         sourceSpecificName:element.i,
                         alternateNames:element.a
                     }
-                    res.push(obj);
+                    res.push(obj)
                 })
-
+                Fs.writeFileSync('./temp/mangasee123-all.json',JSON.stringify(res))
             })
             .catch(e=>{
-                console.log(e)
+                return 
             })
 
+    }
+
+    async getAll(): Promise<allRes[]>{
+        let data:allRes[] = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString())
+        return data
     }
     
 }
