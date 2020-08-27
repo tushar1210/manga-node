@@ -1,6 +1,5 @@
 import { Request, Response, Router, json } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-import { request } from 'http'
 
 const router = Router()
 
@@ -67,9 +66,9 @@ router.get('/:mangaId/search/',async(request: Request, response: Response)=>{
             .then(data =>{
                 response.json(data)
             })
-            .catch(e=>[
-                response.json(e)
-            ])
+            .catch(e=>{
+                response.status(500).json(e)
+            })
     }
 
 })
