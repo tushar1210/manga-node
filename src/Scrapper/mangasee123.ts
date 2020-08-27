@@ -1,6 +1,7 @@
 import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
+import * as ss from 'string-similarity'
 import { hotUpRes, latestUpRes, allRes } from '../Interfaces/OpenManga/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq } from '../Interfaces/OpenManga/Requests/mangasee'
 
@@ -130,6 +131,18 @@ class scraper {
         let data: allRes[] = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString())
         return data
     }
+
+    async search(keyWord:string): Promise<allRes[]>{
+        let data:allRes[] = await this.getAll()
+        let res:allRes[] = []
+        data.forEach(element=>{
+            if(ss.compareTwoStrings(keyWord.toLowerCase(),element.mangaName.toLowerCase())>0.4 || ss.compareTwoStrings(keyWord.toLowerCase(),element.sourceSpecificName.toLowerCase())>0.5){
+                res.push(element)
+            }
+        })
+        return res
+    }
+
 }
 
 export { scraper } 

@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -32,6 +32,7 @@ exports.scraper = void 0;
 const axios = __importStar(require("axios"));
 const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
+const ss = __importStar(require("string-similarity"));
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -154,6 +155,18 @@ class scraper {
         return __awaiter(this, void 0, void 0, function* () {
             let data = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString());
             return data;
+        });
+    }
+    search(keyWord) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let data = yield this.getAll();
+            let res = [];
+            data.forEach(element => {
+                if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
+                    res.push(element);
+                }
+            });
+            return res;
         });
     }
 }
