@@ -12,7 +12,6 @@ router.post('/login', async (request: Request, response: Response) => {
             error: 'Bad Request',
             message: 'invalid Parameters'
         })
-
     } else {
         user = String(request.query.userId)
         pass = String(request.query.pass)

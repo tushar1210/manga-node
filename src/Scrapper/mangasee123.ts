@@ -1,8 +1,8 @@
 import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
-import { hotUpRes , latestUpRes,allRes } from '../Interfaces/OpenManga/Responses/mangasee'
-import { hotUpReq , latestUpReq,allReq } from '../Interfaces/OpenManga/Requests/mangasee'
+import { hotUpRes, latestUpRes, allRes } from '../Interfaces/OpenManga/Responses/mangasee'
+import { hotUpReq, latestUpReq, allReq } from '../Interfaces/OpenManga/Requests/mangasee'
 
 class scraper {
     defaultHeaders: object
@@ -28,7 +28,7 @@ class scraper {
                 url: url
             })
             .then(data => {
-                
+
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
                 str = $('script:not([src])')[6].children[0].data?.toString()
                 let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
@@ -56,7 +56,6 @@ class scraper {
         return res
     }
 
-    // currently working
     async latestUpdates(): Promise<latestUpRes[]> {
         let res: latestUpRes[] = []
         const url = this.baseURL
@@ -96,43 +95,41 @@ class scraper {
         return res
     }
 
-    async all(){
-        const url:string = this.baseURL+"/_search.php"
-        let res:allRes[] = []
+    async all() {
+        const url: string = this.baseURL + "/_search.php"
+        let res: allRes[] = []
         await axios.default
             .request({
                 method: 'POST',
                 headers: this.defaultHeaders,
                 url: url
             })
-            .then(data=>{
-                var valid:allReq[] = data.data
-                var res:allRes[] = []
+            .then(data => {
+                var valid: allReq[] = data.data
+                var res: allRes[] = []
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-                valid.forEach(element=>{
-                    let obj:allRes = {
+                valid.forEach(element => {
+                    let obj: allRes = {                        imageURL: imageBaseURL + element.i + '.jpg',
+                        mangaURL: this.baseURL + '/manga/' + element.i,
+
                         source: 'https://mangasee123.com',
-                        mangaName:element.s,
-                        imageURL: imageBaseURL+element.i+'.jpg',
-                        mangaURL: this.baseURL+'/manga/'+element.i,
-                        sourceSpecificName:element.i,
-                        alternateNames:element.a
+                        mangaName: element.s,
+                        sourceSpecificName: element.i,
+                        alternateNames: element.a
                     }
                     res.push(obj)
                 })
-                Fs.writeFileSync('./temp/mangasee123-all.json',JSON.stringify(res))
+                Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res))
             })
-            .catch(e=>{
-                return 
+            .catch(e => {
+                return
             })
-
     }
 
-    async getAll(): Promise<allRes[]>{
-        let data:allRes[] = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString())
+    async getAll(): Promise<allRes[]> {
+        let data: allRes[] = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString())
         return data
     }
-    
 }
 
 export { scraper } 
