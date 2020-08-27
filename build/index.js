@@ -29,5 +29,4 @@ app.listen(PORT, () => {
         mangasee123sc.all();
     });
 });
-exports.default = mongoose_1.default;
 //# sourceMappingURL=index.js.map

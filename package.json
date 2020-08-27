@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node -r tsconfig-paths/register build/index.js",
     "dev": "nodemon",
-    "build": "rm -rf ./build && npx tsc"
+    "build": "rm -rf ./build && npx tsc",
+    "doc:it": "npx typedoc --tsconfig ./tsconfig.json"
   },
   "keywords": [
     "manga",
@@ -34,7 +35,8 @@
   },
   "devDependencies": {
     "del": "^5.1.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "typedoc": "^0.18.0"
   },
   "engines": {
     "node": "12.x",
