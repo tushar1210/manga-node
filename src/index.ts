@@ -2,7 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import userRouter from './Routers/user'
 import mangaRouter from './Routers/manga'
-import {scraper} from './Scrapper/mangasee123'
+import { scraper } from './Scrapper/mangasee123'
 import cron from 'node-cron';
 
 require('dotenv').config()
@@ -11,14 +11,14 @@ mongoose.Promise = global.Promise
 
 const PORT = process.env.PORT || 5000
 const app = express()
-let mangasee123sc = new scraper()
+const mangasee123sc = new scraper()
 
 app.set('json spaces', 4)
 
 app.use('/user', userRouter)
 app.use('/manga', mangaRouter)
 
-app.use("/", (request:express.Request, response:express.Response) => {
+app.use("/", (request: express.Request, response: express.Response) => {
     response.sendFile(__dirname + '/Routers/index.html')
 })
 
@@ -29,13 +29,8 @@ mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }
 
 app.listen(PORT, () => {
     console.log("Server's on @" + PORT)
-    cron.schedule('0 0 0 * * *',()=>{
+
+    cron.schedule('0 0 0 * * *', () => {
         mangasee123sc.all()
-    });
+    })
 })
-
-
-
-
-
-export default mongoose

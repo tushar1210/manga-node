@@ -40,20 +40,20 @@ router.get('/:mangaId/latest-updates', async (req: Request, res: Response) => {
     }
 })
 
-router.get('/:mangaId/get-all',async (request:Request, response:Response)=>{
-    let mangaId=request.params.mangaId.toString()
-    if(mangaId == '0'){
+router.get('/:mangaId/get-all', async (request: Request, response: Response) => {
+    let mangaId = request.params.mangaId.toString()
+    if (mangaId == '0') {
         let mangasee = new mangasee123Scrapper()
         await mangasee
             .getAll()
-            .then(data=>{
+            .then(data => {
                 response.json(data)
             })
-            .catch(e=>{
+            .catch(e => {
                 response.status(500).json(e)
             })
     }
-    
+
 })
 
 export default router

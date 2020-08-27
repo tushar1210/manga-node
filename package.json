@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npm run build && node -r tsconfig-paths/register build/index.js",
     "dev": "nodemon",
-    "build": "rm -rf ./build && npx tsc"
+    "build": "rm -rf ./build && npx tsc",
+    "doc:html": "rm -rf ./docs && npx typedoc --tsconfig ./tsconfig.json",
+    "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json"
   },
   "keywords": [
     "manga",
@@ -34,7 +36,10 @@
   },
   "devDependencies": {
     "del": "^5.1.0",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-typedoc": "^2.2.5",
+    "typedoc": "^0.18.0",
+    "typedoc-plugin-markdown": "^2.4.2"
   },
   "engines": {
     "node": "12.x",

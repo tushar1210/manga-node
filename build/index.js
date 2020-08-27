@@ -13,7 +13,7 @@ require('dotenv').config();
 mongoose_1.default.Promise = global.Promise;
 const PORT = process.env.PORT || 5000;
 const app = express_1.default();
-let mangasee123sc = new mangasee123_1.scraper();
+const mangasee123sc = new mangasee123_1.scraper();
 app.set('json spaces', 4);
 app.use('/user', user_1.default);
 app.use('/manga', manga_1.default);
@@ -29,5 +29,4 @@ app.listen(PORT, () => {
         mangasee123sc.all();
     });
 });
-exports.default = mongoose_1.default;
 //# sourceMappingURL=index.js.map
