@@ -19,7 +19,7 @@ app.use('/user', userRouter)
 app.use('/manga', mangaRouter)
 
 app.use("/", (request: express.Request, response: express.Response) => {
-    response.sendFile(__dirname + '/Routers/index.html')
+  response.sendFile(__dirname + '/Routers/index.html')
 })
 
 const connString = String(process.env.CONNECTION_STRING)
@@ -28,9 +28,9 @@ mongoose.connect(connString, { useNewUrlParser: true, useUnifiedTopology: true }
 })
 
 app.listen(PORT, () => {
-    console.log("Server's on @" + PORT)
+  console.log("Server's on @" + PORT)
 
-    cron.schedule('0 0 0 * * *', () => {
-        mangasee123sc.all()
-    })
+  cron.schedule('0 0 0 * * *', () => {
+    mangasee123sc.all()
+  })
 })
