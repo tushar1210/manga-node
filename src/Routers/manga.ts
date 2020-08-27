@@ -1,5 +1,6 @@
 import { Request, Response, Router, json } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
+import { request } from 'http'
 
 const router = Router()
 
@@ -52,6 +53,23 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
             .catch(e => {
                 response.status(500).json(e)
             })
+    }
+
+})
+
+router.get('/:mangaId/search/',async(request: Request, response: Response)=>{
+    let keyWord=request.query.keyWord.toString()
+    let mangaId = request.params.mangaId.toString()
+    if(mangaId=='0'){
+        let mangaseesc = new mangasee123Scrapper()
+        await mangaseesc
+            .search(keyWord)
+            .then(data =>{
+                response.json(data)
+            })
+            .catch(e=>[
+                response.json(e)
+            ])
     }
 
 })
