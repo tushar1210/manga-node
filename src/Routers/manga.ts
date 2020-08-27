@@ -1,6 +1,5 @@
 import { Request, Response, Router, json } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-import { request } from 'http'
 
 const router = Router()
 
@@ -15,10 +14,10 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
         let mangasee = new mangasee123Scrapper()
         await mangasee
             .hotUpdates()
-            .then(data => {
-                response.json(data)
+            .then((data: any) => {
+                response.status(201).json(data)
             })
-            .catch(e => {
+            .catch((e: any) => {
                 response.status(500).json(e)
             })
     }
@@ -31,12 +30,11 @@ router.get('/:mangaId/latest-updates', async (req: Request, res: Response) => {
         let mangaseeSc = new mangasee123Scrapper()
         await mangaseeSc
             .latestUpdates()
-            .then(data => {
-                res.json(data)
+            .then((data: any) => {
+                res.status(201).json(data)
             })
-            .catch(e => {
-                console.log(e)
-                res.status(400).status(e)
+            .catch((e: any) => {
+                res.status(500).json(e)
             })
     }
 })
@@ -47,31 +45,29 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
         let mangasee = new mangasee123Scrapper()
         await mangasee
             .getAll()
-            .then(data => {
-                response.json(data)
+            .then((data: any) => {
+                response.status(201).json(data)
             })
-            .catch(e => {
+            .catch((e: any) => {
                 response.status(500).json(e)
             })
     }
-
 })
 
-router.get('/:mangaId/search/',async(request: Request, response: Response)=>{
-    let keyWord=request.query.keyWord.toString()
-    let mangaId = request.params.mangaId.toString()
-    if(mangaId=='0'){
+router.get('/:mangaId/search/', async (request: Request, response: Response) => {
+    let keyWord: string = request.query.keyWord.toString()
+    let mangaId: string = request.params.mangaId.toString()
+    if (mangaId == '0') {
         let mangaseesc = new mangasee123Scrapper()
         await mangaseesc
             .search(keyWord)
-            .then(data =>{
-                response.json(data)
+            .then((data: any) => {
+                response.status(201).json(data)
             })
-            .catch(e=>[
-                response.json(e)
+            .catch((e: any) => [
+                response.status(500).json(e)
             ])
     }
-
 })
 
 export default router

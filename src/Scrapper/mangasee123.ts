@@ -28,8 +28,7 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-            .then(data => {
-
+            .then((data: any) => {
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
                 str = $('script:not([src])')[6].children[0].data?.toString()
                 let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
@@ -51,7 +50,7 @@ class scraper {
                 })
                 return res
             })
-            .catch(e => {
+            .catch((e: any) => {
                 return res
             })
         return res
@@ -67,7 +66,7 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-            .then(data => {
+            .then((data: any) => {
                 let str, $ = cheerio.load(data.data, { xmlMode: true })
                 str = $('script:not([src])')[6].children[0].data?.toString()
 
@@ -90,7 +89,7 @@ class scraper {
                 })
                 return res
             })
-            .catch(e => {
+            .catch((e: any) => {
                 return res
             })
         return res
@@ -105,12 +104,13 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-            .then(data => {
+            .then((data: any) => {
                 var valid: allReq[] = data.data
                 var res: allRes[] = []
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/"
                 valid.forEach(element => {
-                    let obj: allRes = {                        imageURL: imageBaseURL + element.i + '.jpg',
+                    let obj: allRes = {
+                        imageURL: imageBaseURL + element.i + '.jpg',
                         mangaURL: this.baseURL + '/manga/' + element.i,
 
                         source: 'https://mangasee123.com',
@@ -122,7 +122,7 @@ class scraper {
                 })
                 Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res))
             })
-            .catch(e => {
+            .catch((e: any) => {
                 return
             })
     }
@@ -132,17 +132,16 @@ class scraper {
         return data
     }
 
-    async search(keyWord:string): Promise<allRes[]>{
-        let data:allRes[] = await this.getAll()
-        let res:allRes[] = []
-        data.forEach(element=>{
-            if(ss.compareTwoStrings(keyWord.toLowerCase(),element.mangaName.toLowerCase())>0.4 || ss.compareTwoStrings(keyWord.toLowerCase(),element.sourceSpecificName.toLowerCase())>0.5){
+    async search(keyWord: string): Promise<allRes[]> {
+        let data: allRes[] = await this.getAll()
+        let res: allRes[] = []
+        data.forEach(element => {
+            if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
                 res.push(element)
             }
         })
         return res
     }
-
 }
 
 export { scraper } 
