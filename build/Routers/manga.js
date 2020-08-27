@@ -16,16 +16,61 @@ const sources = {
     0: "https://mangasee123.com"
 };
 router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    var mangaId = request.params.mangaId.toString();
+    let mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
-        var mangasee = new mangasee123_1.scraper();
-        yield mangasee.hotUpdates()
-            .then((dat) => {
-            response.json(dat);
+        let mangasee = new mangasee123_1.scraper();
+        yield mangasee
+            .hotUpdates()
+            .then(data => {
+            response.json(data);
         })
-            .catch((e) => {
+            .catch(e => {
             response.status(500).json(e);
         });
+    }
+}));
+router.get('/:mangaId/latest-updates', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let mangaId = req.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangaseeSc = new mangasee123_1.scraper();
+        yield mangaseeSc
+            .latestUpdates()
+            .then(data => {
+            res.json(data);
+        })
+            .catch(e => {
+            console.log(e);
+            res.status(400).status(e);
+        });
+    }
+}));
+router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    let mangaId = request.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangasee = new mangasee123_1.scraper();
+        yield mangasee
+            .getAll()
+            .then(data => {
+            response.json(data);
+        })
+            .catch(e => {
+            response.status(500).json(e);
+        });
+    }
+}));
+router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    let keyWord = request.query.keyWord.toString();
+    let mangaId = request.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangaseesc = new mangasee123_1.scraper();
+        yield mangaseesc
+            .search(keyWord)
+            .then(data => {
+            response.json(data);
+        })
+            .catch(e => [
+            response.json(e)
+        ]);
     }
 }));
 exports.default = router;

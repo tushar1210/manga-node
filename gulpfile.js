@@ -6,7 +6,9 @@ function defaultTask(cb) {
 
   del([
     'src/*.js',
-    'src/*/*.js'
+    'src/*/*.js',
+    'src/*/*/*.js',
+    'src/*/*/*/*.js'
   ]);
   cb();
 }

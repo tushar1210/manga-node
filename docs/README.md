@@ -1,3 +1,7 @@
+[manga](README.md) › [Globals](globals.md)
+
+# manga
+
 # Manga 
 ## A microservice for latest manga from various sources.
 
@@ -9,10 +13,8 @@
 - manga/0/hot-updates
 - manga/0/latest-updates
 - manga/0/get-all
-- manga/0/search/?keyWord=<query>
 ```
 
 ## Sources:
 
 `0:` https://mangasee123.com/
-
