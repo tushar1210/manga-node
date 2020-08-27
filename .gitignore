@@ -124,7 +124,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# misc 
-.editorconfig
-note.js
+# misc
 package-lock.json
