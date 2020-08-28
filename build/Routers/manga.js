@@ -21,10 +21,10 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
         let mangasee = new mangasee123_1.scraper();
         yield mangasee
             .hotUpdates()
-            .then(data => {
-            response.json(data);
+            .then((data) => {
+            response.status(201).json(data);
         })
-            .catch(e => {
+            .catch((e) => {
             response.status(500).json(e);
         });
     }
@@ -35,12 +35,11 @@ router.get('/:mangaId/latest-updates', (req, res) => __awaiter(void 0, void 0, v
         let mangaseeSc = new mangasee123_1.scraper();
         yield mangaseeSc
             .latestUpdates()
-            .then(data => {
-            res.json(data);
+            .then((data) => {
+            res.status(201).json(data);
         })
-            .catch(e => {
-            console.log(e);
-            res.status(400).status(e);
+            .catch((e) => {
+            res.status(500).json(e);
         });
     }
 }));
@@ -50,10 +49,10 @@ router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0,
         let mangasee = new mangasee123_1.scraper();
         yield mangasee
             .getAll()
-            .then(data => {
-            response.json(data);
+            .then((data) => {
+            response.status(201).json(data);
         })
-            .catch(e => {
+            .catch((e) => {
             response.status(500).json(e);
         });
     }
@@ -65,11 +64,11 @@ router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0,
         let mangaseesc = new mangasee123_1.scraper();
         yield mangaseesc
             .search(keyWord)
-            .then(data => {
-            response.json(data);
+            .then((data) => {
+            response.status(201).json(data);
         })
-            .catch(e => [
-            response.json(e)
+            .catch((e) => [
+            response.status(500).json(e)
         ]);
     }
 }));

@@ -105,8 +105,8 @@ class scraper {
         url: url
       })
       .then((data: any) => {
-        var valid: allReq[] = data.data
-        var res: allRes[] = []
+        let valid: allReq[] = data.data
+        let res: allRes[] = []
         const imageBaseURL = "https://cover.mangabeast01.com/cover/"
         valid.forEach(element => {
           let obj: allRes = {
