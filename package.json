@@ -10,9 +10,9 @@
     "doc:html": "rm -rf ./docs && npx typedoc --tsconfig ./tsconfig.json",
     "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json",
     "tslint": "gulp tslint",
-    "sqlz:migrate": "npx sequelize-cli db:migrate",
-    "sqlz:undo": "npx sequelize-cli db:migrate:undo",
-    "sqlz:new": "npx sequelize-cli migration:create"
+    "sqlz:migrate": "npx sequelize db:migrate",
+    "sqlz:undo": "npx sequelize db:migrate:undo",
+    "sqlz:new": "npx sequelize migration:create"
   },
   "keywords": [
     "manga",
