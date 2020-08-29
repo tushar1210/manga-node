@@ -70,7 +70,7 @@ class scraper {
                         mangaName: element.SeriesName,
                         imageURL: imageBaseURL + element.IndexName + '.jpg',
                         date: element.Date,
-                        currentChapter: element.Chapter.substring(2, 5),
+                        currentChapter: parseChapNumber_1.parseChapNumber(element.Chapter),
                         ended: element.IsEdd
                     };
                     res.push(mangaData);
@@ -107,7 +107,7 @@ class scraper {
                         mangaName: element.SeriesName,
                         genres: element.Genres,
                         date: element.Date,
-                        newChapter: element.Chapter.substring(2, 5),
+                        newChapter: parseChapNumber_1.parseChapNumber(element.Chapter),
                         scanStatus: element.ScanStatus,
                         ended: element.IsEdd
                     };
@@ -170,7 +170,6 @@ class scraper {
             return res;
         });
     }
-
     getChaps(mangaName) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = [];
@@ -181,7 +180,31 @@ class scraper {
                 method: 'GET',
                 headers: this.defaultHeaders,
                 url: url
-
+            })
+                .then((data) => {
+                var _a;
+                let str, $ = cheerio.load(data.data, { xmlMode: true });
+                str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                let parse = str === null || str === void 0 ? void 0 : str.match(/vm.Chapters = (\[.*?\])/);
+                let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
+                valid.forEach((element) => {
+                    let mangaData = {
+                        chapterNumber: parseChapNumber_1.parseChapNumber(element.Chapter),
+                        link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber_1.parseChapNumber(element.Chapter) + ".html",
+                        type: element.Type,
+                        date: element.Date,
+                        chapterName: element.ChapterName
+                    };
+                    res.push(mangaData);
+                });
+                return res.reverse();
+            })
+                .catch((e) => {
+                return res;
+            });
+            return res;
+        });
+    }
     mangaData(sourceSpecificName, chapter) {
         return __awaiter(this, void 0, void 0, function* () {
             let url = this.baseURL + `/read-online/${sourceSpecificName}-chapter-${chapter}.html`;
@@ -190,31 +213,10 @@ class scraper {
                 method: 'GET',
                 url: url,
                 headers: this.defaultHeaders
-
             })
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
-
-                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
-                let parse = str === null || str === void 0 ? void 0 : str.match(/vm.Chapters = (\[.*?\])/);
-                let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
-                valid.forEach((element) => {
-                    let mangaData = {
-                        chapterNumber: element.Chapter,
-                        link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber_1.parseChapNumber(element.Chapter) + ".html",
-                        type: element.Type,
-                        date: element.Date,
-                        chapterName: element.ChapterName
-                    };
-                    res.push(mangaData);
-                });
-                return res;
-            })
-                .catch((e) => {
-                return res;
-            });
-            return res;
                 str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
                 let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
@@ -250,7 +252,6 @@ class scraper {
                     let i = index.toString();
                     imageDict[i] = chpURL;
                 }
-                console.log(imageDict);
                 let res = {
                     path: path,
                     imageURL: imageDict,
