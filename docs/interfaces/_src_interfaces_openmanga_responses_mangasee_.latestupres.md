@@ -26,7 +26,7 @@
 
 • **date**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:19](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L19)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:19](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L19)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 • **ended**: *boolean*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:21](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L21)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:21](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L21)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • **genres**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:17](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L17)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:17](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L17)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L13)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L13)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **mangaName**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:16](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L16)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:16](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L16)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **newChapter**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:20](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L20)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:20](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L20)*
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • **scanStatus**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:18](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L18)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:18](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L18)*
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 • **source**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:14](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L14)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:14](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L14)*
 
 ___
 
@@ -90,4 +90,4 @@ ___
 
 • **sourceSpecificName**: *string*
 
-*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:15](https://github.com/tushar1210/manga-node/blob/ee68806/src/Interfaces/OpenManga/Responses/mangasee.ts#L15)*
+*Defined in [src/Interfaces/OpenManga/Responses/mangasee.ts:15](https://github.com/tushar1210/manga-node/blob/a605026/src/Interfaces/OpenManga/Responses/mangasee.ts#L15)*

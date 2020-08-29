@@ -13,11 +13,10 @@ exports.login = exports.signup = void 0;
 const index_1 = require("../../controllers/index");
 function signup(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(req.body);
         return yield index_1.UsersCtrl
             .signup({
-            email: req.body.email,
-            password: req.body.password
+            email: req.query.email,
+            password: req.query.password
         })
             .then((user) => res.status(201).send(user))
             .catch((error) => res.status(400).send(error));
@@ -28,8 +27,8 @@ function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield index_1.UsersCtrl
             .login({
-            email: req.body.email,
-            password: req.body.password
+            email: req.query.email,
+            password: req.query.password
         })
             .then((user) => res.status(200).send(user))
             .catch((error) => res.status(402).send(error));

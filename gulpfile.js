@@ -1,6 +1,6 @@
-var gulp = require('gulp');
-var del = require('del');
-let tslint = require("gulp-tslint");
+const gulp = require('gulp');
+const del = require('del');
+const tslint = require("gulp-tslint");
 
 const TSLINT = "tslint";
 const TS_SRC_GLOB = "./src/**/*.ts";

@@ -19,9 +19,18 @@ export interface latestUpReq {
 }
 
 export interface allReq {
-  i: string,
-  s: string,
+  i: string
+  s: string
   a: string[]
+}
+
+
+export interface chapsReq {
+  link: string
+  Chapter: string
+  Type: string
+  Date: string
+  ChapterName: string
 }
 
 export interface allChapterInfoReq{
@@ -41,4 +50,3 @@ export interface curChapterReq{
   Date:string
   ChapterName:string|null
 }
-
