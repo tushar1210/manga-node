@@ -97,7 +97,6 @@ class scraper {
 
   async all() {
     const url: string = this.baseURL + "/_search.php"
-    let res: allRes[] = []
     await axios.default
       .request({
         method: 'POST',
