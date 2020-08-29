@@ -23,3 +23,22 @@ export interface allReq {
   s: string,
   a: string[]
 }
+
+export interface allChapterInfoReq{
+  Chapter:string
+  Type:string
+  Page:string
+  Directory:string
+  Date:string
+  ChapterName:string
+}
+
+export interface curChapterReq{
+  Chapter:string
+  Type:string
+  Page:string
+  Directory:string
+  Date:string
+  ChapterName:string|null
+}
+
