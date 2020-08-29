@@ -31,9 +31,17 @@ export interface allRes {
   alternateNames: string[]
 }
 
+export interface chapsRes {
+  link: string
+  chapterNumber: string
+  type: string
+  date: string
+  chapterName: string
+}
 export interface mangaDataRes{
   imageURL:any
   path:string
   allChapters:allChapterInfoReq[]
   currentChapter:curChapterReq
+
 }

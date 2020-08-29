@@ -67,9 +67,23 @@ router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0,
             .then((data) => {
             response.status(201).json(data);
         })
-            .catch((e) => [
-            response.status(500).json(e)
-        ]);
+            .catch((e) => {
+            response.status(500).json(e);
+        });
+    }
+}));
+router.get('/:mangaId/chaps/:mangaName', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let mangaId = req.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangasee = new mangasee123_1.scraper();
+        yield mangasee
+            .getChaps(req.params.mangaName.toString())
+            .then((data) => {
+            res.status(201).json(data);
+        })
+            .catch((e) => {
+            res.status(500).json(e);
+        });
     }
 }));
 router.get('/:mangaId/manga-data', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
