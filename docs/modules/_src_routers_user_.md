@@ -14,7 +14,7 @@
 
 ▸ **routes**(`app`: Express): *void*
 
-*Defined in [src/Routers/user.ts:4](https://github.com/tushar1210/manga-node/blob/a6fc0c4/src/Routers/user.ts#L4)*
+*Defined in [src/Routers/user.ts:4](https://github.com/tushar1210/manga-node/blob/a605026/src/Routers/user.ts#L4)*
 
 **Parameters:**
 

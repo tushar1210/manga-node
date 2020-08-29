@@ -13,6 +13,7 @@
 * ["src/Routers/manga"](modules/_src_routers_manga_.md)
 * ["src/Routers/user"](modules/_src_routers_user_.md)
 * ["src/Scrapper/mangasee123"](modules/_src_scrapper_mangasee123_.md)
+* ["src/helpers/parseChapNumber"](modules/_src_helpers_parsechapnumber_.md)
 * ["src/index"](modules/_src_index_.md)
 * ["src/sqlz/config/config"](modules/_src_sqlz_config_config_.md)
 * ["src/sqlz/controllers/index"](modules/_src_sqlz_controllers_index_.md)

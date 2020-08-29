@@ -2,8 +2,9 @@ import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
-import { hotUpRes, latestUpRes, allRes } from '../Interfaces/OpenManga/Responses/mangasee'
-import { hotUpReq, latestUpReq, allReq } from '../Interfaces/OpenManga/Requests/mangasee'
+import { parseChapNumber } from '../helpers/parseChapNumber'
+import { hotUpRes, latestUpRes, allRes, chapsRes } from '../Interfaces/OpenManga/Responses/mangasee'
+import { hotUpReq, latestUpReq, allReq, chapsReq } from '../Interfaces/OpenManga/Requests/mangasee'
 
 class scraper {
   defaultHeaders: object
@@ -22,6 +23,7 @@ class scraper {
   async hotUpdates(): Promise<hotUpRes[]> {
     let res: hotUpRes[] = []
     const url = this.baseURL
+
     await axios.default
       .request({
         method: 'GET',
@@ -31,11 +33,12 @@ class scraper {
       .then((data: any) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
         str = $('script:not([src])')[6].children[0].data?.toString()
+
         let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
         let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
 
         const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-        valid.forEach(element => {
+        valid.forEach((element: any) => {
           let mangaData: hotUpRes = {
             id: element.SeriesID,
             sourceSpecificName: element.IndexName,
@@ -43,7 +46,7 @@ class scraper {
             mangaName: element.SeriesName,
             imageURL: imageBaseURL + element.IndexName + '.jpg',
             date: element.Date,
-            currentChapter: element.Chapter.substring(2, 5),
+            currentChapter: parseChapNumber(element.Chapter),
             ended: element.IsEdd
           }
           res.push(mangaData)
@@ -73,7 +76,7 @@ class scraper {
         let parse = str?.match(/vm.LatestJSON = (\[.*?\])/)
         let valid: latestUpReq[] = JSON.parse(parse[0].split('vm.LatestJSON = ')[1])
 
-        valid.forEach(element => {
+        valid.forEach((element: any) => {
           let mangaData: latestUpRes = {
             id: element.SeriesID,
             sourceSpecificName: element.IndexName,
@@ -81,7 +84,7 @@ class scraper {
             mangaName: element.SeriesName,
             genres: element.Genres,
             date: element.Date,
-            newChapter: element.Chapter.substring(2, 5),
+            newChapter: parseChapNumber(element.Chapter),
             scanStatus: element.ScanStatus,
             ended: element.IsEdd
           }
@@ -97,6 +100,7 @@ class scraper {
 
   async all() {
     const url: string = this.baseURL + "/_search.php"
+
     await axios.default
       .request({
         method: 'POST',
@@ -107,11 +111,10 @@ class scraper {
         let valid: allReq[] = data.data
         let res: allRes[] = []
         const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-        valid.forEach(element => {
+        valid.forEach((element: any) => {
           let obj: allRes = {
             imageURL: imageBaseURL + element.i + '.jpg',
             mangaURL: this.baseURL + '/manga/' + element.i,
-
             source: 'https://mangasee123.com',
             mangaName: element.s,
             sourceSpecificName: element.i,
@@ -134,11 +137,49 @@ class scraper {
   async search(keyWord: string): Promise<allRes[]> {
     let data: allRes[] = await this.getAll()
     let res: allRes[] = []
-    data.forEach(element => {
+    data.forEach((element: any) => {
       if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
         res.push(element)
       }
     })
+    return res
+  }
+
+  async getChaps(mangaName: string): Promise<chapsRes[]> {
+    let res: chapsRes[] = []
+    let mangaNameR = mangaName.replace("/\s/", "-")
+    const url = this.baseURL + "/manga/" + mangaNameR
+
+    await axios.default
+      .request({
+        method: 'GET',
+        headers: this.defaultHeaders,
+        url: url
+      })
+      .then((data: any) => {
+        let str, $ = cheerio.load(data.data, { xmlMode: true })
+        str = $('script:not([src])')[5].children[0].data?.toString()
+
+        let parse = str?.match(/vm.Chapters = (\[.*?\])/)
+        let valid: chapsReq[] = JSON.parse(parse[0].split('vm.Chapters = ')[1])
+
+        valid.forEach((element: any) => {
+          let mangaData: chapsRes = {
+            chapterNumber: parseChapNumber(element.Chapter),
+            link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber(element.Chapter) + ".html",
+            type: element.Type,
+            date: element.Date,
+            chapterName: element.ChapterName
+          }
+          res.push(mangaData)
+        })
+        // should keep in DESC mode imo
+        // ASC mode for now
+        return res.reverse()
+      })
+      .catch((e: any) => {
+        return res
+      })
     return res
   }
 }

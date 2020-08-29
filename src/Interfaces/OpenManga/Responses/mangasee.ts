@@ -29,3 +29,11 @@ export interface allRes {
   sourceSpecificName: string
   alternateNames: string[]
 }
+
+export interface chapsRes {
+  link: string
+  chapterNumber: string
+  type: string
+  date: string
+  chapterName: string
+}

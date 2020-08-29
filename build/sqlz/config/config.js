@@ -1,8 +1,5 @@
 "use strict";
-if (process.env.NODE_ENV !== 'production') {
-    const dotenv = require('dotenv');
-    dotenv.config();
-}
+require('dotenv').config();
 module.exports = {
     development: {
         username: 'saqsham',

@@ -33,6 +33,7 @@ const axios = __importStar(require("axios"));
 const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
 const ss = __importStar(require("string-similarity"));
+const parseChapNumber_1 = require("../helpers/parseChapNumber");
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -61,7 +62,7 @@ class scraper {
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
-                valid.forEach(element => {
+                valid.forEach((element) => {
                     let mangaData = {
                         id: element.SeriesID,
                         sourceSpecificName: element.IndexName,
@@ -98,7 +99,7 @@ class scraper {
                 str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.LatestJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.LatestJSON = ')[1]);
-                valid.forEach(element => {
+                valid.forEach((element) => {
                     let mangaData = {
                         id: element.SeriesID,
                         sourceSpecificName: element.IndexName,
@@ -123,7 +124,6 @@ class scraper {
     all() {
         return __awaiter(this, void 0, void 0, function* () {
             const url = this.baseURL + "/_search.php";
-            let res = [];
             yield axios.default
                 .request({
                 method: 'POST',
@@ -131,10 +131,10 @@ class scraper {
                 url: url
             })
                 .then((data) => {
-                var valid = data.data;
-                var res = [];
+                let valid = data.data;
+                let res = [];
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
-                valid.forEach(element => {
+                valid.forEach((element) => {
                     let obj = {
                         imageURL: imageBaseURL + element.i + '.jpg',
                         mangaURL: this.baseURL + '/manga/' + element.i,
@@ -162,10 +162,45 @@ class scraper {
         return __awaiter(this, void 0, void 0, function* () {
             let data = yield this.getAll();
             let res = [];
-            data.forEach(element => {
+            data.forEach((element) => {
                 if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
                     res.push(element);
                 }
+            });
+            return res;
+        });
+    }
+    getChaps(mangaName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = [];
+            let mangaNameR = mangaName.replace("/\s/", "-");
+            const url = this.baseURL + "/manga/" + mangaNameR;
+            yield axios.default
+                .request({
+                method: 'GET',
+                headers: this.defaultHeaders,
+                url: url
+            })
+                .then((data) => {
+                var _a;
+                let str, $ = cheerio.load(data.data, { xmlMode: true });
+                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                let parse = str === null || str === void 0 ? void 0 : str.match(/vm.Chapters = (\[.*?\])/);
+                let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
+                valid.forEach((element) => {
+                    let mangaData = {
+                        chapterNumber: element.Chapter,
+                        link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber_1.parseChapNumber(element.Chapter) + ".html",
+                        type: element.Type,
+                        date: element.Date,
+                        chapterName: element.ChapterName
+                    };
+                    res.push(mangaData);
+                });
+                return res;
+            })
+                .catch((e) => {
+                return res;
             });
             return res;
         });

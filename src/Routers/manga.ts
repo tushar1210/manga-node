@@ -64,9 +64,24 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
       .then((data: any) => {
         response.status(201).json(data)
       })
-      .catch((e: any) => [
+      .catch((e: any) => {
         response.status(500).json(e)
-      ])
+      })
+  }
+})
+
+router.get('/:mangaId/chaps/:mangaName', async (req: Request, res: Response) => {
+  let mangaId: string = req.params.mangaId.toString()
+  if (mangaId == '0') {
+    let mangasee = new mangasee123Scrapper()
+    await mangasee
+      .getChaps(req.params.mangaName.toString())
+      .then((data: any) => {
+        res.status(201).json(data)
+      })
+      .catch((e: any) => {
+        res.status(500).json(e)
+      })
   }
 })
 
