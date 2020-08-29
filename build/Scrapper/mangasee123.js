@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -54,7 +54,7 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-                .then(data => {
+                .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
                 str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
@@ -76,7 +76,7 @@ class scraper {
                 });
                 return res;
             })
-                .catch(e => {
+                .catch((e) => {
                 return res;
             });
             return res;
@@ -92,7 +92,7 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-                .then(data => {
+                .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
                 str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
@@ -114,7 +114,7 @@ class scraper {
                 });
                 return res;
             })
-                .catch(e => {
+                .catch((e) => {
                 return res;
             });
             return res;
@@ -130,12 +130,13 @@ class scraper {
                 headers: this.defaultHeaders,
                 url: url
             })
-                .then(data => {
+                .then((data) => {
                 var valid = data.data;
                 var res = [];
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
                 valid.forEach(element => {
-                    let obj = { imageURL: imageBaseURL + element.i + '.jpg',
+                    let obj = {
+                        imageURL: imageBaseURL + element.i + '.jpg',
                         mangaURL: this.baseURL + '/manga/' + element.i,
                         source: 'https://mangasee123.com',
                         mangaName: element.s,
@@ -146,7 +147,7 @@ class scraper {
                 });
                 Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res));
             })
-                .catch(e => {
+                .catch((e) => {
                 return;
             });
         });
