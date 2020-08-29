@@ -22,7 +22,7 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
         yield mangasee
             .hotUpdates()
             .then((data) => {
-            response.status(201).json(data);
+            response.status(201).json({});
         })
             .catch((e) => {
             response.status(500).json(e);
@@ -83,6 +83,22 @@ router.get('/:mangaId/chaps/:mangaName', (req, res) => __awaiter(void 0, void 0,
         })
             .catch((e) => {
             res.status(500).json(e);
+        });
+    }
+}));
+router.get('/:mangaId/manga-data', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    let sourceSpecificName = request.query.sourceSpecificName.toString();
+    let chapter = request.query.chapter.toString();
+    let mangaId = request.params.mangaId.toString();
+    if (mangaId == '0') {
+        let mangaseesc = new mangasee123_1.scraper();
+        yield mangaseesc
+            .mangaData(sourceSpecificName, chapter)
+            .then((data) => {
+            response.status(201).json(data);
+        })
+            .catch((e) => {
+            response.status(500).json(e);
         });
     }
 }));

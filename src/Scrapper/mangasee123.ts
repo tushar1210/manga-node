@@ -2,9 +2,10 @@ import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
-import { parseChapNumber } from '../helpers/parseChapNumber'
-import { hotUpRes, latestUpRes, allRes, chapsRes } from '../Interfaces/OpenManga/Responses/mangasee'
-import { hotUpReq, latestUpReq, allReq, chapsReq } from '../Interfaces/OpenManga/Requests/mangasee'
+
+import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/OpenManga/Responses/mangasee'
+import { hotUpReq, latestUpReq, allReq, curChapterReq,allChapterInfoReq, chapsReq} from '../Interfaces/OpenManga/Requests/mangasee'
+import { fn } from 'sequelize/types'
 
 class scraper {
   defaultHeaders: object
@@ -96,6 +97,7 @@ class scraper {
         return res
       })
     return res
+    
   }
 
   async all() {
@@ -181,6 +183,67 @@ class scraper {
         return res
       })
     return res
+  
+  async mangaData(sourceSpecificName: string, chapter: string):Promise<mangaDataRes>{
+    let url = this.baseURL+`/read-online/${sourceSpecificName}-chapter-${chapter}.html`
+    var final:mangaDataRes
+    await axios.default.request({
+      method :'GET',
+      url :url,
+      headers:this.defaultHeaders
+    })
+    .then((data:any)=>{
+      let str, $ = cheerio.load(data.data, { xmlMode: true })
+      str = $('script:not([src])')[5].children[0].data?.toString()
+      let path:string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
+      let curChapter:curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
+      let allChaptersReq:allChapterInfoReq[] = JSON.parse(str?.match(/vm.CHAPTERS = (\[.*?\])/)[1])
+      let chpNum = Number(curChapter.Page)
+      let chpPath = curChapter.Chapter.substring(1,5)
+      
+      if(curChapter.Chapter[5] != '0'){
+        chpPath += '.'
+        for (let i = 5; i < curChapter.Chapter.length; i++) {
+          chpPath+=curChapter.Chapter[i]          
+        }
+      }
+      let imgURL = ''
+      if(curChapter.Directory==''){
+        imgURL = `https://${path}/manga/${sourceSpecificName}/${chpPath}-`
+      }
+      else{
+        imgURL = `https://${path}/manga/${sourceSpecificName}/${curChapter.Directory}/${chpPath}-`
+      }
+      let imageDict:any = {}
+      for (let index = 1; index <= chpNum; index++) {
+        let chpURL = imgURL
+        if(index>=1 && index<=9){
+          chpURL+='00'+index.toString()
+        }
+        else if(index>=10 && index<=99){
+          chpURL+='0'+index.toString()
+        }
+        else{
+          chpURL+=index.toString()
+        }
+        chpURL+='.png'
+        let i:string = index.toString()
+        imageDict[i] = chpURL
+      }
+      let res:mangaDataRes = {
+        path:path,
+        imageURL:imageDict,
+        allChapters:allChaptersReq,
+        currentChapter:curChapter
+      }
+      final=res
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
+    return final
+    
+
   }
 }
 

@@ -1,6 +1,5 @@
-import { Request, Response, Router, json } from 'express'
+import { Request, Response, Router} from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-
 const router = Router()
 
 const sources = {
@@ -15,7 +14,9 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
     await mangasee
       .hotUpdates()
       .then((data: any) => {
-        response.status(201).json(data)
+        response.status(201).json({
+          
+        })
       })
       .catch((e: any) => {
         response.status(500).json(e)
@@ -84,5 +85,26 @@ router.get('/:mangaId/chaps/:mangaName', async (req: Request, res: Response) => 
       })
   }
 })
+
+router.get('/:mangaId/manga-data',async(request: Request, response: Response) => {
+  let sourceSpecificName: string = request.query.sourceSpecificName.toString()
+  let chapter: string = request.query.chapter.toString()
+  let mangaId: string = request.params.mangaId.toString()
+
+  if(mangaId=='0'){
+    let mangaseesc = new mangasee123Scrapper()
+    await mangaseesc
+      .mangaData(sourceSpecificName,chapter)
+      .then((data:any)=>{
+        response.status(201).json(data)
+      })
+      .catch((e:any)=>{
+        response.status(500).json(e)
+      })
+  }
+
+})
+
+
 
 export default router

@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -170,6 +170,7 @@ class scraper {
             return res;
         });
     }
+
     getChaps(mangaName) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = [];
@@ -180,10 +181,21 @@ class scraper {
                 method: 'GET',
                 headers: this.defaultHeaders,
                 url: url
+
+    mangaData(sourceSpecificName, chapter) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let url = this.baseURL + `/read-online/${sourceSpecificName}-chapter-${chapter}.html`;
+            var final;
+            yield axios.default.request({
+                method: 'GET',
+                url: url,
+                headers: this.defaultHeaders
+
             })
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
+
                 str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.Chapters = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
@@ -203,6 +215,54 @@ class scraper {
                 return res;
             });
             return res;
+                str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
+                let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
+                let allChaptersReq = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CHAPTERS = (\[.*?\])/)[1]);
+                let chpNum = Number(curChapter.Page);
+                let chpPath = curChapter.Chapter.substring(1, 5);
+                if (curChapter.Chapter[5] != '0') {
+                    chpPath += '.';
+                    for (let i = 5; i < curChapter.Chapter.length; i++) {
+                        chpPath += curChapter.Chapter[i];
+                    }
+                }
+                let imgURL = '';
+                if (curChapter.Directory == '') {
+                    imgURL = `https://${path}/manga/${sourceSpecificName}/${chpPath}-`;
+                }
+                else {
+                    imgURL = `https://${path}/manga/${sourceSpecificName}/${curChapter.Directory}/${chpPath}-`;
+                }
+                let imageDict = {};
+                for (let index = 1; index <= chpNum; index++) {
+                    let chpURL = imgURL;
+                    if (index >= 1 && index <= 9) {
+                        chpURL += '00' + index.toString();
+                    }
+                    else if (index >= 10 && index <= 99) {
+                        chpURL += '0' + index.toString();
+                    }
+                    else {
+                        chpURL += index.toString();
+                    }
+                    chpURL += '.png';
+                    let i = index.toString();
+                    imageDict[i] = chpURL;
+                }
+                console.log(imageDict);
+                let res = {
+                    path: path,
+                    imageURL: imageDict,
+                    allChapters: allChaptersReq,
+                    currentChapter: curChapter
+                };
+                final = res;
+            })
+                .catch((e) => {
+                console.log(e);
+            });
+            return final;
         });
     }
 }

@@ -24,10 +24,29 @@ export interface allReq {
   a: string[]
 }
 
+
 export interface chapsReq {
   link: string
   Chapter: string
   Type: string
   Date: string
   ChapterName: string
+}
+
+export interface allChapterInfoReq{
+  Chapter:string
+  Type:string
+  Page:string
+  Directory:string
+  Date:string
+  ChapterName:string
+}
+
+export interface curChapterReq{
+  Chapter:string
+  Type:string
+  Page:string
+  Directory:string
+  Date:string
+  ChapterName:string|null
 }
