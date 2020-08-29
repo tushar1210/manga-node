@@ -8,7 +8,7 @@
 ```
 - manga/0/hot-updates
 - manga/0/latest-updates
-- manga/0/get-all
+- manga/0/manga-data?sourceSpecificName=<source-name>&chapter=<chapter-name>
 - manga/0/search/?keyWord=<query>
 - manga/0/chaps/<manga-name>
 ```
