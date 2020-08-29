@@ -7,7 +7,7 @@
     "start": "npm run build && node -r tsconfig-paths/register build/index.js",
     "dev": "nodemon",
     "build": "rm -rf ./build && npx tsc",
-    "doc:html": "rm -rf ./docs && npx typedoc --tsconfig ./tsconfig.json",
+    "doc:html": "rm -rf ./docs && npx typedoc --plugin none --theme default --tsconfig ./tsconfig.json",
     "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json",
     "tslint": "gulp tslint",
     "sqlz:migrate": "npx sequelize db:migrate",
