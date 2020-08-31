@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -33,7 +33,7 @@ const axios = __importStar(require("axios"));
 const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
 const ss = __importStar(require("string-similarity"));
-const parseChapNumber_1 = require("../helpers/parseChapNumber");
+const mangasee_1 = require("../helpers/mangasee");
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -70,7 +70,7 @@ class scraper {
                         mangaName: element.SeriesName,
                         imageURL: imageBaseURL + element.IndexName + '.jpg',
                         date: element.Date,
-                        currentChapter: parseChapNumber_1.parseChapNumber(element.Chapter),
+                        currentChapter: mangasee_1.parseChapNumber(element.Chapter),
                         ended: element.IsEdd
                     };
                     res.push(mangaData);
@@ -107,7 +107,7 @@ class scraper {
                         mangaName: element.SeriesName,
                         genres: element.Genres,
                         date: element.Date,
-                        newChapter: parseChapNumber_1.parseChapNumber(element.Chapter),
+                        newChapter: mangasee_1.parseChapNumber(element.Chapter),
                         scanStatus: element.ScanStatus,
                         ended: element.IsEdd
                     };
@@ -189,8 +189,8 @@ class scraper {
                 let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
                 valid.forEach((element) => {
                     let mangaData = {
-                        chapterNumber: parseChapNumber_1.parseChapNumber(element.Chapter),
-                        link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber_1.parseChapNumber(element.Chapter) + ".html",
+                        chapterNumber: mangasee_1.parseChapNumber(element.Chapter),
+                        link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + mangasee_1.parseChapNumber(element.Chapter) + mangasee_1.chapToken(element.Chapter) + ".html",
                         type: element.Type,
                         date: element.Date,
                         chapterName: element.ChapterName
