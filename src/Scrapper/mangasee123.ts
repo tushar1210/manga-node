@@ -186,8 +186,8 @@ class scraper {
     return res
   }
 
-  async mangaData(sourceSpecificName: string, chapter: string): Promise<mangaDataRes> {
-    let url = this.baseURL + `/read-online/${sourceSpecificName}-chapter-${chapter}.html`
+  async mangaData(chapterURL: string): Promise<mangaDataRes> {
+    let url = chapterURL
     var final: mangaDataRes
     await axios.default.request({
       method: 'GET',
@@ -200,6 +200,7 @@ class scraper {
         let path: string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
         let curChapter: curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
         let allChaptersReq: allChapterInfoReq[] = JSON.parse(str?.match(/vm.CHAPTERS = (\[.*?\])/)[1])
+        let sourceSpecificName = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
         let chpNum = Number(curChapter.Page)
         let chpPath = curChapter.Chapter.substring(1, 5)
 

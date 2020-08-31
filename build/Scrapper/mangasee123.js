@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -205,9 +205,9 @@ class scraper {
             return res;
         });
     }
-    mangaData(sourceSpecificName, chapter) {
+    mangaData(chapterURL) {
         return __awaiter(this, void 0, void 0, function* () {
-            let url = this.baseURL + `/read-online/${sourceSpecificName}-chapter-${chapter}.html`;
+            let url = chapterURL;
             var final;
             yield axios.default.request({
                 method: 'GET',
@@ -221,6 +221,7 @@ class scraper {
                 let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
                 let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
                 let allChaptersReq = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CHAPTERS = (\[.*?\])/)[1]);
+                let sourceSpecificName = str === null || str === void 0 ? void 0 : str.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1];
                 let chpNum = Number(curChapter.Page);
                 let chpPath = curChapter.Chapter.substring(1, 5);
                 if (curChapter.Chapter[5] != '0') {

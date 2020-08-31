@@ -87,13 +87,12 @@ router.get('/:mangaId/chaps/:mangaName', (req, res) => __awaiter(void 0, void 0,
     }
 }));
 router.get('/:mangaId/manga-data', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    let sourceSpecificName = request.query.sourceSpecificName.toString();
-    let chapter = request.query.chapter.toString();
+    let chapterURL = request.query.chapterURL.toString();
     let mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
         let mangaseesc = new mangasee123_1.scraper();
         yield mangaseesc
-            .mangaData(sourceSpecificName, chapter)
+            .mangaData(chapterURL)
             .then((data) => {
             response.status(201).json(data);
         })
