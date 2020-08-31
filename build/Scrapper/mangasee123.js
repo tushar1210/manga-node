@@ -58,7 +58,12 @@ class scraper {
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
-                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                try {
+                    str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                }
+                catch (e) {
+                    throw new Error(e);
+                }
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
                 const imageBaseURL = "https://cover.mangabeast01.com/cover/";
@@ -77,7 +82,7 @@ class scraper {
                 });
             })
                 .catch((e) => {
-                return res;
+                return Promise.reject(e);
             });
             return res;
         });
@@ -95,7 +100,12 @@ class scraper {
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
-                str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                try {
+                    str = (_a = $('script:not([src])')[6].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                }
+                catch (e) {
+                    throw new Error(e);
+                }
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.LatestJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.LatestJSON = ')[1]);
                 valid.forEach((element) => {
@@ -115,7 +125,7 @@ class scraper {
                 return res;
             })
                 .catch((e) => {
-                return res;
+                return Promise.reject(res);
             });
             return res;
         });
@@ -184,7 +194,12 @@ class scraper {
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
-                str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                try {
+                    str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
+                }
+                catch (e) {
+                    throw new Error(e);
+                }
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.Chapters = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.Chapters = ')[1]);
                 valid.forEach((element) => {
@@ -197,10 +212,10 @@ class scraper {
                     };
                     res.push(mangaData);
                 });
-                return res.reverse();
+                return res;
             })
                 .catch((e) => {
-                return res;
+                return Promise.reject(e);
             });
             return res;
         });

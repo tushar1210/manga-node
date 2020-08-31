@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-import { mangaDataRes } from '../Interfaces/Responses/mangasee'
+import { mangaDataRes, hotUpResMain, latestUpResMain, chapsResMain } from '../Interfaces/Responses/mangasee'
 const router = Router()
 
 const sources = {
@@ -15,26 +15,42 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
     await mangasee
       .hotUpdates()
       .then((data: any) => {
-        response.status(201).json(data)
+        let res: hotUpResMain = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        response.status(500).json(e)
+        let res: hotUpResMain = {
+          success: false,
+          data: []
+        }
+        response.status(500).json(res)
       })
   }
 })
 
-router.get('/:mangaId/latest-updates', async (req: Request, res: Response) => {
-  let mangaId = req.params.mangaId.toString()
+router.get('/:mangaId/latest-updates', async (request: Request, response: Response) => {
+  let mangaId = request.params.mangaId.toString()
 
   if (mangaId == '0') {
     let mangaseeSc = new mangasee123Scrapper()
     await mangaseeSc
       .latestUpdates()
       .then((data: any) => {
-        res.status(201).json(data)
+        let res: latestUpResMain = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        res.status(500).json(e)
+        let res: latestUpResMain = {
+          success: false,
+          data: []
+        }
+        response.status(500).json(res)
       })
   }
 })
@@ -46,10 +62,16 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
     await mangasee
       .getAll()
       .then((data: any) => {
-        response.status(201).json(data)
+        response.status(201).json({
+          success: true,
+          data: data
+        })
       })
       .catch((e: any) => {
-        response.status(500).json(e)
+        response.status(500).json({
+          success: false,
+          data: []
+        })
       })
   }
 })
@@ -62,25 +84,41 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
     await mangaseesc
       .search(keyWord)
       .then((data: any) => {
-        response.status(201).json(data)
+        response.status(201).json({
+          success: true,
+          data: data
+        })
       })
       .catch((e: any) => {
-        response.status(500).json(e)
+        response.status(500).json({
+          success: false,
+          data: []
+        })
       })
   }
 })
 
-router.get('/:mangaId/chaps/:mangaName', async (req: Request, res: Response) => {
-  let mangaId: string = req.params.mangaId.toString()
+router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Response) => {
+  let mangaId: string = request.params.mangaId.toString()
+  let mangaName = request.params.mangaName.toString()
+  mangaName = mangaName.replace(/[ ]/gm, '-')
   if (mangaId == '0') {
     let mangasee = new mangasee123Scrapper()
     await mangasee
-      .getChaps(req.params.mangaName.toString())
+      .getChaps(mangaName)
       .then((data: any) => {
-        res.status(201).json(data)
+        let res: mangaDataRes = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        res.status(500).json(e)
+        let res: chapsResMain = {
+          success: false,
+          data: []
+        }
+        response.status(500).json(res)
       })
   }
 })
