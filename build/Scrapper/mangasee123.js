@@ -75,7 +75,6 @@ class scraper {
                     };
                     res.push(mangaData);
                 });
-                return res;
             })
                 .catch((e) => {
                 return res;
