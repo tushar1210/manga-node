@@ -217,6 +217,9 @@ class scraper {
                 .then((data) => {
                 var _a;
                 let str, $ = cheerio.load(data.data, { xmlMode: true });
+                if ($('script:not([src])').length != 6) {
+                    throw new Error("Illegal chapterURL");
+                }
                 str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
                 let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
@@ -254,15 +257,23 @@ class scraper {
                     imageDict[i] = chpURL;
                 }
                 let res = {
-                    path: path,
-                    imageURL: imageDict,
-                    allChapters: allChaptersReq,
-                    currentChapter: curChapter
+                    success: true,
+                    data: {
+                        path: path,
+                        imageURL: imageDict,
+                        allChapters: allChaptersReq,
+                        currentChapter: curChapter
+                    }
                 };
                 final = res;
             })
                 .catch((e) => {
-                console.log(e);
+                let res = {
+                    success: false,
+                    data: {}
+                };
+                final = res;
+                return Promise.reject(res);
             });
             return final;
         });

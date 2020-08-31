@@ -3,11 +3,8 @@ import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken } from '../helpers/mangasee'
-import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/OpenManga/Responses/mangasee'
-import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/OpenManga/Requests/mangasee'
-
-import { fn } from 'sequelize/types'
-
+import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
+import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -194,8 +191,11 @@ class scraper {
       url: url,
       headers: this.defaultHeaders
     })
-      .then((data: any) => {
+      .then((data: axios.AxiosResponse) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
+        if ($('script:not([src])').length != 6) {
+          throw new Error("Illegal chapterURL")
+        }
         str = $('script:not([src])')[5].children[0].data?.toString()
         let path: string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
         let curChapter: curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
@@ -234,19 +234,25 @@ class scraper {
           imageDict[i] = chpURL
         }
         let res: mangaDataRes = {
-          path: path,
-          imageURL: imageDict,
-          allChapters: allChaptersReq,
-          currentChapter: curChapter
+          success: true,
+          data: {
+            path: path,
+            imageURL: imageDict,
+            allChapters: allChaptersReq,
+            currentChapter: curChapter
+          }
         }
         final = res
       })
       .catch((e) => {
-        console.log(e)
+        let res: mangaDataRes = {
+          success: false,
+          data: {}
+        }
+        final = res
+        return Promise.reject(res)
       })
     return final
-
-
   }
 }
 
