@@ -22,7 +22,7 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
         yield mangasee
             .hotUpdates()
             .then((data) => {
-            response.status(201).json({});
+            response.status(201).json(data);
         })
             .catch((e) => {
             response.status(500).json(e);

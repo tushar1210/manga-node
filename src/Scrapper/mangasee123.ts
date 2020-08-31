@@ -35,10 +35,9 @@ class scraper {
       .then((data: any) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
         str = $('script:not([src])')[6].children[0].data?.toString()
-
+        // console.log(str)
         let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
         let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
-
         const imageBaseURL = "https://cover.mangabeast01.com/cover/"
         valid.forEach((element: any) => {
           let mangaData: hotUpRes = {
@@ -52,8 +51,8 @@ class scraper {
             ended: element.IsEdd
           }
           res.push(mangaData)
+
         })
-        return res
       })
       .catch((e: any) => {
         return res
@@ -145,6 +144,7 @@ class scraper {
         res.push(element)
       }
     })
+    res.reverse()
     return res
   }
 

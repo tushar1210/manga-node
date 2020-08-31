@@ -75,7 +75,6 @@ class scraper {
                     };
                     res.push(mangaData);
                 });
-                return res;
             })
                 .catch((e) => {
                 return res;
@@ -167,6 +166,7 @@ class scraper {
                     res.push(element);
                 }
             });
+            res.reverse();
             return res;
         });
     }
