@@ -144,6 +144,7 @@ class scraper {
         res.push(element)
       }
     })
+    res.reverse()
     return res
   }
 
