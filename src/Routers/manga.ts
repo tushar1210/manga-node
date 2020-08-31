@@ -14,9 +14,7 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
     await mangasee
       .hotUpdates()
       .then((data: any) => {
-        response.status(201).json({
-
-        })
+        response.status(201).json(data)
       })
       .catch((e: any) => {
         response.status(500).json(e)
@@ -103,6 +101,7 @@ router.get('/:mangaId/manga-data', async (request: Request, response: Response) 
   }
 
 })
+
 
 
 
