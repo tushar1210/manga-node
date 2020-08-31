@@ -13,7 +13,6 @@ const parseChapNumber = (chapNumber: string) => {
 const chapToken = (chapNumber: string) => {
   let token = "";
   let t = chapNumber.substring(0, 1)
-  console.log(t)
   if (t != "1") {
     token = "-index-" + t
   }
