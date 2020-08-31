@@ -31,8 +31,12 @@ class scraper {
       })
       .then((data: any) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
-        str = $('script:not([src])')[6].children[0].data?.toString()
-        // console.log(str)
+        try {
+          str = $('script:not([src])')[6].children[0].data?.toString()
+        }
+        catch (e) {
+          throw new Error(e)
+        }
         let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
         let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
         const imageBaseURL = "https://cover.mangabeast01.com/cover/"
@@ -48,11 +52,10 @@ class scraper {
             ended: element.IsEdd
           }
           res.push(mangaData)
-
         })
       })
       .catch((e: any) => {
-        return res
+        return Promise.reject(e)
       })
     return res
   }
@@ -69,8 +72,12 @@ class scraper {
       })
       .then((data: any) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
-        str = $('script:not([src])')[6].children[0].data?.toString()
-
+        try {
+          str = $('script:not([src])')[6].children[0].data?.toString()
+        }
+        catch (e) {
+          throw new Error(e)
+        }
         let parse = str?.match(/vm.LatestJSON = (\[.*?\])/)
         let valid: latestUpReq[] = JSON.parse(parse[0].split('vm.LatestJSON = ')[1])
 
@@ -91,7 +98,7 @@ class scraper {
         return res
       })
       .catch((e: any) => {
-        return res
+        return Promise.reject(res)
       })
     return res
 
@@ -158,8 +165,12 @@ class scraper {
       })
       .then((data: any) => {
         let str, $ = cheerio.load(data.data, { xmlMode: true })
-        str = $('script:not([src])')[5].children[0].data?.toString()
-
+        try {
+          str = $('script:not([src])')[5].children[0].data?.toString()
+        }
+        catch (e) {
+          throw new Error(e)
+        }
         let parse = str?.match(/vm.Chapters = (\[.*?\])/)
         let valid: chapsReq[] = JSON.parse(parse[0].split('vm.Chapters = ')[1])
 
@@ -173,12 +184,10 @@ class scraper {
           }
           res.push(mangaData)
         })
-        // should keep in DESC mode imo
-        // ASC mode for now
-        return res.reverse()
+        return res
       })
       .catch((e: any) => {
-        return res
+        return Promise.reject(e)
       })
     return res
   }

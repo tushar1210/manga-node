@@ -10,6 +10,11 @@ export interface hotUpRes {
   ended: boolean
 }
 
+export interface hotUpResMain {
+  success: boolean
+  data: hotUpRes[]
+}
+
 export interface latestUpRes {
   id: string
   source: string
@@ -20,6 +25,11 @@ export interface latestUpRes {
   date: string
   newChapter: string
   ended: boolean
+}
+
+export interface latestUpResMain {
+  success: boolean
+  data: latestUpRes[]
 }
 
 export interface allRes {
@@ -38,6 +48,12 @@ export interface chapsRes {
   date: string
   chapterName: string
 }
+
+export interface chapsResMain {
+  success: boolean
+  data: chapsRes[]
+}
+
 export interface mangaDataRes {
   success: boolean
   data: {
