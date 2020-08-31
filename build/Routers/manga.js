@@ -91,6 +91,13 @@ router.get('/:mangaId/manga-data', (request, response) => __awaiter(void 0, void
     let mangaId = request.params.mangaId.toString();
     if (mangaId == '0') {
         let mangaseesc = new mangasee123_1.scraper();
+        if (chapterURL == null || chapterURL == '') {
+            let resp = {
+                success: false,
+                data: {}
+            };
+            return response.status(400).json(resp);
+        }
         yield mangaseesc
             .mangaData(chapterURL)
             .then((data) => {

@@ -33,20 +33,20 @@ export interface chapsReq {
   ChapterName: string
 }
 
-export interface allChapterInfoReq{
-  Chapter:string
-  Type:string
-  Page:string
-  Directory:string
-  Date:string
-  ChapterName:string
+export interface allChapterInfoReq {
+  Chapter: string
+  Type: string
+  Page: string
+  Directory: string
+  Date: string
+  ChapterName: string
 }
 
-export interface curChapterReq{
-  Chapter:string
-  Type:string
-  Page:string
-  Directory:string
-  Date:string
-  ChapterName:string|null
+export interface curChapterReq {
+  Chapter: string
+  Type: string
+  Page: string
+  Directory: string
+  Date: string
+  ChapterName: string | null
 }
