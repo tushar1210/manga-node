@@ -2,7 +2,7 @@ import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
-import { parseChapNumber } from '../helpers/parseChapNumber'
+import { parseChapNumber, chapToken } from '../helpers/mangasee'
 import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/OpenManga/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/OpenManga/Requests/mangasee'
 
@@ -169,7 +169,7 @@ class scraper {
         valid.forEach((element: any) => {
           let mangaData: chapsRes = {
             chapterNumber: parseChapNumber(element.Chapter),
-            link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber(element.Chapter) + ".html",
+            link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber(element.Chapter) + chapToken(element.Chapter) + ".html",
             type: element.Type,
             date: element.Date,
             chapterName: element.ChapterName

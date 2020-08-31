@@ -6,7 +6,18 @@ const parseChapNumber = (chapNumber: string) => {
       chapNumberR = chapNumberR.substring(1, 2)
     }
   }
+  if (chapNumber.substring(5, 6) != "0") chapNumberR = chapNumberR + "." + chapNumber.substring(5, 6)
   return chapNumberR
 }
 
-export { parseChapNumber }
+const chapToken = (chapNumber: string) => {
+  let token = "";
+  let t = chapNumber.substring(0, 1)
+  console.log(t)
+  if (t != "1") {
+    token = "-index-" + t
+  }
+  return token
+}
+
+export { parseChapNumber, chapToken }
