@@ -1,4 +1,4 @@
-const parseChapNumber = (chapNumber: string) => {
+const parseChapNumber = (chapNumber: string): string => {
   let chapNumberR: string = chapNumber.substring(2, 5)
   if (chapNumberR.substring(0, 1) == "0") {
     chapNumberR = chapNumberR.substring(1, 3)
@@ -10,7 +10,7 @@ const parseChapNumber = (chapNumber: string) => {
   return chapNumberR
 }
 
-const chapToken = (chapNumber: string) => {
+const chapToken = (chapNumber: string): string => {
   let token = "";
   let t = chapNumber.substring(0, 1)
   if (t != "1") {
