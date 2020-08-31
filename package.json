@@ -7,8 +7,18 @@
     "start": "npm run build && node -r tsconfig-paths/register build/index.js",
     "dev": "nodemon",
     "build": "rm -rf ./build && npx tsc",
-    "doc:html": "rm -rf ./docs && npx typedoc --tsconfig ./tsconfig.json",
-    "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json"
+    "doc:html": "rm -rf ./docs && npx typedoc --plugin none --theme default --tsconfig ./tsconfig.json",
+    "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json",
+    "tslint": "gulp tslint",
+    "prettify": "npx tsfmt -r --baseDir ./src",
+    "sqlz:migrate": "npx sequelize db:migrate",
+    "sqlz:undo": "npx sequelize db:migrate:undo",
+    "sqlz:new": "npx sequelize migration:create"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run prettify"
+    ]
   },
   "keywords": [
     "manga",
@@ -18,19 +28,26 @@
   "author": "Tushar Singh",
   "license": "ISC",
   "dependencies": {
+    "@types/bluebird": "^3.5.32",
+    "@types/body-parser": "^1.19.0",
     "@types/cheerio": "^0.22.18",
     "@types/express": "^4.17.6",
     "@types/mongoose": "^5.7.24",
-    "@types/node": "^14.0.13",
+    "@types/node": "^14.6.1",
     "@types/node-cron": "^2.0.3",
     "@types/string-similarity": "^3.0.0",
+    "@types/validator": "^13.1.0",
     "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.19",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.4",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "5.21.5",
     "string-similarity": "^4.0.2",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
@@ -39,12 +56,21 @@
   "devDependencies": {
     "del": "^5.1.0",
     "gulp": "^4.0.2",
-    "gulp-typedoc": "^2.2.5",
+    "gulp-tslint": "^8.1.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
+    "tslint": "^6.1.3",
     "typedoc": "^0.18.0",
-    "typedoc-plugin-markdown": "^2.4.2"
+    "typedoc-plugin-markdown": "^2.4.2",
+    "typescript-formatter": "^7.2.2"
   },
   "engines": {
     "node": "12.x",
     "npm": "6.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

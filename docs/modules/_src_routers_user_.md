@@ -4,14 +4,22 @@
 
 ## Index
 
-### Variables
+### Functions
 
-* [router](_src_routers_user_.md#const-router)
+* [routes](_src_routers_user_.md#routes)
 
-## Variables
+## Functions
 
-### `Const` router
+###  routes
 
-• **router**: *Router‹›* = Router()
+▸ **routes**(`app`: Express): *void*
 
-*Defined in [src/Routers/user.ts:3](https://github.com/tushar1210/manga-node/blob/ee68806/src/Routers/user.ts#L3)*
+*Defined in [src/Routers/user.ts:4](https://github.com/tushar1210/manga-node/blob/a605026/src/Routers/user.ts#L4)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`app` | Express |
+
+**Returns:** *void*
