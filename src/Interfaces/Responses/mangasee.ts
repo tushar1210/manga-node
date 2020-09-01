@@ -1,4 +1,4 @@
-import {allChapterInfoReq, curChapterReq} from '../Requests/mangasee'
+import { allChapterInfoReq, curChapterReq } from '../Requests/mangasee'
 export interface hotUpRes {
   id: string
   source: string
@@ -8,6 +8,11 @@ export interface hotUpRes {
   date: string
   currentChapter: string
   ended: boolean
+}
+
+export interface hotUpResMain {
+  success: boolean
+  data: hotUpRes[]
 }
 
 export interface latestUpRes {
@@ -20,6 +25,11 @@ export interface latestUpRes {
   date: string
   newChapter: string
   ended: boolean
+}
+
+export interface latestUpResMain {
+  success: boolean
+  data: latestUpRes[]
 }
 
 export interface allRes {
@@ -38,10 +48,21 @@ export interface chapsRes {
   date: string
   chapterName: string
 }
-export interface mangaDataRes{
-  imageURL:any
-  path:string
-  allChapters:allChapterInfoReq[]
-  currentChapter:curChapterReq
 
+export interface chapsResMain {
+  success: boolean
+  data: chapsRes[]
+}
+
+export interface mangaDataRes {
+  success: boolean
+  data: {
+    imageURL?: {
+      Sno?: string
+      url?: string
+    } | any
+    path?: string
+    allChapters?: allChapterInfoReq[]
+    currentChapter?: curChapterReq
+  }
 }

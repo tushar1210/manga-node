@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manga-Node | API | Heroku</title>
+</head>
+
+<body>
+  <h1> Manga </h1>
+  <h2>Welcome!</h2>
+
+  <table>
+    <tr>
+      <th>MSP</th>
+      <th>Route</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td>Mangasee</td>
+      <td>manga/0/hot-updates</td>
+      <td> - </td>
+    </tr>
+    <tr>
+      <td>Mangasee</td>
+      <td>manga/0/latest-updates</td>
+      <td> - </td>
+    </tr>
+    <tr>
+      <td>Mangasee</td>
+      <td>manga/0/manga-data?chapterURL=</url>
+      </td>
+      <td>manga/0/manga-data?chapterURL=https://mangasee123.com/read-online/Monster-chapter-162.html</td>
+    </tr>
+    <tr>
+      <td>Mangasee</td>
+      <td>manga/0/search/?keyWord=<query>
+      </td>
+      <td>manga/0/search/?keyWord=loli</td>
+    </tr>
+    <tr>
+      <td>Mangasee</td>
+      <td>manga/0/chaps/<manga-name>
+      </td>
+      <td>manga/0/chaps/Monster</td>
+    </tr>
+
+  </table>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -27,6 +27,7 @@ const mangasee123_1 = require("./Scrapper/mangasee123");
 const manga_1 = __importDefault(require("./Routers/manga"));
 const UserRoutes = __importStar(require("./Routers/user"));
 const node_cron_1 = __importDefault(require("node-cron"));
+const path = require('path');
 const body_parser_1 = require("body-parser");
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -40,7 +41,7 @@ app.use(body_parser_1.urlencoded({
 app.use('/manga', manga_1.default);
 UserRoutes.routes(app);
 app.use("/", (request, response) => {
-    response.sendFile(__dirname + '/Routers/index.html');
+    response.sendFile(path.join(__dirname, '../public/index.html'));
 });
 app.listen(PORT, () => {
     console.log("Server's on @" + PORT);

@@ -18,7 +18,7 @@
 
 • **router**: *Router‹›* = Router()
 
-*Defined in [src/Routers/manga.ts:4](https://github.com/tushar1210/manga-node/blob/a605026/src/Routers/manga.ts#L4)*
+*Defined in [src/Routers/manga.ts:4](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Routers/manga.ts#L4)*
 
 ## Object literals
 
@@ -26,10 +26,10 @@
 
 ### ▪ **sources**: *object*
 
-*Defined in [src/Routers/manga.ts:6](https://github.com/tushar1210/manga-node/blob/a605026/src/Routers/manga.ts#L6)*
+*Defined in [src/Routers/manga.ts:6](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Routers/manga.ts#L6)*
 
 ###  0
 
 • **0**: *string* = "https://mangasee123.com"
 
-*Defined in [src/Routers/manga.ts:7](https://github.com/tushar1210/manga-node/blob/a605026/src/Routers/manga.ts#L7)*
+*Defined in [src/Routers/manga.ts:7](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Routers/manga.ts#L7)*
