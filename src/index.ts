@@ -3,6 +3,7 @@ import { scraper } from './Scrapper/mangasee123'
 import mangaRouter from './Routers/manga'
 import * as UserRoutes from './Routers/user'
 import cron from 'node-cron'
+const path = require('path')
 import { json, urlencoded } from 'body-parser'
 
 require('dotenv').config()
@@ -23,7 +24,7 @@ app.use('/manga', mangaRouter)
 UserRoutes.routes(app)
 
 app.use("/", (request: express.Request, response: express.Response) => {
-  response.sendFile(__dirname + '/Routers/index.html')
+  response.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
 app.listen(PORT, () => {
