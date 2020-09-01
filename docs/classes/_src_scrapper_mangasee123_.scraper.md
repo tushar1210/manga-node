@@ -24,6 +24,7 @@
 * [getChaps](_src_scrapper_mangasee123_.scraper.md#getchaps)
 * [hotUpdates](_src_scrapper_mangasee123_.scraper.md#hotupdates)
 * [latestUpdates](_src_scrapper_mangasee123_.scraper.md#latestupdates)
+* [mangaData](_src_scrapper_mangasee123_.scraper.md#mangadata)
 * [search](_src_scrapper_mangasee123_.scraper.md#search)
 
 ## Constructors
@@ -32,7 +33,7 @@
 
 \+ **new scraper**(): *[scraper](_src_scrapper_mangasee123_.scraper.md)*
 
-*Defined in [src/Scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L11)*
+*Defined in [src/Scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L11)*
 
 **Returns:** *[scraper](_src_scrapper_mangasee123_.scraper.md)*
 
@@ -42,7 +43,7 @@
 
 • **baseURL**: *string*
 
-*Defined in [src/Scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L11)*
+*Defined in [src/Scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L11)*
 
 ___
 
@@ -50,7 +51,7 @@ ___
 
 • **defaultHeaders**: *object*
 
-*Defined in [src/Scrapper/mangasee123.ts:10](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L10)*
+*Defined in [src/Scrapper/mangasee123.ts:10](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L10)*
 
 ## Methods
 
@@ -58,7 +59,7 @@ ___
 
 ▸ **all**(): *Promise‹void›*
 
-*Defined in [src/Scrapper/mangasee123.ts:101](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L101)*
+*Defined in [src/Scrapper/mangasee123.ts:109](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L109)*
 
 **Returns:** *Promise‹void›*
 
@@ -66,19 +67,19 @@ ___
 
 ###  getAll
 
-▸ **getAll**(): *Promise‹[allRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.allres.md)[]›*
+▸ **getAll**(): *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
-*Defined in [src/Scrapper/mangasee123.ts:132](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L132)*
+*Defined in [src/Scrapper/mangasee123.ts:141](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L141)*
 
-**Returns:** *Promise‹[allRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.allres.md)[]›*
+**Returns:** *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
 ___
 
 ###  getChaps
 
-▸ **getChaps**(`mangaName`: string): *Promise‹[chapsRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.chapsres.md)[]›*
+▸ **getChaps**(`mangaName`: string): *Promise‹[chapsRes](../interfaces/_src_interfaces_responses_mangasee_.chapsres.md)[]›*
 
-*Defined in [src/Scrapper/mangasee123.ts:148](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L148)*
+*Defined in [src/Scrapper/mangasee123.ts:158](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L158)*
 
 **Parameters:**
 
@@ -86,35 +87,51 @@ Name | Type |
 ------ | ------ |
 `mangaName` | string |
 
-**Returns:** *Promise‹[chapsRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.chapsres.md)[]›*
+**Returns:** *Promise‹[chapsRes](../interfaces/_src_interfaces_responses_mangasee_.chapsres.md)[]›*
 
 ___
 
 ###  hotUpdates
 
-▸ **hotUpdates**(): *Promise‹[hotUpRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.hotupres.md)[]›*
+▸ **hotUpdates**(): *Promise‹[hotUpRes](../interfaces/_src_interfaces_responses_mangasee_.hotupres.md)[]›*
 
-*Defined in [src/Scrapper/mangasee123.ts:23](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L23)*
+*Defined in [src/Scrapper/mangasee123.ts:23](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L23)*
 
-**Returns:** *Promise‹[hotUpRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.hotupres.md)[]›*
+**Returns:** *Promise‹[hotUpRes](../interfaces/_src_interfaces_responses_mangasee_.hotupres.md)[]›*
 
 ___
 
 ###  latestUpdates
 
-▸ **latestUpdates**(): *Promise‹[latestUpRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.latestupres.md)[]›*
+▸ **latestUpdates**(): *Promise‹[latestUpRes](../interfaces/_src_interfaces_responses_mangasee_.latestupres.md)[]›*
 
-*Defined in [src/Scrapper/mangasee123.ts:62](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L62)*
+*Defined in [src/Scrapper/mangasee123.ts:66](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L66)*
 
-**Returns:** *Promise‹[latestUpRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.latestupres.md)[]›*
+**Returns:** *Promise‹[latestUpRes](../interfaces/_src_interfaces_responses_mangasee_.latestupres.md)[]›*
+
+___
+
+###  mangaData
+
+▸ **mangaData**(`chapterURL`: string): *Promise‹[mangaDataRes](../interfaces/_src_interfaces_responses_mangasee_.mangadatares.md)›*
+
+*Defined in [src/Scrapper/mangasee123.ts:198](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L198)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`chapterURL` | string |
+
+**Returns:** *Promise‹[mangaDataRes](../interfaces/_src_interfaces_responses_mangasee_.mangadatares.md)›*
 
 ___
 
 ###  search
 
-▸ **search**(`keyWord`: string): *Promise‹[allRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.allres.md)[]›*
+▸ **search**(`keyWord`: string): *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
-*Defined in [src/Scrapper/mangasee123.ts:137](https://github.com/tushar1210/manga-node/blob/a605026/src/Scrapper/mangasee123.ts#L137)*
+*Defined in [src/Scrapper/mangasee123.ts:146](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Scrapper/mangasee123.ts#L146)*
 
 **Parameters:**
 
@@ -122,4 +139,4 @@ Name | Type |
 ------ | ------ |
 `keyWord` | string |
 
-**Returns:** *Promise‹[allRes](../interfaces/_src_interfaces_openmanga_responses_mangasee_.allres.md)[]›*
+**Returns:** *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*

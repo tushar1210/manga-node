@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -74,14 +74,14 @@ exports.mangaEdenChapterList = mangaEdenChapterList;
 function updateMangaEdenListJSON() {
     return __awaiter(this, void 0, void 0, function* () {
         yield axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })
-            .then(data => {
+            .then((data) => {
             let obj = JSON.stringify(data.data.manga);
             Fs.writeFileSync('./build/temp/eden-list.json', obj);
             let now = new Date();
             Fs.appendFileSync('.log', '[Manga Eden] Succeessful MangaList Update at :    ' + now + '\n');
         })
-            .catch(e => {
-            return;
+            .catch((e) => {
+            return e.message;
         });
     });
 }
