@@ -5,6 +5,7 @@ import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken } from '../helpers/mangasee'
 import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
+
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -21,7 +22,7 @@ class scraper {
 
   async hotUpdates(): Promise<hotUpRes[]> {
     let res: hotUpRes[] = []
-    const url = this.baseURL
+    const url: string = this.baseURL
 
     await axios.default
       .request({
@@ -29,18 +30,20 @@ class scraper {
         headers: this.defaultHeaders,
         url: url
       })
-      .then((data: any) => {
-        let str, $ = cheerio.load(data.data, { xmlMode: true })
+      .then((data: axios.AxiosResponse<any>) => {
+        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[6].children[0].data?.toString()
         }
         catch (e) {
           throw new Error(e)
         }
-        let parse = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
+
+        let parse: RegExpMatchArray = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
         let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
-        const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-        valid.forEach((element: any) => {
+        const imageBaseURL: string = "https://cover.mangabeast01.com/cover/"
+
+        valid.forEach((element: hotUpReq) => {
           let mangaData: hotUpRes = {
             id: element.SeriesID,
             sourceSpecificName: element.IndexName,
@@ -55,14 +58,14 @@ class scraper {
         })
       })
       .catch((e: any) => {
-        return Promise.reject(e)
+        return Promise.reject(e.message)
       })
     return res
   }
 
   async latestUpdates(): Promise<latestUpRes[]> {
     let res: latestUpRes[] = []
-    const url = this.baseURL
+    const url: string = this.baseURL
 
     await axios.default
       .request({
@@ -70,18 +73,18 @@ class scraper {
         headers: this.defaultHeaders,
         url: url
       })
-      .then((data: any) => {
-        let str, $ = cheerio.load(data.data, { xmlMode: true })
+      .then((data: axios.AxiosResponse<any>) => {
+        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[6].children[0].data?.toString()
         }
         catch (e) {
           throw new Error(e)
         }
-        let parse = str?.match(/vm.LatestJSON = (\[.*?\])/)
+        let parse: RegExpMatchArray = str?.match(/vm.LatestJSON = (\[.*?\])/)
         let valid: latestUpReq[] = JSON.parse(parse[0].split('vm.LatestJSON = ')[1])
 
-        valid.forEach((element: any) => {
+        valid.forEach((element: latestUpReq) => {
           let mangaData: latestUpRes = {
             id: element.SeriesID,
             sourceSpecificName: element.IndexName,
@@ -101,7 +104,6 @@ class scraper {
         return Promise.reject(res)
       })
     return res
-
   }
 
   async all() {
@@ -113,11 +115,12 @@ class scraper {
         headers: this.defaultHeaders,
         url: url
       })
-      .then((data: any) => {
+      .then((data: axios.AxiosResponse<any>) => {
         let valid: allReq[] = data.data
         let res: allRes[] = []
-        const imageBaseURL = "https://cover.mangabeast01.com/cover/"
-        valid.forEach((element: any) => {
+        const imageBaseURL: string = "https://cover.mangabeast01.com/cover/"
+
+        valid.forEach((element: allReq) => {
           let obj: allRes = {
             imageURL: imageBaseURL + element.i + '.jpg',
             mangaURL: this.baseURL + '/manga/' + element.i,
@@ -131,7 +134,7 @@ class scraper {
         Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res))
       })
       .catch((e: any) => {
-        return
+        return Promise.reject(e.message)
       })
   }
 
@@ -143,7 +146,7 @@ class scraper {
   async search(keyWord: string): Promise<allRes[]> {
     let data: allRes[] = await this.getAll()
     let res: allRes[] = []
-    data.forEach((element: any) => {
+    data.forEach((element: allRes) => {
       if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
         res.push(element)
       }
@@ -154,8 +157,8 @@ class scraper {
 
   async getChaps(mangaName: string): Promise<chapsRes[]> {
     let res: chapsRes[] = []
-    let mangaNameR = mangaName.replace("/\s/", "-")
-    const url = this.baseURL + "/manga/" + mangaNameR
+    let mangaNameR: string = mangaName.replace("/\s/", "-")
+    const url: string = this.baseURL + "/manga/" + mangaNameR
 
     await axios.default
       .request({
@@ -163,18 +166,18 @@ class scraper {
         headers: this.defaultHeaders,
         url: url
       })
-      .then((data: any) => {
-        let str, $ = cheerio.load(data.data, { xmlMode: true })
+      .then((data: axios.AxiosResponse<any>) => {
+        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[5].children[0].data?.toString()
         }
         catch (e) {
           throw new Error(e)
         }
-        let parse = str?.match(/vm.Chapters = (\[.*?\])/)
+        let parse: RegExpMatchArray = str?.match(/vm.Chapters = (\[.*?\])/)
         let valid: chapsReq[] = JSON.parse(parse[0].split('vm.Chapters = ')[1])
 
-        valid.forEach((element: any) => {
+        valid.forEach((element: chapsReq) => {
           let mangaData: chapsRes = {
             chapterNumber: parseChapNumber(element.Chapter),
             link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber(element.Chapter) + chapToken(element.Chapter) + ".html",
@@ -187,21 +190,21 @@ class scraper {
         return res
       })
       .catch((e: any) => {
-        return Promise.reject(e)
+        return Promise.reject(e.message)
       })
     return res
   }
 
   async mangaData(chapterURL: string): Promise<mangaDataRes> {
-    let url = chapterURL
+    let url: string = chapterURL
     var final: mangaDataRes
     await axios.default.request({
       method: 'GET',
       url: url,
       headers: this.defaultHeaders
     })
-      .then((data: axios.AxiosResponse) => {
-        let str, $ = cheerio.load(data.data, { xmlMode: true })
+      .then((data: axios.AxiosResponse<any>) => {
+        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
         if ($('script:not([src])').length != 6) {
           throw new Error("Illegal chapterURL")
         }
@@ -209,9 +212,9 @@ class scraper {
         let path: string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
         let curChapter: curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
         let allChaptersReq: allChapterInfoReq[] = JSON.parse(str?.match(/vm.CHAPTERS = (\[.*?\])/)[1])
-        let sourceSpecificName = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
-        let chpNum = Number(curChapter.Page)
-        let chpPath = curChapter.Chapter.substring(1, 5)
+        let sourceSpecificName: any = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
+        let chpNum: number = Number(curChapter.Page)
+        let chpPath: string = curChapter.Chapter.substring(1, 5)
 
         if (curChapter.Chapter[5] != '0') {
           chpPath += '.'
@@ -219,16 +222,20 @@ class scraper {
             chpPath += curChapter.Chapter[i]
           }
         }
-        let imgURL = ''
+
+        let imgURL: string = ''
+
         if (curChapter.Directory == '') {
           imgURL = `https://${path}/manga/${sourceSpecificName}/${chpPath}-`
         }
         else {
           imgURL = `https://${path}/manga/${sourceSpecificName}/${curChapter.Directory}/${chpPath}-`
         }
+
         let imageDict: any = {}
+
         for (let index = 1; index <= chpNum; index++) {
-          let chpURL = imgURL
+          let chpURL: string = imgURL
           if (index >= 1 && index <= 9) {
             chpURL += '00' + index.toString()
           }
@@ -253,7 +260,7 @@ class scraper {
         }
         final = res
       })
-      .catch((e) => {
+      .catch((e: any) => {
         let res: mangaDataRes = {
           success: false,
           data: {}

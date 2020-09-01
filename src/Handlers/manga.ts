@@ -24,10 +24,10 @@ export async function mangaEdenList() {
 // })
 
 export async function mangaEdenGetImage(dir: String, imgPath: String) {
-  const url = 'https://cdn.mangaeden.com/mangasimg/' + dir + "/" + imgPath
-  const path = Path.resolve('./build/temp/thumbnail', 'image.jpg')
-  const writer = Fs.createWriteStream(path)
-  const response = await axios.default({
+  const url: string = 'https://cdn.mangaeden.com/mangasimg/' + dir + "/" + imgPath
+  const path: string = Path.resolve('./build/temp/thumbnail', 'image.jpg')
+  const writer: Fs.WriteStream = Fs.createWriteStream(path)
+  const response: axios.AxiosResponse<any> = await axios.default({
     url,
     method: 'GET',
     responseType: 'stream',
@@ -52,14 +52,14 @@ export async function mangaEdenChapterList(mangaID: String) {
 
 export async function updateMangaEdenListJSON() {
   await axios.default.get('https://www.mangaeden.com/api/list/0', { headers: headers })
-    .then(data => {
-      let obj = JSON.stringify(data.data.manga)
+    .then((data: axios.AxiosResponse<any>) => {
+      let obj: string = JSON.stringify(data.data.manga)
       Fs.writeFileSync('./build/temp/eden-list.json', obj)
-      let now = new Date()
+      let now: Date = new Date()
       Fs.appendFileSync('.log', '[Manga Eden] Succeessful MangaList Update at :    ' + now + '\n')
     })
-    .catch(e => {
-      return
+    .catch((e: any) => {
+      return e.message
     })
 }
 
