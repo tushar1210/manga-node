@@ -1,11 +1,9 @@
+import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
 import { mangaDataRes, hotUpRes, hotUpResMain, latestUpRes, latestUpResMain, chapsResMain, allRes } from '../Interfaces/Responses/mangasee'
+import { json } from 'body-parser'
 const router = Router()
-
-const sources = {
-  0: "https://mangasee123.com"
-}
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
   let mangaId: string = request.params.mangaId.toString()
@@ -148,6 +146,11 @@ router.get('/:mangaId/manga-data', async (request: Request, response: Response) 
         response.status(500).json(e)
       })
   }
+})
+
+router.get('/get-sources', async (request: Request, response: Response) => {
+  let data = JSON.parse(Fs.readFileSync('./src/sources.json').toString())
+  return response.json(data)
 })
 
 export default router
