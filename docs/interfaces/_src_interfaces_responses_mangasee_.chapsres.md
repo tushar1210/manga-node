@@ -22,7 +22,7 @@
 
 • **chapterName**: *string*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:49](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Responses/mangasee.ts#L49)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:49](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Responses/mangasee.ts#L49)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **chapterNumber**: *string*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:46](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Responses/mangasee.ts#L46)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:46](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Responses/mangasee.ts#L46)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **date**: *string*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:48](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Responses/mangasee.ts#L48)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:48](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Responses/mangasee.ts#L48)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **link**: *string*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:45](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Responses/mangasee.ts#L45)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:45](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Responses/mangasee.ts#L45)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **type**: *string*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:47](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Responses/mangasee.ts#L47)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:47](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Responses/mangasee.ts#L47)*

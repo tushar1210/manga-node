@@ -22,5 +22,5 @@ User
     title: STRING(200),
     favourites: ARRAY(STRING(200))
   }, {
-    sequelize, modelName: 'User',freezeTableName: true, underscored: true
+    sequelize, modelName: 'User', freezeTableName: true, underscored: true
   })
