@@ -24,7 +24,7 @@
 
 • **created_at**: *Date*
 
-*Defined in [src/sqlz/models/user.ts:14](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L14)*
+*Defined in [src/sqlz/models/user.ts:14](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L14)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **email**: *string*
 
-*Defined in [src/sqlz/models/user.ts:10](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L10)*
+*Defined in [src/sqlz/models/user.ts:10](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L10)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **favourites**: *[string]*
 
-*Defined in [src/sqlz/models/user.ts:13](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L13)*
+*Defined in [src/sqlz/models/user.ts:13](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L13)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [src/sqlz/models/user.ts:9](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L9)*
+*Defined in [src/sqlz/models/user.ts:9](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L9)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [src/sqlz/models/user.ts:11](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L11)*
+*Defined in [src/sqlz/models/user.ts:11](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L11)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **title**: *string*
 
-*Defined in [src/sqlz/models/user.ts:12](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L12)*
+*Defined in [src/sqlz/models/user.ts:12](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L12)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **updated_at**: *Date*
 
-*Defined in [src/sqlz/models/user.ts:15](https://github.com/tushar1210/manga-node/blob/8c3a793/src/sqlz/models/user.ts#L15)*
+*Defined in [src/sqlz/models/user.ts:15](https://github.com/tushar1210/manga-node/blob/91f9f49/src/sqlz/models/user.ts#L15)*

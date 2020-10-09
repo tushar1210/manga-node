@@ -20,7 +20,7 @@
 
 • **a**: *string[]*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:24](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Requests/mangasee.ts#L24)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:24](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L24)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **i**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Requests/mangasee.ts#L22)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L22)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **s**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:23](https://github.com/tushar1210/manga-node/blob/8c3a793/src/Interfaces/Requests/mangasee.ts#L23)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:23](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L23)*
