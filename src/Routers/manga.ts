@@ -2,7 +2,6 @@ import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
 import { mangaDataRes, hotUpRes, hotUpResMain, latestUpRes, latestUpResMain, chapsResMain, allRes } from '../Interfaces/Responses/mangasee'
-import { json } from 'body-parser'
 const router = Router()
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
