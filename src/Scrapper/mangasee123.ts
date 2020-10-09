@@ -31,7 +31,7 @@ class scraper {
         url: url
       })
       .then((data: axios.AxiosResponse<any>) => {
-        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
+        let str: any, $ = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[6].children[0].data?.toString()
         }
@@ -74,7 +74,7 @@ class scraper {
         url: url
       })
       .then((data: axios.AxiosResponse<any>) => {
-        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
+        let str: any, $ = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[6].children[0].data?.toString()
         }
@@ -167,7 +167,7 @@ class scraper {
         url: url
       })
       .then((data: axios.AxiosResponse<any>) => {
-        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
+        let str: any, $ = cheerio.load(data.data, { xmlMode: true })
         try {
           str = $('script:not([src])')[5].children[0].data?.toString()
         }
@@ -204,7 +204,7 @@ class scraper {
       headers: this.defaultHeaders
     })
       .then((data: axios.AxiosResponse<any>) => {
-        let str: any, $: CheerioStatic = cheerio.load(data.data, { xmlMode: true })
+        let str: any, $ = cheerio.load(data.data, { xmlMode: true })
         if ($('script:not([src])').length != 6) {
           throw new Error("Illegal chapterURL")
         }
