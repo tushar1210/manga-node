@@ -23,7 +23,7 @@
 
 • **Chapter**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:6](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L6)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:6](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L6)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **Date**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:5](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L5)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:5](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L5)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **IndexName**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:3](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L3)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:3](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L3)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **IsEdd**: *boolean*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:7](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L7)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:7](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L7)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **SeriesID**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:2](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L2)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:2](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L2)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **SeriesName**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:4](https://github.com/tushar1210/manga-node/blob/91f9f49/src/Interfaces/Requests/mangasee.ts#L4)*
+*Defined in [src/Interfaces/Requests/mangasee.ts:4](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Requests/mangasee.ts#L4)*

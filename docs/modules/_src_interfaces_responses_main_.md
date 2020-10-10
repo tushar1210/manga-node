@@ -6,4 +6,5 @@
 
 ### Interfaces
 
-* [res](../interfaces/_src_interfaces_responses_main_.res.md)
+* [hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)
+* [response](../interfaces/_src_interfaces_responses_main_.response.md)

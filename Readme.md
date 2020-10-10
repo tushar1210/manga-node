@@ -11,11 +11,13 @@
 - manga/0/manga-data?chapterURL=<url>
 - manga/0/search/?keyWord=<query>
 - manga/0/chaps/<manga-name>
+- manga/1/hot-updates
 ```
 
 ## Sources:
 
 `0:` https://mangasee123.com/
+`1:` https://mangakakalot.com/
 
 
 ## POST /api/signup
