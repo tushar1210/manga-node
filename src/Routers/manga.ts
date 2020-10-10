@@ -2,8 +2,9 @@ import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
 import { scraper as mangakakalotScrapper } from '../Scrapper/mangakakalot'
-import { mangaDataRes, hotUpRes, hotUpResMain, latestUpRes, latestUpResMain, chapsResMain, allRes } from '../Interfaces/Responses/mangasee'
+import * as mangaseeInterface from '../Interfaces/Responses/mangasee'
 import * as mangakakalotInterface from '../Interfaces/Responses/mangakaklot'
+import * as mainInterface from '../Interfaces/Responses/main'
 const router = Router()
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
@@ -13,28 +14,27 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
     let mangasee: mangasee123Scrapper = new mangasee123Scrapper()
     await mangasee
       .hotUpdates()
-      .then((data: hotUpRes[]) => {
-        let res: hotUpResMain = {
+      .then((data: mainInterface.hotUpdates[]) => {
+        let res: mainInterface.response = {
           success: true,
           data: data
         }
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: hotUpResMain = {
+        let res: mangaseeInterface.hotUpResMain = {
           success: false,
           data: []
         }
         response.status(500).json(res)
       })
   }
-
-  if (mangaId == '1') {
+  else if (mangaId == '1') {
     let mangakakalot = new mangakakalotScrapper()
     await mangakakalot
       .hotUpdates()
-      .then((data: mangakakalotInterface.hotUpRes[]) => {
-        let res: mangakakalotInterface.hotUpResMain = {
+      .then((data: mainInterface.hotUpdates[]) => {
+        let res: mainInterface.response = {
           success: true,
           data: data
         }
@@ -58,15 +58,15 @@ router.get('/:mangaId/latest-updates', async (request: Request, response: Respon
     let mangaseeSc: mangasee123Scrapper = new mangasee123Scrapper()
     await mangaseeSc
       .latestUpdates()
-      .then((data: latestUpRes[]) => {
-        let res: latestUpResMain = {
+      .then((data: mangaseeInterface.latestUpRes[]) => {
+        let res: mangaseeInterface.latestUpResMain = {
           success: true,
           data: data
         }
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: latestUpResMain = {
+        let res: mangaseeInterface.latestUpResMain = {
           success: false,
           data: []
         }
@@ -82,7 +82,7 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
     let mangasee: mangasee123Scrapper = new mangasee123Scrapper()
     await mangasee
       .getAll()
-      .then((data: allRes[]) => {
+      .then((data: mangaseeInterface.allRes[]) => {
         response.status(201).json({
           success: true,
           data: data
@@ -105,7 +105,7 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
     let mangaseesc: mangasee123Scrapper = new mangasee123Scrapper()
     await mangaseesc
       .search(keyWord)
-      .then((data: allRes[]) => {
+      .then((data: mangaseeInterface.allRes[]) => {
         response.status(201).json({
           success: true,
           data: data
@@ -130,14 +130,14 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
     await mangasee
       .getChaps(mangaName)
       .then((data: any) => {
-        let res: mangaDataRes = {
+        let res: mangaseeInterface.mangaDataRes = {
           success: true,
           data: data
         }
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: chapsResMain = {
+        let res: mangaseeInterface.chapsResMain = {
           success: false,
           data: []
         }
@@ -153,7 +153,7 @@ router.get('/:mangaId/manga-data', async (request: Request, response: Response) 
   if (mangaId == '0') {
     let mangaseesc: mangasee123Scrapper = new mangasee123Scrapper()
     if (chapterURL == null || chapterURL == '') {
-      let resp: mangaDataRes = {
+      let resp: mangaseeInterface.mangaDataRes = {
         success: false,
         data: {}
       }
@@ -161,7 +161,7 @@ router.get('/:mangaId/manga-data', async (request: Request, response: Response) 
     }
     await mangaseesc
       .mangaData(chapterURL)
-      .then((data: mangaDataRes) => {
+      .then((data: mangaseeInterface.mangaDataRes) => {
         response.status(201).json(data)
       })
       .catch((e: any) => {
