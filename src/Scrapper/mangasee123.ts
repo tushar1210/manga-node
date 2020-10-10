@@ -6,6 +6,7 @@ import { parseChapNumber, chapToken } from '../helpers/mangasee'
 import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
 
+
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -19,6 +20,8 @@ class scraper {
     }
     this.baseURL = "https://mangasee123.com"
   }
+
+
 
   async hotUpdates(): Promise<hotUpRes[]> {
     let res: hotUpRes[] = []
