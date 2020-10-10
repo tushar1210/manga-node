@@ -1,8 +1,7 @@
 import * as axios from 'axios'
-import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
-import * as ss from 'string-similarity'
 import { hotUpRes } from '../Interfaces/Responses/mangakaklot'
+import * as mainInterface from '../Interfaces/Responses/main'
 //  import {  } from '../Interfaces/Requests/mangakakalot'
 class scraper {
   defaultHeaders: object
@@ -18,11 +17,11 @@ class scraper {
     this.baseURL = "https://mangakakalot.com"
   }
 
-  async hotUpdates(): Promise<hotUpRes[]> {
-    let res: hotUpRes[] = []
+  async hotUpdates(): Promise<mainInterface.hotUpdates[]> {
+    let res: mainInterface.hotUpdates[] = []
     const url: string = this.baseURL + '/manga_list?type=topview&category=all&state=all&page='
 
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 4; i++) {
       await axios.default({
         method: 'GET',
         headers: this.defaultHeaders,
@@ -32,17 +31,20 @@ class scraper {
           try {
             var $ = cheerio.load(data.data, { xmlMode: true })
             $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: CheerioElement) => {
-              let hotres: hotUpRes = {
-                mangaURL: $('a', elem)[0].attribs.href,
-                sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+              let hotUpdate: mainInterface.hotUpdates = {
                 title: $('a', elem)[0].attribs.title,
+                sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
                 imageURL: $('img', elem).attr('src'),
+                source: this.baseURL,
                 currentChapter: $('a', elem)[2].attribs.title,
                 currentChapterURL: $('a', elem)[2].attribs.href,
-                views: $('a', elem).next().next().next().text().split('\n')[1],
-                summary: $('p', elem).text().split('\n')[1]
+                additionalInfo: {
+                  views: $('a', elem).next().next().next().text().split('\n')[1],
+                  summary: $('p', elem).text().split('\n')[1],
+                  mangaURL: $('a', elem)[0].attribs.href
+                }
               }
-              res.push(hotres)
+              res.push(hotUpdate)
             })
           }
           catch (e) {

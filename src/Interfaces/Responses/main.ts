@@ -1,4 +1,4 @@
-export interface res {
+export interface response {
   success: boolean
   data: any | hotUpdates
 }
@@ -9,6 +9,6 @@ export interface hotUpdates {
   imageURL: string
   source: string
   currentChapter: string
-  currentChapterLink?: string
-  additionalInfo: any
+  currentChapterURL?: string
+  additionalInfo?: any
 }

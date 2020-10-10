@@ -3,9 +3,9 @@ import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken } from '../helpers/mangasee'
-import { hotUpRes, latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
+import { latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
-
+import * as mainInterface from '../Interfaces/Responses/main'
 
 class scraper {
   defaultHeaders: object
@@ -21,10 +21,8 @@ class scraper {
     this.baseURL = "https://mangasee123.com"
   }
 
-
-
-  async hotUpdates(): Promise<hotUpRes[]> {
-    let res: hotUpRes[] = []
+  async hotUpdates(): Promise<mainInterface.hotUpdates[]> {
+    let res: mainInterface.hotUpdates[] = []
     const url: string = this.baseURL
 
     await axios.default
@@ -47,17 +45,20 @@ class scraper {
         const imageBaseURL: string = "https://cover.mangabeast01.com/cover/"
 
         valid.forEach((element: hotUpReq) => {
-          let mangaData: hotUpRes = {
-            id: element.SeriesID,
+          let updateResponse: mainInterface.hotUpdates = {
+            title: element.SeriesName,
             sourceSpecificName: element.IndexName,
-            source: 'https://mangasee123.com/',
-            mangaName: element.SeriesName,
             imageURL: imageBaseURL + element.IndexName + '.jpg',
-            date: element.Date,
+            source: this.baseURL,
             currentChapter: parseChapNumber(element.Chapter),
-            ended: element.IsEdd
+            additionalInfo: {
+              id: element.SeriesID,
+              date: element.Date,
+              ended: element.IsEdd
+            }
+
           }
-          res.push(mangaData)
+          res.push(updateResponse)
         })
       })
       .catch((e: any) => {
