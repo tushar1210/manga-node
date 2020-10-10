@@ -10,4 +10,5 @@ export interface hotUpdates {
   source: string
   currentChapter: string
   currentChapterLink?: string
+  additionalInfo: any
 }
