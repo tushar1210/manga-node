@@ -28,8 +28,7 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
         response.status(500).json(res)
       })
   }
-
-  if (mangaId == '1') {
+  else if (mangaId == '1') {
     let mangakakalot = new mangakakalotScrapper()
     await mangakakalot
       .hotUpdates()
