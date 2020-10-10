@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -31,6 +31,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Fs = __importStar(require("fs"));
 const express_1 = require("express");
 const mangasee123_1 = require("../Scrapper/mangasee123");
+const mangakakalot_1 = require("../Scrapper/mangakakalot");
 const router = express_1.Router();
 router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     let mangaId = request.params.mangaId.toString();
@@ -51,6 +52,15 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
                 data: []
             };
             response.status(500).json(res);
+        });
+    }
+    if (mangaId == '1') {
+        let mangakakalot = new mangakakalot_1.scraper();
+        yield mangakakalot.hotUpdates()
+            .then((d) => {
+            response.json('123');
+        })
+            .catch((e) => {
         });
     }
 }));

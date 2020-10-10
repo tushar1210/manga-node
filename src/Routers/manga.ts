@@ -1,7 +1,9 @@
 import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
+import { scraper as mangakakalotScrapper } from '../Scrapper/mangakakalot'
 import { mangaDataRes, hotUpRes, hotUpResMain, latestUpRes, latestUpResMain, chapsResMain, allRes } from '../Interfaces/Responses/mangasee'
+import * as mangakakalotInterface from '../Interfaces/Responses/mangakaklot'
 const router = Router()
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
@@ -26,6 +28,27 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
         response.status(500).json(res)
       })
   }
+
+  if (mangaId == '1') {
+    let mangakakalot = new mangakakalotScrapper()
+    await mangakakalot
+      .hotUpdates()
+      .then((data: mangakakalotInterface.hotUpRes[]) => {
+        let res: mangakakalotInterface.hotUpResMain = {
+          success: true,
+          data: data
+        }
+        response.json(res)
+      })
+      .catch((e) => {
+        let res: mangakakalotInterface.hotUpResMain = {
+          success: false,
+          data: []
+        }
+        response.status(500).json(res)
+      })
+  }
+
 })
 
 router.get('/:mangaId/latest-updates', async (request: Request, response: Response) => {
