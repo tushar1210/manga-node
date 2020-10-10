@@ -9,6 +9,7 @@
     "build": "rm -rf ./build && npx tsc",
     "doc:html": "rm -rf ./docs && npx typedoc --plugin none --theme default --tsconfig ./tsconfig.json",
     "doc:md": "rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json",
+    "doc:all": "rm -rf ./docs && npx typedoc --plugin none --theme default --tsconfig ./tsconfig.json && rm -rf ./docs && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json",
     "tslint": "gulp tslint",
     "prettify": "npx tsfmt -r --baseDir ./src",
     "sqlz:migrate": "npx sequelize db:migrate",

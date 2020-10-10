@@ -17,7 +17,7 @@
 
 • **PORT**: *string | 5000* = process.env.PORT || 5000
 
-*Defined in [src/index.ts:11](https://github.com/tushar1210/manga-node/blob/91f9f49/src/index.ts#L11)*
+*Defined in [src/index.ts:11](https://github.com/tushar1210/manga-node/blob/6d10892/src/index.ts#L11)*
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 • **app**: *Express‹›* = express()
 
-*Defined in [src/index.ts:12](https://github.com/tushar1210/manga-node/blob/91f9f49/src/index.ts#L12)*
+*Defined in [src/index.ts:12](https://github.com/tushar1210/manga-node/blob/6d10892/src/index.ts#L12)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **mangasee123sc**: *[scraper](../classes/_src_scrapper_mangasee123_.scraper.md)‹›* = new scraper()
 
-*Defined in [src/index.ts:13](https://github.com/tushar1210/manga-node/blob/91f9f49/src/index.ts#L13)*
+*Defined in [src/index.ts:13](https://github.com/tushar1210/manga-node/blob/6d10892/src/index.ts#L13)*
 
 ___
 
@@ -41,4 +41,4 @@ ___
 
 • **path**: *any* = require('path')
 
-*Defined in [src/index.ts:6](https://github.com/tushar1210/manga-node/blob/91f9f49/src/index.ts#L6)*
+*Defined in [src/index.ts:6](https://github.com/tushar1210/manga-node/blob/6d10892/src/index.ts#L6)*
