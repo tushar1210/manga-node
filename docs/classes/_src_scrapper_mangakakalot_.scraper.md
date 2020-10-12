@@ -27,7 +27,7 @@
 
 \+ **new scraper**(): *[scraper](_src_scrapper_mangakakalot_.scraper.md)*
 
-*Defined in [src/Scrapper/mangakakalot.ts:8](https://github.com/tushar1210/manga-node/blob/6d10892/src/Scrapper/mangakakalot.ts#L8)*
+*Defined in [src/Scrapper/mangakakalot.ts:7](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Scrapper/mangakakalot.ts#L7)*
 
 **Returns:** *[scraper](_src_scrapper_mangakakalot_.scraper.md)*
 
@@ -37,7 +37,7 @@
 
 • **baseURL**: *string*
 
-*Defined in [src/Scrapper/mangakakalot.ts:8](https://github.com/tushar1210/manga-node/blob/6d10892/src/Scrapper/mangakakalot.ts#L8)*
+*Defined in [src/Scrapper/mangakakalot.ts:7](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Scrapper/mangakakalot.ts#L7)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • **defaultHeaders**: *object*
 
-*Defined in [src/Scrapper/mangakakalot.ts:7](https://github.com/tushar1210/manga-node/blob/6d10892/src/Scrapper/mangakakalot.ts#L7)*
+*Defined in [src/Scrapper/mangakakalot.ts:6](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Scrapper/mangakakalot.ts#L6)*
 
 ## Methods
 
@@ -53,6 +53,6 @@ ___
 
 ▸ **hotUpdates**(): *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
-*Defined in [src/Scrapper/mangakakalot.ts:20](https://github.com/tushar1210/manga-node/blob/6d10892/src/Scrapper/mangakakalot.ts#L20)*
+*Defined in [src/Scrapper/mangakakalot.ts:19](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Scrapper/mangakakalot.ts#L19)*
 
 **Returns:** *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*

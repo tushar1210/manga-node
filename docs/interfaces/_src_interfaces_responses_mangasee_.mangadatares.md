@@ -19,7 +19,7 @@
 
 • **data**: *object*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:59](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangasee.ts#L59)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:59](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangasee.ts#L59)*
 
 #### Type declaration:
 
@@ -37,4 +37,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangasee.ts#L58)*
+*Defined in [src/Interfaces/Responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangasee.ts#L58)*

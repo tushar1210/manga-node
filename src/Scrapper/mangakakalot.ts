@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 import * as cheerio from 'cheerio'
-import { hotUpRes } from '../Interfaces/Responses/mangakaklot'
 import * as mainInterface from '../Interfaces/Responses/main'
+import * as helpers from '../helpers/mangakakalot'
 //  import {  } from '../Interfaces/Requests/mangakakalot'
 class scraper {
   defaultHeaders: object
@@ -29,23 +29,7 @@ class scraper {
       })
         .then((data: axios.AxiosResponse) => {
           try {
-            var $ = cheerio.load(data.data, { xmlMode: true })
-            $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: CheerioElement) => {
-              let hotUpdate: mainInterface.hotUpdates = {
-                title: $('a', elem)[0].attribs.title,
-                sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
-                imageURL: $('img', elem).attr('src'),
-                source: this.baseURL,
-                currentChapter: $('a', elem)[2].attribs.title,
-                currentChapterURL: $('a', elem)[2].attribs.href,
-                additionalInfo: {
-                  views: $('a', elem).next().next().next().text().split('\n')[1],
-                  summary: $('p', elem).text().split('\n')[1],
-                  mangaURL: $('a', elem)[0].attribs.href
-                }
-              }
-              res.push(hotUpdate)
-            })
+            res = helpers.scrape(data)
           }
           catch (e) {
             throw new Error(e)
@@ -54,10 +38,39 @@ class scraper {
         .catch((e: any) => {
           return Promise.reject(e.message)
         })
-
     }
     return res
   }
+
+  async latestUpdates(): Promise<mainInterface.latestUpdates[]> {
+    var res: mainInterface.latestUpdates[] = []
+    const url: string = this.baseURL + '/manga_list?type=latest&category=all&state=all&page='
+    for (let i = 1; i < 4; i++) {
+      await axios.default({
+        method: 'GET',
+        headers: this.defaultHeaders,
+        url: url + String(i)
+      })
+        .then((data: axios.AxiosResponse) => {
+          try {
+            res = helpers.scrape(data)
+          }
+          catch (e) {
+            throw new Error(e)
+          }
+        })
+        .catch((e: any) => {
+          return Promise.reject(e.message)
+        })
+    }
+
+    return res
+  }
+
+
+
+
+
 
 
 }
