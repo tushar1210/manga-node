@@ -3,7 +3,7 @@ import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken, thumbnail } from '../helpers/mangasee'
-import { latestUpRes, allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
+import { allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
 import * as mainInterface from '../Interfaces/Responses/main'
 
@@ -42,13 +42,12 @@ class scraper {
 
         let parse: RegExpMatchArray = str?.match(/vm.HotUpdateJSON = (\[.*?\])/)
         let valid: hotUpReq[] = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1])
-        const imageBaseURL: string = "https://cover.mangabeast01.com/cover/"
 
         valid.forEach((element: hotUpReq) => {
           let updateResponse: mainInterface.hotUpdates = {
             title: element.SeriesName,
             sourceSpecificName: element.IndexName,
-            imageURL: imageBaseURL + element.IndexName + '.jpg',
+            imageURL: thumbnail(element.IndexName),
             source: this.baseURL,
             currentChapter: parseChapNumber(element.Chapter),
             additionalInfo: {
@@ -56,7 +55,6 @@ class scraper {
               date: element.Date,
               ended: element.IsEdd
             }
-
           }
           res.push(updateResponse)
         })
@@ -125,11 +123,10 @@ class scraper {
       .then((data: axios.AxiosResponse<any>) => {
         let valid: allReq[] = data.data
         let res: allRes[] = []
-        const imageBaseURL: string = "https://cover.mangabeast01.com/cover/"
 
         valid.forEach((element: allReq) => {
           let obj: allRes = {
-            imageURL: imageBaseURL + element.i + '.jpg',
+            imageURL: thumbnail(element.i),
             mangaURL: this.baseURL + '/manga/' + element.i,
             source: 'https://mangasee123.com',
             mangaName: element.s,
