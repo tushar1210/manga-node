@@ -15,7 +15,7 @@
 
 ▸ **chapToken**(`chapNumber`: string): *string*
 
-*Defined in [src/helpers/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/6d10892/src/helpers/mangasee.ts#L13)*
+*Defined in [src/helpers/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/b7b4735/src/helpers/mangasee.ts#L13)*
 
 **Parameters:**
 
@@ -31,7 +31,7 @@ ___
 
 ▸ **parseChapNumber**(`chapNumber`: string): *string*
 
-*Defined in [src/helpers/mangasee.ts:1](https://github.com/tushar1210/manga-node/blob/6d10892/src/helpers/mangasee.ts#L1)*
+*Defined in [src/helpers/mangasee.ts:1](https://github.com/tushar1210/manga-node/blob/b7b4735/src/helpers/mangasee.ts#L1)*
 
 **Parameters:**
 

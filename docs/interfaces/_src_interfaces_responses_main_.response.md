@@ -19,7 +19,7 @@
 
 • **data**: *any | [hotUpdates](_src_interfaces_responses_main_.hotupdates.md)*
 
-*Defined in [src/Interfaces/Responses/main.ts:3](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/main.ts#L3)*
+*Defined in [src/Interfaces/Responses/main.ts:3](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/main.ts#L3)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/main.ts:2](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/main.ts#L2)*
+*Defined in [src/Interfaces/Responses/main.ts:2](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/main.ts#L2)*

@@ -58,8 +58,8 @@ router.get('/:mangaId/latest-updates', async (request: Request, response: Respon
     let mangaseeSc: mangasee123Scrapper = new mangasee123Scrapper()
     await mangaseeSc
       .latestUpdates()
-      .then((data: mangaseeInterface.latestUpRes[]) => {
-        let res: mangaseeInterface.latestUpResMain = {
+      .then((data: mainInterface.latestUpdates[]) => {
+        let res: mainInterface.response = {
           success: true,
           data: data
         }
@@ -73,6 +73,27 @@ router.get('/:mangaId/latest-updates', async (request: Request, response: Respon
         response.status(500).json(res)
       })
   }
+  else if (mangaId == '1') {
+    let mangakakalotSc: mangakakalotScrapper = new mangakakalotScrapper()
+    await mangakakalotSc
+      .latestUpdates()
+      .then((data: mainInterface.latestUpdates[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e: any) => {
+        let res: mangakakalotInterface.hotUpResMain = {
+          success: false,
+          data: []
+        }
+        response.status(500).json(res)
+      })
+  }
+
+
 })
 
 router.get('/:mangaId/get-all', async (request: Request, response: Response) => {

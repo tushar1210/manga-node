@@ -25,7 +25,7 @@
 
 • **currentChapter**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:6](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L6)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:6](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L6)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **currentChapterURL**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:7](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L7)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:7](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L7)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **imageURL**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:5](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L5)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:5](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L5)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **mangaURL**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:2](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L2)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:2](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L2)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **sourceSpecificName**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:4](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L4)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:4](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L4)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • **summary**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:9](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L9)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:9](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L9)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **title**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:3](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L3)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:3](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L3)*
 
 ___
 
@@ -81,4 +81,4 @@ ___
 
 • **views**: *string*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:8](https://github.com/tushar1210/manga-node/blob/6d10892/src/Interfaces/Responses/mangakaklot.ts#L8)*
+*Defined in [src/Interfaces/Responses/mangakaklot.ts:8](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Interfaces/Responses/mangakaklot.ts#L8)*

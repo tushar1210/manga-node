@@ -14,4 +14,4 @@
 
 • **router**: *Router‹›* = Router()
 
-*Defined in [src/Routers/manga.ts:8](https://github.com/tushar1210/manga-node/blob/6d10892/src/Routers/manga.ts#L8)*
+*Defined in [src/Routers/manga.ts:8](https://github.com/tushar1210/manga-node/blob/b7b4735/src/Routers/manga.ts#L8)*
