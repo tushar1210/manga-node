@@ -1,7 +1,3 @@
-import { allRes } from '../Interfaces/Responses/mangasee'
-import * as Fs from 'fs'
-import * as ss from 'string-similarity'
-
 const parseChapNumber = (chapNumber: string): string => {
   let chapNumberR: string = chapNumber.substring(2, 5)
   if (chapNumberR.substring(0, 1) == "0") {
