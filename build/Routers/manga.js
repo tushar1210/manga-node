@@ -54,13 +54,23 @@ router.get('/:mangaId/hot-updates', (request, response) => __awaiter(void 0, voi
             response.status(500).json(res);
         });
     }
-    if (mangaId == '1') {
+    else if (mangaId == '1') {
         let mangakakalot = new mangakakalot_1.scraper();
-        yield mangakakalot.hotUpdates()
-            .then((d) => {
-            response.json('123');
+        yield mangakakalot
+            .hotUpdates()
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.json(res);
         })
             .catch((e) => {
+            let res = {
+                success: false,
+                data: []
+            };
+            response.status(500).json(res);
         });
     }
 }));
@@ -69,6 +79,25 @@ router.get('/:mangaId/latest-updates', (request, response) => __awaiter(void 0, 
     if (mangaId == '0') {
         let mangaseeSc = new mangasee123_1.scraper();
         yield mangaseeSc
+            .latestUpdates()
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: false,
+                data: []
+            };
+            response.status(500).json(res);
+        });
+    }
+    else if (mangaId == '1') {
+        let mangakakalotSc = new mangakakalot_1.scraper();
+        yield mangakakalotSc
             .latestUpdates()
             .then((data) => {
             let res = {

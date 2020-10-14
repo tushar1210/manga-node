@@ -66,19 +66,20 @@ class scraper {
                 }
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
-                const imageBaseURL = "https://cover.mangabeast01.com/cover/";
                 valid.forEach((element) => {
-                    let mangaData = {
-                        id: element.SeriesID,
+                    let updateResponse = {
+                        title: element.SeriesName,
                         sourceSpecificName: element.IndexName,
-                        source: 'https://mangasee123.com/',
-                        mangaName: element.SeriesName,
-                        imageURL: imageBaseURL + element.IndexName + '.jpg',
-                        date: element.Date,
+                        imageURL: mangasee_1.thumbnail(element.IndexName),
+                        source: this.baseURL,
                         currentChapter: mangasee_1.parseChapNumber(element.Chapter),
-                        ended: element.IsEdd
+                        additionalInfo: {
+                            id: element.SeriesID,
+                            date: element.Date,
+                            ended: element.IsEdd
+                        }
                     };
-                    res.push(mangaData);
+                    res.push(updateResponse);
                 });
             })
                 .catch((e) => {
@@ -110,15 +111,18 @@ class scraper {
                 let valid = JSON.parse(parse[0].split('vm.LatestJSON = ')[1]);
                 valid.forEach((element) => {
                     let mangaData = {
-                        id: element.SeriesID,
+                        title: element.SeriesName,
                         sourceSpecificName: element.IndexName,
-                        source: 'https://mangasee123.com/',
-                        mangaName: element.SeriesName,
-                        genres: element.Genres,
-                        date: element.Date,
-                        newChapter: mangasee_1.parseChapNumber(element.Chapter),
-                        scanStatus: element.ScanStatus,
-                        ended: element.IsEdd
+                        source: this.baseURL,
+                        imageURL: mangasee_1.thumbnail(element.IndexName),
+                        currentChapter: mangasee_1.parseChapNumber(element.Chapter),
+                        additionalInfo: {
+                            id: element.SeriesID,
+                            genres: element.Genres,
+                            date: element.Date,
+                            scanStatus: element.ScanStatus,
+                            ended: element.IsEdd
+                        }
                     };
                     res.push(mangaData);
                 });
@@ -142,10 +146,9 @@ class scraper {
                 .then((data) => {
                 let valid = data.data;
                 let res = [];
-                const imageBaseURL = "https://cover.mangabeast01.com/cover/";
                 valid.forEach((element) => {
                     let obj = {
-                        imageURL: imageBaseURL + element.i + '.jpg',
+                        imageURL: mangasee_1.thumbnail(element.i),
                         mangaURL: this.baseURL + '/manga/' + element.i,
                         source: 'https://mangasee123.com',
                         mangaName: element.s,
