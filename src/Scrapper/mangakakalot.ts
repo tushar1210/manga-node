@@ -2,6 +2,8 @@ import * as axios from 'axios'
 import * as cheerio from 'cheerio'
 import * as mainInterface from '../Interfaces/Responses/main'
 import * as helpers from '../helpers/mangakakalot'
+import * as interfaces from '../Interfaces/Responses/mangakaklot'
+import * as qs from 'querystring'
 //  import {  } from '../Interfaces/Requests/mangakakalot'
 class scraper {
   defaultHeaders: object
@@ -12,7 +14,7 @@ class scraper {
       'DNT': '1',
       'X-Requested-With': 'XMLHttpRequest',
       'Accept': 'application/json, text/javascript, */* q=0.01',
-      'Content-Type': 'application/x-www-form-urlencoded charset=UTF-8'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
     this.baseURL = "https://mangakakalot.com"
   }
@@ -67,7 +69,39 @@ class scraper {
     return res
   }
 
+  async search(keyWord: string): Promise<mainInterface.searchResults[]> {
+    let searchResultArray: mainInterface.searchResults[] = []
+    let params = {
+      searchword: keyWord
+    }
+    await axios.default.post('https://mangakakalot.com/home_json_search', qs.stringify(params), this.defaultHeaders)
+      .then((data: axios.AxiosResponse) => {
+        try {
+          let searchResult: interfaces.searchResults[] = data.data
+          searchResult.forEach((elem: interfaces.searchResults) => {
+            searchResultArray.push({
+              title: elem.name.replace(/<[^>]*>?/gm, ''),
+              sourceSpecificName: elem.nameunsigned,
+              imageURL: elem.image,
+              mangaURL: elem.story_link,
+              additionalInfo: {
+                id: elem.id,
+                author: elem.author,
+                lastChapter: elem.lastchapter
+              }
+            })
+          })
+        }
+        catch (e) {
+          throw new Error(e)
+        }
+      })
+      .catch((e) => {
 
+      })
+
+    return searchResultArray
+  }
 
 
 

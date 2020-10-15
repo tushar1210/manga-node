@@ -22,3 +22,11 @@ export interface latestUpdates {
   currentChapterURL?: string
   additionalInfo?: any
 }
+
+export interface searchResults {
+  title: string
+  sourceSpecificName: string
+  imageURL: string
+  mangaURL: string
+  additionalInfo?: any
+}
