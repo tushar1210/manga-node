@@ -5,7 +5,8 @@ import * as mainInterface from '../Interfaces/Responses/main'
 export function scrape(data: axios.AxiosResponse): mainInterface.hotUpdates[] {
   let res: mainInterface.hotUpdates[] = []
   var $ = cheerio.load(data.data, { xmlMode: true })
-  $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: cheerio.Element) => {
+
+  $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: CheerioElement) => {
     let hotUpdate: mainInterface.hotUpdates = {
       title: $('a', elem)[0].attribs.title,
       sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
@@ -22,4 +23,10 @@ export function scrape(data: axios.AxiosResponse): mainInterface.hotUpdates[] {
     res.push(hotUpdate)
   })
   return res
+}
+
+export function stripTags(html: string): string {
+  var tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  return tmp.textContent;
 }

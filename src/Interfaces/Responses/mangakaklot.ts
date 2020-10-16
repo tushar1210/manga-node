@@ -13,3 +13,13 @@ export interface hotUpResMain {
   success: boolean
   data: hotUpRes[]
 }
+
+export interface searchResults {
+  id: string
+  name: string
+  nameunsigned: string
+  lastchapter: string
+  image: string
+  author: string
+  story_link: string
+}

@@ -139,6 +139,23 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
         })
       })
   }
+  if (mangaId == '1') {
+    let mangakakalotsc: mangakakalotScrapper = new mangakakalotScrapper()
+    await mangakakalotsc
+      .search(keyWord)
+      .then((data: mainInterface.searchResults[]) => {
+        response.status(201).json({
+          success: true,
+          data: data
+        })
+      })
+      .catch((e: any) => {
+
+      })
+  }
+
+
+
 })
 
 router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Response) => {

@@ -30,7 +30,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scraper = void 0;
 const axios = __importStar(require("axios"));
-const cheerio = __importStar(require("cheerio"));
+const helpers = __importStar(require("../helpers/mangakakalot"));
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -46,17 +46,49 @@ class scraper {
         return __awaiter(this, void 0, void 0, function* () {
             let res = [];
             const url = this.baseURL + '/manga_list?type=topview&category=all&state=all&page=';
-            yield axios.default({
-                method: 'GET',
-                headers: this.defaultHeaders,
-                url: url
-            })
-                .then((data) => {
-                let str, $ = cheerio.load(data.data, { xmlMode: true });
-                console.log($.toString());
-            })
-                .catch((e) => {
-            });
+            for (let i = 1; i < 4; i++) {
+                yield axios.default({
+                    method: 'GET',
+                    headers: this.defaultHeaders,
+                    url: url + String(i)
+                })
+                    .then((data) => {
+                    try {
+                        res = helpers.scrape(data);
+                    }
+                    catch (e) {
+                        throw new Error(e);
+                    }
+                })
+                    .catch((e) => {
+                    return Promise.reject(e.message);
+                });
+            }
+            return res;
+        });
+    }
+    latestUpdates() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var res = [];
+            const url = this.baseURL + '/manga_list?type=latest&category=all&state=all&page=';
+            for (let i = 1; i < 4; i++) {
+                yield axios.default({
+                    method: 'GET',
+                    headers: this.defaultHeaders,
+                    url: url + String(i)
+                })
+                    .then((data) => {
+                    try {
+                        res = helpers.scrape(data);
+                    }
+                    catch (e) {
+                        throw new Error(e);
+                    }
+                })
+                    .catch((e) => {
+                    return Promise.reject(e.message);
+                });
+            }
             return res;
         });
     }
