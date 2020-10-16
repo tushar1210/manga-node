@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -31,6 +31,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.scraper = void 0;
 const axios = __importStar(require("axios"));
 const helpers = __importStar(require("../helpers/mangakakalot"));
+const qs = __importStar(require("querystring"));
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -38,7 +39,7 @@ class scraper {
             'DNT': '1',
             'X-Requested-With': 'XMLHttpRequest',
             'Accept': 'application/json, text/javascript, */* q=0.01',
-            'Content-Type': 'application/x-www-form-urlencoded charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded'
         };
         this.baseURL = "https://mangakakalot.com";
     }
@@ -90,6 +91,39 @@ class scraper {
                 });
             }
             return res;
+        });
+    }
+    search(keyWord) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let searchResultArray = [];
+            let params = {
+                searchword: keyWord
+            };
+            yield axios.default.post('https://mangakakalot.com/home_json_search', qs.stringify(params), this.defaultHeaders)
+                .then((data) => {
+                try {
+                    let searchResult = data.data;
+                    searchResult.forEach((elem) => {
+                        searchResultArray.push({
+                            title: elem.name.replace(/<[^>]*>?/gm, ''),
+                            sourceSpecificName: elem.nameunsigned,
+                            imageURL: elem.image,
+                            mangaURL: elem.story_link,
+                            additionalInfo: {
+                                id: elem.id,
+                                author: elem.author,
+                                lastChapter: elem.lastchapter
+                            }
+                        });
+                    });
+                }
+                catch (e) {
+                    throw new Error(e);
+                }
+            })
+                .catch((e) => {
+            });
+            return searchResultArray;
         });
     }
 }

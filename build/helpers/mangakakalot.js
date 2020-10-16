@@ -14,12 +14,12 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.scrape = void 0;
+exports.stripTags = exports.scrape = void 0;
 const cheerio = __importStar(require("cheerio"));
 function scrape(data) {
     let res = [];
@@ -43,4 +43,10 @@ function scrape(data) {
     return res;
 }
 exports.scrape = scrape;
+function stripTags(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent;
+}
+exports.stripTags = stripTags;
 //# sourceMappingURL=mangakakalot.js.map
