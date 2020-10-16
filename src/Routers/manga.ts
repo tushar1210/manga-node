@@ -116,6 +116,13 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
         })
       })
   }
+  else if (mangaId == '1') {
+    response.status(503).json({
+      success: false,
+      error: "Unavailable for this source"
+    })
+  }
+
 })
 
 router.get('/:mangaId/search/', async (request: Request, response: Response) => {
@@ -150,7 +157,10 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
         })
       })
       .catch((e: any) => {
-
+        response.status(500).json({
+          success: false,
+          error: e
+        })
       })
   }
 
