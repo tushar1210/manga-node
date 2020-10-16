@@ -6,7 +6,7 @@ export function scrape(data: axios.AxiosResponse): mainInterface.hotUpdates[] {
   let res: mainInterface.hotUpdates[] = []
   var $ = cheerio.load(data.data, { xmlMode: true })
 
-  $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: cheerio.element) => {
+  $('.truyen-list').children('.list-truyen-item-wrap').each((index: number, elem: cheerio.Element) => {
     let hotUpdate: mainInterface.hotUpdates = {
       title: $('a', elem)[0].attribs.title,
       sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
