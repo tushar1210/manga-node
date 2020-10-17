@@ -23,7 +23,7 @@ class scraper {
     let res: mainInterface.hotUpdates[] = []
     const url: string = this.baseURL + '/manga_list?type=topview&category=all&state=all&page='
 
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 5; i++) {
       await axios.default({
         method: 'GET',
         headers: this.defaultHeaders,
@@ -31,7 +31,7 @@ class scraper {
       })
         .then((data: axios.AxiosResponse) => {
           try {
-            res = helpers.scrape(data)
+            res = res.concat(helpers.scrape(data))
           }
           catch (e) {
             throw new Error(e)
@@ -103,7 +103,9 @@ class scraper {
     return searchResultArray
   }
 
+  async getChaps(mangaName: string) {
 
+  }
 
 
 
