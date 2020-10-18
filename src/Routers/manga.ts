@@ -5,6 +5,7 @@ import { scraper as mangakakalotScrapper } from '../Scrapper/mangakakalot'
 import * as mangaseeInterface from '../Interfaces/Responses/mangasee'
 import * as mangakakalotInterface from '../Interfaces/Responses/mangakaklot'
 import * as mainInterface from '../Interfaces/Responses/main'
+import { json } from 'body-parser'
 const router = Router()
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
@@ -33,7 +34,7 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
     let mangakakalot = new mangakakalotScrapper()
     await mangakakalot
       .hotUpdates()
-      .then((data: mainInterface.hotUpdates[]) => {
+      .then((data: any) => { //data: mainInterface.hotUpdates[]
         let res: mainInterface.response = {
           success: true,
           data: data
@@ -190,6 +191,20 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
           data: []
         }
         response.status(500).json(res)
+      })
+  }
+  else if (mangaId == '1') {
+    let mangakakalotSc = new mangakakalotScrapper()
+    await mangakakalotSc
+      .getChaps(mangaName)
+      .then((data: any) => { //data:mainInterface.chapterResults[]
+        response.json({
+          success: true,
+          data: data
+        })
+      })
+      .catch((e) => {
+
       })
   }
 })
