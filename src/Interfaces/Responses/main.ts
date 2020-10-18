@@ -32,6 +32,9 @@ export interface searchResults {
 }
 
 export interface chapterResults {
-  chapterTitle: string
-  chapterURL: string
+  link: string
+  chapterNumber: string
+  type: string | null
+  date: string
+  chapterName: string
 }

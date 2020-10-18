@@ -118,9 +118,18 @@ class scraper {
     })
       .then((data: axios.AxiosResponse) => {
         var $ = cheerio.load(data.data)
+        $('.row-content-chapter').children('li').each((_: number, elem: cheerio.Element) => {
+          let chapterItem: mainInterface.chapterResults = {
+            chapterNumber: $('a', elem).attr('href').split('_').splice(-1)[0],
+            chapterName: $('a', elem).attr('title'),
+            link: $('a', elem).attr('href'),
+            type: null,
+            date: $('.chapter-time', elem).attr('title')
+          }
+          chapterResults.push(chapterItem)
+        })
       })
       .catch((e) => {
-
       })
 
     return chapterResults
