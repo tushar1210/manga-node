@@ -89,7 +89,7 @@ class scraper {
               title: elem.name.replace(/<[^>]*>?/gm, ''),
               sourceSpecificName: elem.nameunsigned,
               imageURL: elem.image,
-              mangaURL: elem.story_link,
+              mangaURL: this.dataURL + '/manga/' + elem.story_link.split('/').splice(-1)[0],
               additionalInfo: {
                 id: elem.id,
                 author: elem.author,
