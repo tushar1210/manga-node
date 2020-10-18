@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -134,6 +134,12 @@ router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0,
             });
         });
     }
+    else if (mangaId == '1') {
+        response.status(503).json({
+            success: false,
+            error: "Unavailable for this source"
+        });
+    }
 }));
 router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     let keyWord = request.query.keyWord.toString();
@@ -152,6 +158,23 @@ router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0,
             response.status(500).json({
                 success: false,
                 data: []
+            });
+        });
+    }
+    if (mangaId == '1') {
+        let mangakakalotsc = new mangakakalot_1.scraper();
+        yield mangakakalotsc
+            .search(keyWord)
+            .then((data) => {
+            response.status(201).json({
+                success: true,
+                data: data
+            });
+        })
+            .catch((e) => {
+            response.status(500).json({
+                success: false,
+                error: e
             });
         });
     }

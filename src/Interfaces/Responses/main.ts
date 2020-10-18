@@ -30,3 +30,8 @@ export interface searchResults {
   mangaURL: string
   additionalInfo?: any
 }
+
+export interface chapterResults {
+  chapterTitle: string
+  chapterURL: string
+}
