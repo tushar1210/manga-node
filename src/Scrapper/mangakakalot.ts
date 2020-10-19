@@ -4,7 +4,6 @@ import * as mainInterface from '../Interfaces/Responses/main'
 import * as helpers from '../helpers/mangakakalot'
 import * as interfaces from '../Interfaces/Responses/mangakaklot'
 import * as qs from 'querystring'
-import { method } from 'bluebird'
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -89,7 +88,7 @@ class scraper {
               title: elem.name.replace(/<[^>]*>?/gm, ''),
               sourceSpecificName: elem.nameunsigned,
               imageURL: elem.image,
-              mangaURL: elem.story_link,
+              mangaURL: this.dataURL + '/manga/' + elem.story_link.split('/').splice(-1)[0],
               additionalInfo: {
                 id: elem.id,
                 author: elem.author,
@@ -118,16 +117,51 @@ class scraper {
     })
       .then((data: axios.AxiosResponse) => {
         var $ = cheerio.load(data.data)
+        $('.row-content-chapter').children('li').each((_: number, elem: cheerio.Element) => {
+          let chapterItem: mainInterface.chapterResults = {
+            chapterNumber: $('a', elem).attr('href').split('_').splice(-1)[0],
+            chapterName: $('a', elem).attr('title'),
+            link: $('a', elem).attr('href'),
+            type: null,
+            date: $('.chapter-time', elem).attr('title')
+          }
+          chapterResults.push(chapterItem)
+        })
       })
       .catch((e) => {
-
       })
 
     return chapterResults
   }
 
-
-
+  async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
+    var chapterData: any = {}
+    var chapterNumber: string
+    var mangaName: string
+    await axios.default({
+      url: chapterURL,
+      headers: this.defaultHeaders,
+      method: 'GET'
+    })
+      .then((data: axios.AxiosResponse) => {
+        var $ = cheerio.load(data.data)
+        $('.container-chapter-reader').each((_: number, elem: cheerio.Element) => {
+          $('img', elem).each((idx: number, element: cheerio.Element) => {
+            chapterData[idx] = $(element).attr('src')
+          })
+        })
+        chapterNumber = $('.panel-breadcrumb').children('a').last().html().replace(/^\D+/g, '')
+        mangaName = $('.panel-breadcrumb').children('a').first().next().next().text()
+      })
+      .catch((e) => {
+      })
+    var mangaDataDict: mainInterface.chapterData = {
+      imageURL: chapterData,
+      chapterNumber: chapterNumber,
+      mangaTitle: mangaName
+    }
+    return mangaDataDict
+  }
 }
 
 export { scraper }

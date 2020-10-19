@@ -159,8 +159,8 @@ class scraper {
     return res
   }
 
-  async getChaps(mangaName: string): Promise<chapsRes[]> {
-    let res: chapsRes[] = []
+  async getChaps(mangaName: string): Promise<mainInterface.chapterResults[]> {
+    let res: mainInterface.chapterResults[] = []
     let mangaNameR: string = mangaName.replace("/\s/", "-")
     const url: string = this.baseURL + "/manga/" + mangaNameR
 
@@ -182,7 +182,7 @@ class scraper {
         let valid: chapsReq[] = JSON.parse(parse[0].split('vm.Chapters = ')[1])
 
         valid.forEach((element: chapsReq) => {
-          let mangaData: chapsRes = {
+          let mangaData: mainInterface.chapterResults = {
             chapterNumber: parseChapNumber(element.Chapter),
             link: "https://mangasee123.com/read-online/" + mangaNameR + "-chapter-" + parseChapNumber(element.Chapter) + chapToken(element.Chapter) + ".html",
             type: element.Type,
@@ -199,9 +199,9 @@ class scraper {
     return res
   }
 
-  async mangaData(chapterURL: string): Promise<mangaDataRes> {
+  async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
     let url: string = chapterURL
-    var final: mangaDataRes
+    var final: mainInterface.chapterData
     await axios.default.request({
       method: 'GET',
       url: url,
@@ -215,7 +215,6 @@ class scraper {
         str = $('script:not([src])')[5].children[0].data?.toString()
         let path: string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
         let curChapter: curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
-        let allChaptersReq: allChapterInfoReq[] = JSON.parse(str?.match(/vm.CHAPTERS = (\[.*?\])/)[1])
         let sourceSpecificName: any = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
         let chpNum: number = Number(curChapter.Page)
         let chpPath: string = curChapter.Chapter.substring(1, 5)
@@ -253,21 +252,18 @@ class scraper {
           let i: string = index.toString()
           imageDict[i] = chpURL
         }
-        let res: mangaDataRes = {
-          success: true,
-          data: {
-            path: path,
-            imageURL: imageDict,
-            allChapters: allChaptersReq,
-            currentChapter: curChapter
-          }
+        let res: mainInterface.chapterData = {
+          imageURL: imageDict,
+          chapterNumber: curChapter.Chapter,
+          mangaTitle: null
         }
         final = res
       })
       .catch((e: any) => {
-        let res: mangaDataRes = {
-          success: false,
-          data: {}
+        let res: mainInterface.chapterData = {
+          imageURL: {},
+          mangaTitle: null,
+          chapterNumber: null
         }
         final = res
         return Promise.reject(res)

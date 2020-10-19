@@ -23,3 +23,11 @@ export interface searchResults {
   author: string
   story_link: string
 }
+
+export interface chapterResults {
+  link: string
+  chapterNumber: string
+  type: string | null
+  date: string
+  chapterName: string
+}

@@ -178,8 +178,8 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
     let mangasee: mangasee123Scrapper = new mangasee123Scrapper()
     await mangasee
       .getChaps(mangaName)
-      .then((data: any) => {
-        let res: mangaseeInterface.mangaDataRes = {
+      .then((data: mainInterface.chapterResults[]) => {
+        let res = {
           success: true,
           data: data
         }
@@ -197,7 +197,7 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
     let mangakakalotSc = new mangakakalotScrapper()
     await mangakakalotSc
       .getChaps(mangaName)
-      .then((data: any) => { //data:mainInterface.chapterResults[]
+      .then((data: any) => {
         response.json({
           success: true,
           data: data
@@ -212,23 +212,39 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
 router.get('/:mangaId/manga-data', async (request: Request, response: Response) => {
   let chapterURL: string = request.query.chapterURL.toString()
   let mangaId: string = request.params.mangaId.toString()
-
+  if (chapterURL == null || chapterURL == '') {
+    let resp = {
+      success: false,
+      data: {}
+    }
+    return response.status(400).json(resp)
+  }
   if (mangaId == '0') {
     let mangaseesc: mangasee123Scrapper = new mangasee123Scrapper()
-    if (chapterURL == null || chapterURL == '') {
-      let resp: mangaseeInterface.mangaDataRes = {
-        success: false,
-        data: {}
-      }
-      return response.status(400).json(resp)
-    }
     await mangaseesc
       .mangaData(chapterURL)
-      .then((data: mangaseeInterface.mangaDataRes) => {
-        response.status(201).json(data)
+      .then((data: mainInterface.chapterData) => {
+        response.status(201).json({
+          success: true,
+          data: data
+        })
       })
       .catch((e: any) => {
         response.status(500).json(e)
+      })
+  }
+  else if (mangaId == '1') {
+    let mangakakalotSc = new mangakakalotScrapper()
+    await mangakakalotSc
+      .mangaData(chapterURL)
+      .then((data: mainInterface.chapterData) => {
+        response.json({
+          success: true,
+          data: data
+        })
+      })
+      .catch((e) => {
+
       })
   }
 })
