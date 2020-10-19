@@ -5,7 +5,6 @@ import { scraper as mangakakalotScrapper } from '../Scrapper/mangakakalot'
 import * as mangaseeInterface from '../Interfaces/Responses/mangasee'
 import * as mangakakalotInterface from '../Interfaces/Responses/mangakaklot'
 import * as mainInterface from '../Interfaces/Responses/main'
-import { json } from 'body-parser'
 const router = Router()
 
 router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
