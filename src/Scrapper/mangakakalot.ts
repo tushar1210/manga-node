@@ -4,6 +4,8 @@ import * as mainInterface from '../Interfaces/Responses/main'
 import * as helpers from '../helpers/mangakakalot'
 import * as interfaces from '../Interfaces/Responses/mangakaklot'
 import * as qs from 'querystring'
+import * as Fs from 'fs'
+
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -162,6 +164,42 @@ class scraper {
     }
     return mangaDataDict
   }
+
+  async getAll(): Promise<mainInterface.latestUpdates[]> {
+    return JSON.parse(Fs.readFileSync('./temp/mangakaklot-all.json').toString())
+  }
+
+  async scrapeAll() {
+    var res: mainInterface.latestUpdates[] = []
+    for (let i = 1; i <= 1156; i++) {
+      const url: string = this.dataURL + `/genre-all/${i}`
+      await axios.default({
+        method: 'GET',
+        headers: this.defaultHeaders,
+        url: url
+      })
+        .then((data: axios.AxiosResponse) => {
+          try {
+            res = res.concat(helpers.scrapeLatestUpdates(data))
+          }
+          catch (e) {
+            throw new Error(e)
+          }
+        })
+        .catch((e: any) => {
+          return Promise.reject(e.message)
+        })
+    }
+    Fs.writeFile('./temp/mangakaklot-all.json', JSON.stringify(res), (e: NodeJS.ErrnoException) => {
+      console.log("completed")
+      if (e != null) {
+        throw new Error(e.message)
+      }
+    })
+  }
+
+
+
 }
 
 export { scraper }

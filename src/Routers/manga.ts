@@ -117,10 +117,18 @@ router.get('/:mangaId/get-all', async (request: Request, response: Response) => 
       })
   }
   else if (mangaId == '1') {
-    response.status(503).json({
-      success: false,
-      error: "Unavailable for this source"
-    })
+    let mangakakalotSc = new mangakakalotScrapper()
+    await mangakakalotSc.
+      getAll()
+      .then((data: mainInterface.latestUpdates[]) => {
+        response.json({
+          success: true,
+          data: data
+        })
+      })
+      .catch((e) => {
+
+      })
   }
 
 })

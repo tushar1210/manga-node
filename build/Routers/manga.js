@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -135,6 +135,8 @@ router.get('/:mangaId/get-all', (request, response) => __awaiter(void 0, void 0,
         });
     }
     else if (mangaId == '1') {
+        let mangakakalotSc = new mangakakalot_1.scraper();
+        mangakakalotSc.scrapeAll();
         response.status(503).json({
             success: false,
             error: "Unavailable for this source"
@@ -202,26 +204,55 @@ router.get('/:mangaId/chaps/:mangaName', (request, response) => __awaiter(void 0
             response.status(500).json(res);
         });
     }
+    else if (mangaId == '1') {
+        let mangakakalotSc = new mangakakalot_1.scraper();
+        yield mangakakalotSc
+            .getChaps(mangaName)
+            .then((data) => {
+            response.json({
+                success: true,
+                data: data
+            });
+        })
+            .catch((e) => {
+        });
+    }
 }));
 router.get('/:mangaId/manga-data', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     let chapterURL = request.query.chapterURL.toString();
     let mangaId = request.params.mangaId.toString();
+    if (chapterURL == null || chapterURL == '') {
+        let resp = {
+            success: false,
+            data: {}
+        };
+        return response.status(400).json(resp);
+    }
     if (mangaId == '0') {
         let mangaseesc = new mangasee123_1.scraper();
-        if (chapterURL == null || chapterURL == '') {
-            let resp = {
-                success: false,
-                data: {}
-            };
-            return response.status(400).json(resp);
-        }
         yield mangaseesc
             .mangaData(chapterURL)
             .then((data) => {
-            response.status(201).json(data);
+            response.status(201).json({
+                success: true,
+                data: data
+            });
         })
             .catch((e) => {
             response.status(500).json(e);
+        });
+    }
+    else if (mangaId == '1') {
+        let mangakakalotSc = new mangakakalot_1.scraper();
+        yield mangakakalotSc
+            .mangaData(chapterURL)
+            .then((data) => {
+            response.json({
+                success: true,
+                data: data
+            });
+        })
+            .catch((e) => {
         });
     }
 }));

@@ -1,5 +1,6 @@
 import express from "express"
-import { scraper } from './Scrapper/mangasee123'
+import { scraper as mangasee123Scrapper } from './Scrapper/mangasee123'
+import { scraper as mangakakalotScrapper } from './Scrapper/mangakakalot'
 import mangaRouter from './Routers/manga'
 import * as UserRoutes from './Routers/user'
 import cron from 'node-cron'
@@ -10,7 +11,8 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
 const app = express()
-const mangasee123sc = new scraper()
+const mangasee123sc = new mangasee123Scrapper()
+const mangakakalotsc = new mangakakalotScrapper()
 
 app.set('json spaces', 4)
 
@@ -32,5 +34,6 @@ app.listen(PORT, () => {
 
   cron.schedule('0 0 0 * * *', () => {
     mangasee123sc.all()
+    mangakakalotsc.scrapeAll()
   })
 })
