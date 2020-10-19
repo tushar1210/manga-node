@@ -14,39 +14,61 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stripTags = exports.scrape = void 0;
+exports.scrapeLatestUpdates = exports.scrapeHotUpdates = void 0;
 const cheerio = __importStar(require("cheerio"));
-function scrape(data) {
+function scrapeHotUpdates(data) {
     let res = [];
     var $ = cheerio.load(data.data, { xmlMode: true });
-    $('.truyen-list').children('.list-truyen-item-wrap').each((index, elem) => {
-        let hotUpdate = {
-            title: $('a', elem)[0].attribs.title,
-            sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+    $('.panel-content-genres').children().each((_, elem) => {
+        let hotUpdateItem = {
+            title: $('a', elem).attr('title'),
             imageURL: $('img', elem).attr('src'),
-            source: 'https://mangakakalot.com',
-            currentChapter: $('a', elem)[2].attribs.title,
-            currentChapterURL: $('a', elem)[2].attribs.href,
+            source: 'manganelo.com',
+            sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+            currentChapter: $('div', elem).children('a').first().text(),
+            currentChapterURL: $('div', elem).children('a').attr('href'),
             additionalInfo: {
-                views: $('a', elem).next().next().next().text().split('\n')[1],
-                summary: $('p', elem).text().split('\n')[1],
-                mangaURL: $('a', elem)[0].attribs.href
+                rating: $('em', elem).text(),
+                views: $('.genres-item-view', elem).html(),
+                date: $('.genres-item-time', elem).html(),
+                author: $('.genres-item-author', elem).html(),
+                description: $('.genres-item-description', elem).text().replace(/<[^>]*>?/gm, ''),
+                mangaURL: $('a', elem).attr('href')
             }
         };
-        res.push(hotUpdate);
+        res.push(hotUpdateItem);
     });
     return res;
 }
-exports.scrape = scrape;
-function stripTags(html) {
-    var tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent;
+exports.scrapeHotUpdates = scrapeHotUpdates;
+function scrapeLatestUpdates(data) {
+    let res = [];
+    var $ = cheerio.load(data.data, { xmlMode: true });
+    $('.panel-content-genres').children().each((_, elem) => {
+        let hotUpdateItem = {
+            title: $('a', elem).attr('title'),
+            imageURL: $('img', elem).attr('src'),
+            source: 'manganelo.com',
+            sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+            currentChapter: $('div', elem).children('a').first().text(),
+            currentChapterURL: $('div', elem).children('a').attr('href'),
+            additionalInfo: {
+                rating: $('em', elem).text(),
+                views: $('.genres-item-view', elem).html(),
+                date: $('.genres-item-time', elem).html(),
+                author: $('.genres-item-author', elem).html(),
+                description: $('.genres-item-description', elem).text().replace(/<[^>]*>?/gm, '').replace('\n', ''),
+                mangaURL: $('a', elem).attr('href')
+            }
+        };
+        res.push(hotUpdateItem);
+    });
+    return res;
 }
-exports.stripTags = stripTags;
+exports.scrapeLatestUpdates = scrapeLatestUpdates;
 //# sourceMappingURL=mangakakalot.js.map

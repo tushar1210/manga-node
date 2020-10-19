@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -241,7 +241,6 @@ class scraper {
                 str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
                 let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
-                let allChaptersReq = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CHAPTERS = (\[.*?\])/)[1]);
                 let sourceSpecificName = str === null || str === void 0 ? void 0 : str.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1];
                 let chpNum = Number(curChapter.Page);
                 let chpPath = curChapter.Chapter.substring(1, 5);
@@ -275,20 +274,17 @@ class scraper {
                     imageDict[i] = chpURL;
                 }
                 let res = {
-                    success: true,
-                    data: {
-                        path: path,
-                        imageURL: imageDict,
-                        allChapters: allChaptersReq,
-                        currentChapter: curChapter
-                    }
+                    imageURL: imageDict,
+                    chapterNumber: curChapter.Chapter,
+                    mangaTitle: null
                 };
                 final = res;
             })
                 .catch((e) => {
                 let res = {
-                    success: false,
-                    data: {}
+                    imageURL: {},
+                    mangaTitle: null,
+                    chapterNumber: null
                 };
                 final = res;
                 return Promise.reject(res);

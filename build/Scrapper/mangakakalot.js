@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -30,8 +30,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.scraper = void 0;
 const axios = __importStar(require("axios"));
+const cheerio = __importStar(require("cheerio"));
 const helpers = __importStar(require("../helpers/mangakakalot"));
 const qs = __importStar(require("querystring"));
+const Fs = __importStar(require("fs"));
 class scraper {
     constructor() {
         this.defaultHeaders = {
@@ -42,20 +44,24 @@ class scraper {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
         this.baseURL = "https://mangakakalot.com";
+        this.dataURL = "https://manganelo.com";
     }
     hotUpdates() {
         return __awaiter(this, void 0, void 0, function* () {
             let res = [];
-            const url = this.baseURL + '/manga_list?type=topview&category=all&state=all&page=';
-            for (let i = 1; i < 4; i++) {
+            for (let i = 1; i < 5; i++) {
+                const url = this.dataURL + `/genre-all/${i}`;
                 yield axios.default({
                     method: 'GET',
                     headers: this.defaultHeaders,
-                    url: url + String(i)
+                    url: url,
+                    params: {
+                        type: "topview"
+                    }
                 })
                     .then((data) => {
                     try {
-                        res = helpers.scrape(data);
+                        res = res.concat(helpers.scrapeHotUpdates(data));
                     }
                     catch (e) {
                         throw new Error(e);
@@ -71,16 +77,17 @@ class scraper {
     latestUpdates() {
         return __awaiter(this, void 0, void 0, function* () {
             var res = [];
-            const url = this.baseURL + '/manga_list?type=latest&category=all&state=all&page=';
-            for (let i = 1; i < 4; i++) {
+            for (let i = 1; i < 2; i++) {
+                const url = this.dataURL + `/genre-all/${i}`;
                 yield axios.default({
                     method: 'GET',
                     headers: this.defaultHeaders,
-                    url: url + String(i)
+                    url: url
                 })
                     .then((data) => {
                     try {
-                        res = helpers.scrape(data);
+                        res = res.concat(helpers.scrapeLatestUpdates(data));
+                        console.log(url);
                     }
                     catch (e) {
                         throw new Error(e);
@@ -108,7 +115,7 @@ class scraper {
                             title: elem.name.replace(/<[^>]*>?/gm, ''),
                             sourceSpecificName: elem.nameunsigned,
                             imageURL: elem.image,
-                            mangaURL: elem.story_link,
+                            mangaURL: this.dataURL + '/manga/' + elem.story_link.split('/').splice(-1)[0],
                             additionalInfo: {
                                 id: elem.id,
                                 author: elem.author,
@@ -124,6 +131,95 @@ class scraper {
                 .catch((e) => {
             });
             return searchResultArray;
+        });
+    }
+    getChaps(mangaName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let chapterResults = [];
+            yield axios.default({
+                url: this.dataURL + `/manga/${mangaName}`,
+                method: 'GET',
+                headers: this.defaultHeaders
+            })
+                .then((data) => {
+                var $ = cheerio.load(data.data);
+                $('.row-content-chapter').children('li').each((_, elem) => {
+                    let chapterItem = {
+                        chapterNumber: $('a', elem).attr('href').split('_').splice(-1)[0],
+                        chapterName: $('a', elem).attr('title'),
+                        link: $('a', elem).attr('href'),
+                        type: null,
+                        date: $('.chapter-time', elem).attr('title')
+                    };
+                    chapterResults.push(chapterItem);
+                });
+            })
+                .catch((e) => {
+            });
+            return chapterResults;
+        });
+    }
+    mangaData(chapterURL) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var chapterData = {};
+            var chapterNumber;
+            var mangaName;
+            yield axios.default({
+                url: chapterURL,
+                headers: this.defaultHeaders,
+                method: 'GET'
+            })
+                .then((data) => {
+                var $ = cheerio.load(data.data);
+                $('.container-chapter-reader').each((_, elem) => {
+                    $('img', elem).each((idx, element) => {
+                        chapterData[idx] = $(element).attr('src');
+                    });
+                });
+                chapterNumber = $('.panel-breadcrumb').children('a').last().html().replace(/^\D+/g, '');
+                mangaName = $('.panel-breadcrumb').children('a').first().next().next().text();
+            })
+                .catch((e) => {
+            });
+            var mangaDataDict = {
+                imageURL: chapterData,
+                chapterNumber: chapterNumber,
+                mangaTitle: mangaName
+            };
+            return mangaDataDict;
+        });
+    }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return JSON.parse(Fs.readFileSync('./temp/mangakaklot-all.json').toString());
+        });
+    }
+    scrapeAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var res = [];
+            for (let i = 1; i <= 1156; i++) {
+                const url = this.dataURL + `/genre-all/${i}`;
+                yield axios.default({
+                    method: 'GET',
+                    headers: this.defaultHeaders,
+                    url: url
+                })
+                    .then((data) => {
+                    try {
+                        res = res.concat(helpers.scrapeLatestUpdates(data));
+                        console.log(url);
+                    }
+                    catch (e) {
+                        throw new Error(e);
+                    }
+                })
+                    .catch((e) => {
+                    return Promise.reject(e.message);
+                });
+            }
+            Fs.writeFile('./temp/mangakaklot-all.json', JSON.stringify(res), () => {
+                console.log("completed");
+            });
         });
     }
 }
