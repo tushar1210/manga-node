@@ -4,7 +4,6 @@ import * as mainInterface from '../Interfaces/Responses/main'
 import * as helpers from '../helpers/mangakakalot'
 import * as interfaces from '../Interfaces/Responses/mangakaklot'
 import * as qs from 'querystring'
-import { method } from 'bluebird'
 class scraper {
   defaultHeaders: object
   baseURL: string
@@ -135,8 +134,34 @@ class scraper {
     return chapterResults
   }
 
-
-
+  async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
+    var chapterData: any = {}
+    var chapterNumber: string
+    var mangaName: string
+    await axios.default({
+      url: chapterURL,
+      headers: this.defaultHeaders,
+      method: 'GET'
+    })
+      .then((data: axios.AxiosResponse) => {
+        var $ = cheerio.load(data.data)
+        $('.container-chapter-reader').each((_: number, elem: cheerio.Element) => {
+          $('img', elem).each((idx: number, element: cheerio.Element) => {
+            chapterData[idx] = $(element).attr('src')
+          })
+        })
+        chapterNumber = $('.panel-breadcrumb').children('a').last().html().replace(/^\D+/g, '')
+        mangaName = $('.panel-breadcrumb').children('a').first().next().next().text()
+      })
+      .catch((e) => {
+      })
+    var mangaDataDict: mainInterface.chapterData = {
+      imageURL: chapterData,
+      chapterNumber: chapterNumber,
+      mangaTitle: mangaName
+    }
+    return mangaDataDict
+  }
 }
 
 export { scraper }

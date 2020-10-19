@@ -38,3 +38,9 @@ export interface chapterResults {
   date: string
   chapterName: string
 }
+
+export interface chapterData {
+  imageURL: any
+  chapterNumber: string | null,
+  mangaTitle: string | null
+}

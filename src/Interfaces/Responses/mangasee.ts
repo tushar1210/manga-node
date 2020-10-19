@@ -55,14 +55,12 @@ export interface chapsResMain {
 }
 
 export interface mangaDataRes {
-  success: boolean
   data: {
     imageURL?: {
       Sno?: string
       url?: string
     } | any
     path?: string
-    allChapters?: allChapterInfoReq[]
     currentChapter?: curChapterReq
   }
 }
