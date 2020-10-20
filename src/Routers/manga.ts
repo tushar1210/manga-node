@@ -1,13 +1,13 @@
 import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
-import { scraper as mangasee123Scrapper } from '../Scrapper/mangasee123'
-import { scraper as mangakakalotScrapper } from '../Scrapper/mangakakalot'
-import * as mangaseeInterface from '../Interfaces/Responses/mangasee'
-import * as mangakakalotInterface from '../Interfaces/Responses/mangakaklot'
-import * as mainInterface from '../Interfaces/Responses/main'
+import { scraper as mangasee123Scrapper } from '../scrapper/mangasee123'
+import { scraper as mangakakalotScrapper } from '../scrapper/mangakakalot'
+import * as mangaseeInterface from '../interfaces/responses/mangasee'
+import * as mangakakalotInterface from '../interfaces/responses/mangakaklot'
+import * as mainInterface from '../interfaces/responses/main'
 const router = Router()
 
-router.get('/:mangaId/hot-updates', async (request: Request, response: Response) => {
+router.get('/:mangaId/hotupdates', async (request: Request, response: Response) => {
   let mangaId: string = request.params.mangaId.toString()
 
   if (mangaId == '0') {
@@ -51,7 +51,7 @@ router.get('/:mangaId/hot-updates', async (request: Request, response: Response)
 
 })
 
-router.get('/:mangaId/latest-updates', async (request: Request, response: Response) => {
+router.get('/:mangaId/latestupdates', async (request: Request, response: Response) => {
   let mangaId: string = request.params.mangaId.toString()
 
   if (mangaId == '0') {
@@ -96,7 +96,7 @@ router.get('/:mangaId/latest-updates', async (request: Request, response: Respon
 
 })
 
-router.get('/:mangaId/get-all', async (request: Request, response: Response) => {
+router.get('/:mangaId/getall', async (request: Request, response: Response) => {
   let mangaId: string = request.params.mangaId.toString()
 
   if (mangaId == '0') {
@@ -176,7 +176,7 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
 
 })
 
-router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Response) => {
+router.get('/:mangaId/chapters/:mangaName', async (request: Request, response: Response) => {
   let mangaId: string = request.params.mangaId.toString()
   let mangaName: string = request.params.mangaName.toString()
   mangaName = mangaName.replace(/[ ]/gm, '-')
@@ -216,7 +216,7 @@ router.get('/:mangaId/chaps/:mangaName', async (request: Request, response: Resp
   }
 })
 
-router.get('/:mangaId/manga-data', async (request: Request, response: Response) => {
+router.get('/:mangaId/mangadata', async (request: Request, response: Response) => {
   let chapterURL: string = request.query.chapterURL.toString()
   let mangaId: string = request.params.mangaId.toString()
   if (chapterURL == null || chapterURL == '') {
@@ -256,8 +256,8 @@ router.get('/:mangaId/manga-data', async (request: Request, response: Response) 
   }
 })
 
-router.get('/get-sources', async (request: Request, response: Response) => {
-  let data = JSON.parse(Fs.readFileSync('./src/sources.json').toString())
+router.get('/sources', async (request: Request, response: Response) => {
+  let data = JSON.parse(Fs.readFileSync('./public/sources.json').toString())
   return response.json(data)
 })
 
