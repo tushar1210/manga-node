@@ -3,11 +3,11 @@ import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken, thumbnail } from '../helpers/mangasee'
-import { allRes, mangaDataRes, chapsRes } from '../Interfaces/Responses/mangasee'
-import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../Interfaces/Requests/mangasee'
-import * as mainInterface from '../Interfaces/Responses/main'
+import { allRes, mangaDataRes, chapsRes } from '../interfaces/responses/mangasee'
+import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../interfaces/requests/mangasee'
+import * as mainInterface from '../interfaces/responses/main'
 
-class scraper {
+class Scraper {
   defaultHeaders: object
   baseURL: string
   constructor() {
@@ -135,7 +135,7 @@ class scraper {
           }
           res.push(obj)
         })
-        Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res))
+        Fs.writeFileSync('./public/mangasee123-all.json', JSON.stringify(res))
       })
       .catch((e: any) => {
         return Promise.reject(e.message)
@@ -143,7 +143,7 @@ class scraper {
   }
 
   async getAll(): Promise<allRes[]> {
-    let data: allRes[] = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString())
+    let data: allRes[] = JSON.parse(Fs.readFileSync('./public/mangasee123-all.json').toString())
     return data
   }
 
@@ -272,4 +272,4 @@ class scraper {
   }
 }
 
-export { scraper }
+export { Scraper as scraper }

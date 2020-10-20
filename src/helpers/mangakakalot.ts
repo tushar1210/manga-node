@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio'
 import * as axios from 'axios'
-import * as mainInterface from '../Interfaces/Responses/main'
+import * as mainInterface from '../interfaces/responses/main'
 
 export function scrapeHotUpdates(data: axios.AxiosResponse): mainInterface.hotUpdates[] {
   let res: mainInterface.hotUpdates[] = []

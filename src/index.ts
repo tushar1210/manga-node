@@ -1,8 +1,8 @@
 import express from "express"
-import { scraper as mangasee123Scrapper } from './Scrapper/mangasee123'
-import { scraper as mangakakalotScrapper } from './Scrapper/mangakakalot'
-import mangaRouter from './Routers/manga'
-import * as UserRoutes from './Routers/user'
+import { scraper as mangasee123Scrapper } from './scrapper/mangasee123'
+import { scraper as mangakakalotScrapper } from './scrapper/mangakakalot'
+import mangaRouter from './routers/manga'
+import * as UserRoutes from './routers/user'
 import cron from 'node-cron'
 const path = require('path')
 import { json, urlencoded } from 'body-parser'

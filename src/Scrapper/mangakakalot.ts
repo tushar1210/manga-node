@@ -1,12 +1,12 @@
 import * as axios from 'axios'
 import * as cheerio from 'cheerio'
-import * as mainInterface from '../Interfaces/Responses/main'
+import * as mainInterface from '../interfaces/responses/main'
 import * as helpers from '../helpers/mangakakalot'
-import * as interfaces from '../Interfaces/Responses/mangakaklot'
+import * as interfaces from '../interfaces/responses/mangakaklot'
 import * as qs from 'querystring'
 import * as Fs from 'fs'
 
-class scraper {
+class Scraper {
   defaultHeaders: object
   baseURL: string
   dataURL: string
@@ -24,8 +24,6 @@ class scraper {
 
   async hotUpdates(): Promise<mainInterface.hotUpdates[]> {
     let res: mainInterface.hotUpdates[] = []
-
-
     for (let i = 1; i < 5; i++) {
       const url: string = this.dataURL + `/genre-all/${i}`
       await axios.default({
@@ -166,7 +164,7 @@ class scraper {
   }
 
   async getAll(): Promise<mainInterface.latestUpdates[]> {
-    return JSON.parse(Fs.readFileSync('./temp/mangakaklot-all.json').toString())
+    return JSON.parse(Fs.readFileSync('./public/mangakaklot-all.json').toString())
   }
 
   async scrapeAll() {
@@ -190,16 +188,13 @@ class scraper {
           return Promise.reject(e.message)
         })
     }
-    Fs.writeFile('./temp/mangakaklot-all.json', JSON.stringify(res), (e: NodeJS.ErrnoException) => {
+    Fs.writeFile('./public/mangakaklot-all.json', JSON.stringify(res), (e: NodeJS.ErrnoException) => {
       console.log("completed")
       if (e != null) {
         throw new Error(e.message)
       }
     })
   }
-
-
-
 }
 
-export { scraper }
+export { Scraper as scraper }

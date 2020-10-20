@@ -1,4 +1,4 @@
-import { allChapterInfoReq, curChapterReq } from '../Requests/mangasee'
+import { allChapterInfoReq, curChapterReq } from '../requests/mangasee'
 export interface hotUpRes {
   id: string
   source: string
