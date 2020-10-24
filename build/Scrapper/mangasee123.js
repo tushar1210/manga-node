@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -34,7 +34,7 @@ const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
 const ss = __importStar(require("string-similarity"));
 const mangasee_1 = require("../helpers/mangasee");
-class scraper {
+class Scraper {
     constructor() {
         this.defaultHeaders = {
             'User-Agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
@@ -157,7 +157,7 @@ class scraper {
                     };
                     res.push(obj);
                 });
-                Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res));
+                Fs.writeFileSync('./public/mangasee123-all.json', JSON.stringify(res));
             })
                 .catch((e) => {
                 return Promise.reject(e.message);
@@ -166,7 +166,7 @@ class scraper {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString());
+            let data = JSON.parse(Fs.readFileSync('./public/mangasee123-all.json').toString());
             return data;
         });
     }
@@ -293,5 +293,5 @@ class scraper {
         });
     }
 }
-exports.scraper = scraper;
+exports.scraper = Scraper;
 //# sourceMappingURL=mangasee123.js.map

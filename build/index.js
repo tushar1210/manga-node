@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -23,9 +23,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mangasee123_1 = require("./Scrapper/mangasee123");
-const manga_1 = __importDefault(require("./Routers/manga"));
-const UserRoutes = __importStar(require("./Routers/user"));
+const mangasee123_1 = require("./scrapper/mangasee123");
+const mangakakalot_1 = require("./scrapper/mangakakalot");
+const manga_1 = __importDefault(require("./routers/manga"));
+const UserRoutes = __importStar(require("./routers/user"));
 const node_cron_1 = __importDefault(require("node-cron"));
 const path = require('path');
 const body_parser_1 = require("body-parser");
@@ -33,6 +34,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 const app = express_1.default();
 const mangasee123sc = new mangasee123_1.scraper();
+const mangakakalotsc = new mangakakalot_1.scraper();
 app.set('json spaces', 4);
 app.use(body_parser_1.json());
 app.use(body_parser_1.urlencoded({
@@ -47,6 +49,7 @@ app.listen(PORT, () => {
     console.log("Server's on @" + PORT);
     node_cron_1.default.schedule('0 0 0 * * *', () => {
         mangasee123sc.all();
+        mangakakalotsc.scrapeAll();
     });
 });
 //# sourceMappingURL=index.js.map
