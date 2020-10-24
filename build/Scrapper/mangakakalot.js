@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -31,10 +31,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.scraper = void 0;
 const axios = __importStar(require("axios"));
 const cheerio = __importStar(require("cheerio"));
-const helpers = __importStar(require("../helpers/mangakakalot"));
 const qs = __importStar(require("querystring"));
 const Fs = __importStar(require("fs"));
-class scraper {
+class Scraper {
     constructor() {
         this.defaultHeaders = {
             'User-Agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
@@ -61,7 +60,7 @@ class scraper {
                 })
                     .then((data) => {
                     try {
-                        res = res.concat(helpers.scrapeHotUpdates(data));
+                        res = res.concat(this.scrapeHotUpdates(data));
                     }
                     catch (e) {
                         throw new Error(e);
@@ -86,7 +85,7 @@ class scraper {
                 })
                     .then((data) => {
                     try {
-                        res = res.concat(helpers.scrapeLatestUpdates(data));
+                        res = res.concat(this.scrapeLatestUpdates(data));
                         console.log(url);
                     }
                     catch (e) {
@@ -191,7 +190,7 @@ class scraper {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return JSON.parse(Fs.readFileSync('./temp/mangakaklot-all.json').toString());
+            return JSON.parse(Fs.readFileSync('./public/mangakaklot-all.json').toString());
         });
     }
     scrapeAll() {
@@ -206,8 +205,7 @@ class scraper {
                 })
                     .then((data) => {
                     try {
-                        res = res.concat(helpers.scrapeLatestUpdates(data));
-                        console.log(url);
+                        res = res.concat(this.scrapeLatestUpdates(data));
                     }
                     catch (e) {
                         throw new Error(e);
@@ -217,11 +215,62 @@ class scraper {
                     return Promise.reject(e.message);
                 });
             }
-            Fs.writeFile('./temp/mangakaklot-all.json', JSON.stringify(res), () => {
+            Fs.writeFile('./public/mangakaklot-all.json', JSON.stringify(res), (e) => {
                 console.log("completed");
+                if (e != null) {
+                    throw new Error(e.message);
+                }
             });
         });
     }
+    scrapeHotUpdates(data) {
+        let res = [];
+        var $ = cheerio.load(data.data, { xmlMode: true });
+        $('.panel-content-genres').children().each((_, elem) => {
+            let hotUpdateItem = {
+                title: $('a', elem).attr('title'),
+                imageURL: $('img', elem).attr('src'),
+                source: 'manganelo.com',
+                sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+                currentChapter: $('div', elem).children('a').first().text(),
+                currentChapterURL: $('div', elem).children('a').attr('href'),
+                additionalInfo: {
+                    rating: $('em', elem).text(),
+                    views: $('.genres-item-view', elem).html(),
+                    date: $('.genres-item-time', elem).html(),
+                    author: $('.genres-item-author', elem).html(),
+                    description: $('.genres-item-description', elem).text().replace(/<[^>]*>?/gm, ''),
+                    mangaURL: $('a', elem).attr('href')
+                }
+            };
+            res.push(hotUpdateItem);
+        });
+        return res;
+    }
+    scrapeLatestUpdates(data) {
+        let res = [];
+        var $ = cheerio.load(data.data, { xmlMode: true });
+        $('.panel-content-genres').children().each((_, elem) => {
+            let hotUpdateItem = {
+                title: $('a', elem).attr('title'),
+                imageURL: $('img', elem).attr('src'),
+                source: 'manganelo.com',
+                sourceSpecificName: $('a', elem).attr('href').split('/').slice(-1)[0],
+                currentChapter: $('div', elem).children('a').first().text(),
+                currentChapterURL: $('div', elem).children('a').attr('href'),
+                additionalInfo: {
+                    rating: $('em', elem).text(),
+                    views: $('.genres-item-view', elem).html(),
+                    date: $('.genres-item-time', elem).html(),
+                    author: $('.genres-item-author', elem).html(),
+                    description: $('.genres-item-description', elem).text().replace(/<[^>]*>?/gm, '').replace('\n', ''),
+                    mangaURL: $('a', elem).attr('href')
+                }
+            };
+            res.push(hotUpdateItem);
+        });
+        return res;
+    }
 }
-exports.scraper = scraper;
+exports.scraper = Scraper;
 //# sourceMappingURL=mangakakalot.js.map
