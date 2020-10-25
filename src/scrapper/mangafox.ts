@@ -46,6 +46,36 @@ class Scraper {
       })
     return res
   }
+
+  async latestUpdates(): Promise<mainInterface.latestUpdates[]> {
+    let res: mainInterface.latestUpdates[] = []
+    await axios.default({
+      url: this.baseURL + '/releases/',
+      headers: this.defaultHeaders,
+      method: 'GET'
+    })
+      .then((data: axios.AxiosResponse) => {
+        var $ = cheerio.load(data.data)
+        $('.manga-list-4-list').children('li').each((_: number, elem: cheerio.Element) => {
+          let genreArray: string[] = $(elem).children('p').last().text().split(' ').filter(String)
+          let latestUpdate: mainInterface.latestUpdates = {
+            title: $(elem).children('a').attr('title'),
+            imageURL: $(elem).children('a').children('img').attr('src'),
+            source: this.baseURL,
+            sourceSpecificName: $(elem).children('p').children('a').attr('href').split('/').splice(-2)[0],
+            currentChapter: $(elem).children('ul').first().children().first().text(),
+            currentChapterURL: this.baseURL + $(elem).children('ul').first().children().first().children('a').attr('href'),
+            additionalInfo: {
+              genres: genreArray
+            }
+          }
+          res.push(latestUpdate)
+        })
+
+      })
+
+    return res
+  }
 }
 
 export { Scraper as mangafoxScraper }

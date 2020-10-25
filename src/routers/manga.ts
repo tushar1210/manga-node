@@ -111,7 +111,25 @@ router.get('/:mangaId/latestupdates', async (request: Request, response: Respons
         response.status(500).json(res)
       })
   }
-
+  else if (mangaId == '2') {
+    let mangafoxSc = new mangafoxScraper()
+    await mangafoxSc
+      .latestUpdates()
+      .then((data: mainInterface.latestUpdates[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: true,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
 
 })
 
