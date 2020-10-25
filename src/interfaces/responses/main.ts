@@ -1,6 +1,8 @@
 export interface response {
-  success: boolean
-  data: hotUpdates[] | latestUpdates[]
+  success: boolean,
+  data?: chapterData[] | chapterResults[] | searchResults[] | latestUpdates[] | hotUpdates[] | any,
+  error?: string,
+  errorMessage?: string
 }
 
 export interface hotUpdates {

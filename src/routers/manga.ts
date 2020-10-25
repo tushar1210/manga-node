@@ -22,9 +22,9 @@ router.get('/:mangaId/hotupdates', async (request: Request, response: Response) 
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: mangaseeInterface.hotUpResMain = {
+        let res: mainInterface.response = {
           success: false,
-          data: []
+          error: e
         }
         response.status(500).json(res)
       })
@@ -41,9 +41,9 @@ router.get('/:mangaId/hotupdates', async (request: Request, response: Response) 
         response.json(res)
       })
       .catch((e) => {
-        let res: mangakakalotInterface.hotUpResMain = {
+        let res: mainInterface.response = {
           success: false,
-          data: []
+          error: e
         }
         response.status(500).json(res)
       })
@@ -66,9 +66,9 @@ router.get('/:mangaId/latestupdates', async (request: Request, response: Respons
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: mangaseeInterface.latestUpResMain = {
+        let res: mainInterface.response = {
           success: false,
-          data: []
+          error: e
         }
         response.status(500).json(res)
       })
@@ -85,9 +85,9 @@ router.get('/:mangaId/latestupdates', async (request: Request, response: Respons
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: mangakakalotInterface.hotUpResMain = {
+        let res: mainInterface.response = {
           success: false,
-          data: []
+          error: e
         }
         response.status(500).json(res)
       })
@@ -104,16 +104,18 @@ router.get('/:mangaId/getall', async (request: Request, response: Response) => {
     await mangasee
       .getAll()
       .then((data: mangaseeInterface.allRes[]) => {
-        response.status(201).json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        response.status(500).json({
+        let res: mainInterface.response = {
           success: false,
-          data: []
-        })
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
   else if (mangaId == '1') {
@@ -121,13 +123,18 @@ router.get('/:mangaId/getall', async (request: Request, response: Response) => {
     await mangakakalotSc.
       getAll()
       .then((data: mainInterface.latestUpdates[]) => {
-        response.json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e) => {
-
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
 
@@ -142,16 +149,18 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
     await mangaseesc
       .search(keyWord)
       .then((data: mangaseeInterface.allRes[]) => {
-        response.status(201).json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        response.status(500).json({
+        let res: mainInterface.response = {
           success: false,
-          data: []
-        })
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
   if (mangaId == '1') {
@@ -159,16 +168,18 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
     await mangakakalotsc
       .search(keyWord)
       .then((data: mainInterface.searchResults[]) => {
-        response.status(201).json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        response.status(500).json({
+        let res: mainInterface.response = {
           success: false,
           error: e
-        })
+        }
+        response.status(500).json(res)
       })
   }
 
@@ -186,16 +197,16 @@ router.get('/:mangaId/chapters/:mangaName', async (request: Request, response: R
     await mangasee
       .getChaps(mangaName)
       .then((data: mainInterface.chapterResults[]) => {
-        let res = {
+        let res: mainInterface.response = {
           success: true,
           data: data
         }
         response.status(201).json(res)
       })
       .catch((e: any) => {
-        let res: mangaseeInterface.chapsResMain = {
+        let res: mainInterface.response = {
           success: false,
-          data: []
+          error: e
         }
         response.status(500).json(res)
       })
@@ -205,13 +216,18 @@ router.get('/:mangaId/chapters/:mangaName', async (request: Request, response: R
     await mangakakalotSc
       .getChaps(mangaName)
       .then((data: any) => {
-        response.json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e) => {
-
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
 })
@@ -231,13 +247,18 @@ router.get('/:mangaId/mangadata', async (request: Request, response: Response) =
     await mangaseesc
       .mangaData(chapterURL)
       .then((data: mainInterface.chapterData) => {
-        response.status(201).json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e: any) => {
-        response.status(500).json(e)
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
   else if (mangaId == '1') {
@@ -245,13 +266,18 @@ router.get('/:mangaId/mangadata', async (request: Request, response: Response) =
     await mangakakalotSc
       .mangaData(chapterURL)
       .then((data: mainInterface.chapterData) => {
-        response.json({
+        let res: mainInterface.response = {
           success: true,
           data: data
-        })
+        }
+        response.status(201).json(res)
       })
       .catch((e) => {
-
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
       })
   }
 })
