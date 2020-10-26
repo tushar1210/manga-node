@@ -285,6 +285,25 @@ router.get('/:mangaId/chapters/:mangaName', async (request: Request, response: R
         response.status(500).json(res)
       })
   }
+  else if (mangaId == '2') {
+    let mangafoxSc: mangafoxScraper = new mangafoxScraper()
+    await mangafoxSc
+      .getChaps(mangaName)
+      .then((data: mainInterface.chapterResults[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
 })
 
 router.get('/:mangaId/mangadata', async (request: Request, response: Response) => {

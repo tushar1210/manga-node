@@ -109,9 +109,39 @@ class Scraper {
           res.push(searchElement)
         })
       })
+      .catch((e: axios.AxiosError) => {
+
+      })
     return res
   }
 
+  async getChaps(mangaName: string): Promise<mainInterface.chapterResults[]> {
+    let res: mainInterface.chapterResults[] = []
+    let url: string = this.baseURL + `/manga/${mangaName}`
+    await axios.default({
+      url: url,
+      headers: this.defaultHeaders,
+      method: 'GET'
+    })
+      .then((data: axios.AxiosResponse) => {
+        var $ = cheerio.load(data.data)
+        $('.detail-main-list').children('li').each((_: number, elem: cheerio.Element) => {
+          let chp = $(elem).children('a').children('div').children('p').first().text().split('-')
+          let chapter: mainInterface.chapterResults = {
+            link: this.baseURL + $(elem).children('a').attr('href'),
+            chapterNumber: chp[0],
+            chapterName: (chp.length == 2) ? chp[1] : '',
+            type: '',
+            date: $(elem).children('a').children('div').children('p').first().next().text()
+          }
+          res.push(chapter)
+        })
+      })
+      .catch((e: axios.AxiosError) => {
+
+      })
+    return res
+  }
 }
 
 export { Scraper as mangafoxScraper }
