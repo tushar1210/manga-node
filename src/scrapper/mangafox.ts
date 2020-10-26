@@ -76,6 +76,42 @@ class Scraper {
 
     return res
   }
+
+  async search(keyword: string): Promise<mainInterface.searchResults[]> {
+    let res: mainInterface.searchResults[] = []
+    await axios.default({
+      url: this.baseURL + '/search',
+      headers: this.defaultHeaders,
+      method: 'GET',
+      params: {
+        title: keyword.replace(' ', '+')
+      }
+    })
+      .then((data: axios.AxiosResponse) => {
+        var $ = cheerio.load(data.data)
+        $('.manga-list-4-list').children('li').each((_: number, element: cheerio.Element) => {
+          let authors: string[] = []
+          $(element).children('p').next().first().next().children('a').each((__: number, elem: cheerio.Element) => {
+            authors.push($(elem).text())
+          })
+          let searchElement: mainInterface.searchResults = {
+            title: $(element).children('a').attr('title'),
+            sourceSpecificName: $(element).children('a').attr('href').split('/').filter(String).splice(-1)[0],
+            imageURL: $(element).children('a').children('img').attr('src'),
+            mangaURL: this.baseURL + $(element).children('a').attr('href'),
+            additionalInfo: {
+              status: $(element).children('p').next().first().text(),
+              latestChapter: $(element).children('p').next().first().next().next().text(),
+              author: authors,
+              synopsis: $(element).children('p').last().text()
+            }
+          }
+          res.push(searchElement)
+        })
+      })
+    return res
+  }
+
 }
 
 export { Scraper as mangafoxScraper }
