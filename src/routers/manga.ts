@@ -2,8 +2,8 @@ import * as Fs from 'fs'
 import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../scrapper/mangasee123'
 import { scraper as mangakakalotScrapper } from '../scrapper/mangakakalot'
+import { mangafoxScraper } from '../scrapper/mangafox'
 import * as mangaseeInterface from '../interfaces/responses/mangasee'
-import * as mangakakalotInterface from '../interfaces/responses/mangakaklot'
 import * as mainInterface from '../interfaces/responses/main'
 const router = Router()
 
@@ -33,12 +33,31 @@ router.get('/:mangaId/hotupdates', async (request: Request, response: Response) 
     let mangakakalot = new mangakakalotScrapper()
     await mangakakalot
       .hotUpdates()
-      .then((data: any) => { //data: mainInterface.hotUpdates[]
+      .then((data: any) => {
         let res: mainInterface.response = {
           success: true,
           data: data
         }
         response.json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
+  else if (mangaId == '2') {
+    let mangafoxSc: mangafoxScraper = new mangafoxScraper()
+    await mangafoxSc
+      .hotUpdates()
+      .then((data: mainInterface.hotUpdates[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
       })
       .catch((e) => {
         let res: mainInterface.response = {
@@ -92,7 +111,25 @@ router.get('/:mangaId/latestupdates', async (request: Request, response: Respons
         response.status(500).json(res)
       })
   }
-
+  else if (mangaId == '2') {
+    let mangafoxSc = new mangafoxScraper()
+    await mangafoxSc
+      .latestUpdates()
+      .then((data: mainInterface.latestUpdates[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: true,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
 
 })
 
@@ -182,7 +219,25 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
         response.status(500).json(res)
       })
   }
-
+  if (mangaId == '3') {
+    let mangafoxSc: mangafoxScraper = new mangafoxScraper()
+    await mangafoxSc
+      .search(keyWord)
+      .then((data: mainInterface.searchResults[]) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
 
 
 })
@@ -216,6 +271,25 @@ router.get('/:mangaId/chapters/:mangaName', async (request: Request, response: R
     await mangakakalotSc
       .getChaps(mangaName)
       .then((data: any) => {
+        let res: mainInterface.response = {
+          success: true,
+          data: data
+        }
+        response.status(201).json(res)
+      })
+      .catch((e) => {
+        let res: mainInterface.response = {
+          success: false,
+          error: e
+        }
+        response.status(500).json(res)
+      })
+  }
+  else if (mangaId == '2') {
+    let mangafoxSc: mangafoxScraper = new mangafoxScraper()
+    await mangafoxSc
+      .getChaps(mangaName)
+      .then((data: mainInterface.chapterResults[]) => {
         let res: mainInterface.response = {
           success: true,
           data: data

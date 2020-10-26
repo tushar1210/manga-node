@@ -17,7 +17,8 @@
 ## Sources:
 
 `0:` https://mangasee123.com/  
-`1:` https://mangakakalot.com/
+`1:` https://mangakakalot.com/  
+`2:` https://fanfox.net/ [WIP]
 
 
 ## POST /api/signup
