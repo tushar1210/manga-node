@@ -358,7 +358,7 @@ router.get('/:mangaId/mangadata', async (request: Request, response: Response) =
     let mangafoxSc: mangafoxScraper = new mangafoxScraper()
     await mangafoxSc
       .mangaData(chapterURL)
-      .then((data: mainInterface.chapterData[]) => {
+      .then((data: mainInterface.chapterData) => {
         let res: mainInterface.response = {
           success: true,
           data: data

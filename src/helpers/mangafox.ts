@@ -1,17 +1,19 @@
-const parseChapNumber = (chapNumber: number, chapterURL: string, char: string): string[] => {
+const parseChapNumber = (chapNumber: number, chapterURL: string, char: string): any => {
   let chapArr = []
-  for (let index = 0; index < chapNumber; index++) {
+  let chpJSON: any = {}
+  for (let index = 0; index < chapNumber - 1; index++) {
     let strIdx = String(index)
+    let imageURL = ''
     if (strIdx.length == 1) {
-      chapArr.push(`https://${chapterURL}/${char}00${strIdx}.jpg`)
+      imageURL = `https://${chapterURL}/${char}00${strIdx}.jpg`
     } else if (strIdx.length == 2) {
-      chapArr.push(`https://${chapterURL}/${char}0${strIdx}.jpg`)
+      imageURL = `https://${chapterURL}/${char}0${strIdx}.jpg`
     } else {
-      chapArr.push(`https://${chapterURL}/${char}${strIdx}.jpg`)
+      imageURL = `https://${chapterURL}/${char}${strIdx}.jpg`
     }
+    chpJSON[index] = imageURL
   }
-  chapArr.pop()
-  return chapArr
+  return chpJSON
 }
 
 export { parseChapNumber }

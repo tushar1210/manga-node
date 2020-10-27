@@ -144,8 +144,8 @@ class Scraper {
     return res
   }
 
-  async mangaData(chapterURL: string): Promise<mainInterface.chapterData[]> {
-    let res: mainInterface.chapterData[] = []
+  async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
+    let res: mainInterface.chapterData
     try {
       let browser = await puppeteer.launch()
       const [page] = await browser.pages();
@@ -156,13 +156,15 @@ class Scraper {
       const imageURL = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/'))
       const appendingChar = imageURL.pop().split('.')[0][0]
       const imageFiles = parseChapNumber(chapterLength, imageURL.join('/'), appendingChar)
-
+      res = {
+        imageURL: imageFiles,
+        chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
+        mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
+      }
       await browser.close()
     } catch (error) {
       console.log(error)
-
     }
-
     return res
   }
 }
