@@ -1,7 +1,8 @@
 import * as axios from 'axios'
 import * as cheerio from 'cheerio'
 import * as mainInterface from '../interfaces/responses/main'
-
+import puppeteer from 'puppeteer'
+import { parseChapNumber } from '../helpers/mangafox'
 class Scraper {
   defaultHeaders: object
   baseURL: string
@@ -142,6 +143,51 @@ class Scraper {
       })
     return res
   }
+
+  async mangaData(chapterURL: string): Promise<mainInterface.chapterData[]> {
+    let res: mainInterface.chapterData[] = []
+    try {
+      let browser = await puppeteer.launch()
+      const [page] = await browser.pages();
+      page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
+      page.setDefaultTimeout(300000)
+      await page.goto(chapterURL, { waitUntil: 'networkidle0' })
+      const chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
+      const imageURL = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/'))
+      const appendingChar = imageURL.pop().split('.')[0][0]
+      const imageFiles = parseChapNumber(chapterLength, imageURL.join('/'), appendingChar)
+
+      await browser.close()
+    } catch (error) {
+      console.log(error)
+
+    }
+
+    return res
+  }
 }
 
 export { Scraper as mangafoxScraper }
+
+
+
+// await axios.default({
+// 	url:chapterURL,
+// 	headers:this.defaultHeaders,
+// 	method:'GET'
+// })
+// .then((data:axios.AxiosResponse)=>{
+// 	var $ = cheerio.load(data.data)
+// 	var chapterLength = Number($('.cp-pager-list').children('.pager-list-left').children('span').last().text().replace(/\./g,'').split(' ').filter(String).splice(-2)[0])
+// 	// var chaps = {
+// 	// 	1:$('.reader-main').children('.reader-main-img').html()
+// 	// }
+// 	console.log($('.reader-main').children('img').attr('src'))
+// 	// for (let index = 1; index <= chapterLength; index++) {
+
+
+// 	// }
+// })
+// .catch((e:axios.AxiosError)=>{
+// 	throw new Error(e.message)
+// })
