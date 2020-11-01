@@ -2,7 +2,7 @@ import * as axios from 'axios'
 import * as cheerio from 'cheerio'
 import * as mainInterface from '../interfaces/responses/main'
 import puppeteer from 'puppeteer'
-import { parseChapNumber } from '../helpers/mangafox'
+import { parseChapNumber, increamentImage } from '../helpers/mangafox'
 class Scraper {
   defaultHeaders: object
   baseURL: string
@@ -152,18 +152,31 @@ class Scraper {
       page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
       page.setDefaultTimeout(300000)
       await page.goto(chapterURL, { waitUntil: 'networkidle0' })
-      const chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
-      const imageURL = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/'))
-      const appendingChar = imageURL.pop().split('.')[0][0]
-      const imageFiles = parseChapNumber(chapterLength, imageURL.join('/'), appendingChar)
-      res = {
-        imageURL: imageFiles,
-        chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
-        mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
+      var imageURL: string[]
+      var chapterLength = 0
+      var appendingChar = ''
+      var spanSections = await page.$$('.pager-list.cp-pager-list > .pager-list-left > span > a')
+      var isSinglePage = spanSections.length > 0 ? false : true
+      var isImagehyphenSpaced = false
+      var imageFiles: any = {}
+      if (isSinglePage) {
+        let imageTags = await page.$$('.reader-main-img')
+        chapterLength = imageTags.length
+        var count = 0
+        for (let imageTag of imageTags) {
+          await page.evaluate(el => el.getAttribute('data-src'), imageTag).then((imageLink: string) => {
+            imageFiles[count] = imageLink.replace('//', '')
+            count += 1
+          })
+        }
       }
+      else {
+        chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
+      }
+      console.log(chapterLength)
       await browser.close()
     } catch (error) {
-      console.log(error)
+      throw new Error(String(error))
     }
     return res
   }
@@ -172,24 +185,34 @@ class Scraper {
 export { Scraper as mangafoxScraper }
 
 
-
-// await axios.default({
-// 	url:chapterURL,
-// 	headers:this.defaultHeaders,
-// 	method:'GET'
-// })
-// .then((data:axios.AxiosResponse)=>{
-// 	var $ = cheerio.load(data.data)
-// 	var chapterLength = Number($('.cp-pager-list').children('.pager-list-left').children('span').last().text().replace(/\./g,'').split(' ').filter(String).splice(-2)[0])
-// 	// var chaps = {
-// 	// 	1:$('.reader-main').children('.reader-main-img').html()
-// 	// }
-// 	console.log($('.reader-main').children('img').attr('src'))
-// 	// for (let index = 1; index <= chapterLength; index++) {
-
-
-// 	// }
-// })
-// .catch((e:axios.AxiosError)=>{
-// 	throw new Error(e.message)
-// })
+// if(isSinglePage){
+//   imageURL = await page.$eval('.reader-main img', e => e.getAttribute('data-src').replace('//', '').split('/'))
+//   const els = await page.$$('.reader-main img')
+//   chapterLength = els.length
+// }
+// else{
+//   chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
+//   imageURL = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/'))
+//   appendingChar = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/')).then((d)=>{
+//     return d.splice(-1)[0].split('.')[0][0]
+//   })
+// }
+// console.log(chapterLength);
+// var imageFiles:any
+// if(/_/gm.test(imageURL.slice(-1)[0])){
+//   var splitted = increamentImage(imageURL.slice(-1)[0].split('_').slice(-1)[0].split('?')[0].replace('.jpg',''))+'.jpg'
+//   var final = imageURL.slice(-1)[0].split('_')
+//   final.pop()
+//   final.push(splitted)
+//   imageURL.pop()
+//   imageURL.push(final.join('_'))
+//   console.log(imageURL.join('/'))
+// }
+// else{
+//   imageFiles = parseChapNumber(chapterLength, imageURL.join('/'), appendingChar)
+// }
+// res = {
+//   imageURL: imageFiles,
+//   chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
+//   mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
+// }
