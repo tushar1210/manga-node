@@ -33,7 +33,7 @@
 
 \+ **new Scraper**(): *[Scraper](_src_scrapper_mangasee123_.scraper.md)*
 
-*Defined in [src/scrapper/mangasee123.ts:12](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L12)*
+*Defined in [src/scrapper/mangasee123.ts:12](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L12)*
 
 **Returns:** *[Scraper](_src_scrapper_mangasee123_.scraper.md)*
 
@@ -43,7 +43,7 @@
 
 • **baseURL**: *string*
 
-*Defined in [src/scrapper/mangasee123.ts:12](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L12)*
+*Defined in [src/scrapper/mangasee123.ts:12](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L12)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **defaultHeaders**: *object*
 
-*Defined in [src/scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L11)*
+*Defined in [src/scrapper/mangasee123.ts:11](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L11)*
 
 ## Methods
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **all**(): *Promise‹void›*
 
-*Defined in [src/scrapper/mangasee123.ts:114](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L114)*
+*Defined in [src/scrapper/mangasee123.ts:114](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L114)*
 
 **Returns:** *Promise‹void›*
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **getAll**(): *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
-*Defined in [src/scrapper/mangasee123.ts:145](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L145)*
+*Defined in [src/scrapper/mangasee123.ts:145](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L145)*
 
 **Returns:** *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
@@ -79,7 +79,7 @@ ___
 
 ▸ **getChaps**(`mangaName`: string): *Promise‹[chapterResults](../interfaces/_src_interfaces_responses_main_.chapterresults.md)[]›*
 
-*Defined in [src/scrapper/mangasee123.ts:162](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L162)*
+*Defined in [src/scrapper/mangasee123.ts:162](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L162)*
 
 **Parameters:**
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **hotUpdates**(): *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
-*Defined in [src/scrapper/mangasee123.ts:24](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L24)*
+*Defined in [src/scrapper/mangasee123.ts:24](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L24)*
 
 **Returns:** *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **latestUpdates**(): *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
-*Defined in [src/scrapper/mangasee123.ts:68](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L68)*
+*Defined in [src/scrapper/mangasee123.ts:68](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L68)*
 
 **Returns:** *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **mangaData**(`chapterURL`: string): *Promise‹[chapterData](../interfaces/_src_interfaces_responses_main_.chapterdata.md)›*
 
-*Defined in [src/scrapper/mangasee123.ts:202](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L202)*
+*Defined in [src/scrapper/mangasee123.ts:202](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L202)*
 
 **Parameters:**
 
@@ -131,7 +131,7 @@ ___
 
 ▸ **search**(`keyWord`: string): *Promise‹[allRes](../interfaces/_src_interfaces_responses_mangasee_.allres.md)[]›*
 
-*Defined in [src/scrapper/mangasee123.ts:150](https://github.com/tushar1210/manga-node/blob/fed3e48/src/scrapper/mangasee123.ts#L150)*
+*Defined in [src/scrapper/mangasee123.ts:150](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangasee123.ts#L150)*
 
 **Parameters:**
 

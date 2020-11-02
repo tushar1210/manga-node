@@ -16,7 +16,7 @@
 
 ▸ **chapToken**(`chapNumber`: string): *string*
 
-*Defined in [src/helpers/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/fed3e48/src/helpers/mangasee.ts#L13)*
+*Defined in [src/helpers/mangasee.ts:13](https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L13)*
 
 **Parameters:**
 
@@ -32,7 +32,7 @@ ___
 
 ▸ **parseChapNumber**(`chapNumber`: string): *string*
 
-*Defined in [src/helpers/mangasee.ts:1](https://github.com/tushar1210/manga-node/blob/fed3e48/src/helpers/mangasee.ts#L1)*
+*Defined in [src/helpers/mangasee.ts:1](https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L1)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **thumbnail**(`indexName`: string): *string*
 
-*Defined in [src/helpers/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/fed3e48/src/helpers/mangasee.ts#L22)*
+*Defined in [src/helpers/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L22)*
 
 **Parameters:**
 

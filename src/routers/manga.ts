@@ -219,7 +219,7 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
         response.status(500).json(res)
       })
   }
-  if (mangaId == '3') {
+  if (mangaId == '2') {
     let mangafoxSc: mangafoxScraper = new mangafoxScraper()
     await mangafoxSc
       .search(keyWord)

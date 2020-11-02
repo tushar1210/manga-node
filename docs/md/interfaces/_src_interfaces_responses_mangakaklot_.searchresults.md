@@ -24,7 +24,7 @@
 
 • **author**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:23](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L23)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:23](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L23)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:18](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L18)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:18](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L18)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **image**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:22](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L22)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:22](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L22)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **lastchapter**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:21](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L21)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:21](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L21)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:19](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L19)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:19](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L19)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **nameunsigned**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:20](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L20)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:20](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L20)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **story_link**: *string*
 
-*Defined in [src/interfaces/responses/mangakaklot.ts:24](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L24)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:24](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangakaklot.ts#L24)*

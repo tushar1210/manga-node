@@ -22,7 +22,7 @@
 
 • **chapterName**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:41](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L41)*
+*Defined in [src/interfaces/responses/main.ts:41](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L41)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **chapterNumber**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:38](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L38)*
+*Defined in [src/interfaces/responses/main.ts:38](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L38)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **date**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:40](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L40)*
+*Defined in [src/interfaces/responses/main.ts:40](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L40)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **link**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:37](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L37)*
+*Defined in [src/interfaces/responses/main.ts:37](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L37)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **type**: *string | null*
 
-*Defined in [src/interfaces/responses/main.ts:39](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L39)*
+*Defined in [src/interfaces/responses/main.ts:39](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L39)*
