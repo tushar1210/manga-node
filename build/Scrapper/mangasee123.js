@@ -34,7 +34,7 @@ const Fs = __importStar(require("fs"));
 const cheerio = __importStar(require("cheerio"));
 const ss = __importStar(require("string-similarity"));
 const mangasee_1 = require("../helpers/mangasee");
-class scraper {
+class Scraper {
     constructor() {
         this.defaultHeaders = {
             'User-Agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
@@ -66,19 +66,20 @@ class scraper {
                 }
                 let parse = str === null || str === void 0 ? void 0 : str.match(/vm.HotUpdateJSON = (\[.*?\])/);
                 let valid = JSON.parse(parse[0].split('vm.HotUpdateJSON = ')[1]);
-                const imageBaseURL = "https://cover.mangabeast01.com/cover/";
                 valid.forEach((element) => {
-                    let mangaData = {
-                        id: element.SeriesID,
+                    let updateResponse = {
+                        title: element.SeriesName,
                         sourceSpecificName: element.IndexName,
-                        source: 'https://mangasee123.com/',
-                        mangaName: element.SeriesName,
-                        imageURL: imageBaseURL + element.IndexName + '.jpg',
-                        date: element.Date,
+                        imageURL: mangasee_1.thumbnail(element.IndexName),
+                        source: this.baseURL,
                         currentChapter: mangasee_1.parseChapNumber(element.Chapter),
-                        ended: element.IsEdd
+                        additionalInfo: {
+                            id: element.SeriesID,
+                            date: element.Date,
+                            ended: element.IsEdd
+                        }
                     };
-                    res.push(mangaData);
+                    res.push(updateResponse);
                 });
             })
                 .catch((e) => {
@@ -110,15 +111,18 @@ class scraper {
                 let valid = JSON.parse(parse[0].split('vm.LatestJSON = ')[1]);
                 valid.forEach((element) => {
                     let mangaData = {
-                        id: element.SeriesID,
+                        title: element.SeriesName,
                         sourceSpecificName: element.IndexName,
-                        source: 'https://mangasee123.com/',
-                        mangaName: element.SeriesName,
-                        genres: element.Genres,
-                        date: element.Date,
-                        newChapter: mangasee_1.parseChapNumber(element.Chapter),
-                        scanStatus: element.ScanStatus,
-                        ended: element.IsEdd
+                        source: this.baseURL,
+                        imageURL: mangasee_1.thumbnail(element.IndexName),
+                        currentChapter: mangasee_1.parseChapNumber(element.Chapter),
+                        additionalInfo: {
+                            id: element.SeriesID,
+                            genres: element.Genres,
+                            date: element.Date,
+                            scanStatus: element.ScanStatus,
+                            ended: element.IsEdd
+                        }
                     };
                     res.push(mangaData);
                 });
@@ -142,10 +146,9 @@ class scraper {
                 .then((data) => {
                 let valid = data.data;
                 let res = [];
-                const imageBaseURL = "https://cover.mangabeast01.com/cover/";
                 valid.forEach((element) => {
                     let obj = {
-                        imageURL: imageBaseURL + element.i + '.jpg',
+                        imageURL: mangasee_1.thumbnail(element.i),
                         mangaURL: this.baseURL + '/manga/' + element.i,
                         source: 'https://mangasee123.com',
                         mangaName: element.s,
@@ -154,7 +157,7 @@ class scraper {
                     };
                     res.push(obj);
                 });
-                Fs.writeFileSync('./temp/mangasee123-all.json', JSON.stringify(res));
+                Fs.writeFileSync('./public/mangasee123-all.json', JSON.stringify(res));
             })
                 .catch((e) => {
                 return Promise.reject(e.message);
@@ -163,7 +166,7 @@ class scraper {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = JSON.parse(Fs.readFileSync('./temp/mangasee123-all.json').toString());
+            let data = JSON.parse(Fs.readFileSync('./public/mangasee123-all.json').toString());
             return data;
         });
     }
@@ -238,7 +241,6 @@ class scraper {
                 str = (_a = $('script:not([src])')[5].children[0].data) === null || _a === void 0 ? void 0 : _a.toString();
                 let path = str === null || str === void 0 ? void 0 : str.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1];
                 let curChapter = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CurChapter = (\{.*?\})/)[1]);
-                let allChaptersReq = JSON.parse(str === null || str === void 0 ? void 0 : str.match(/vm.CHAPTERS = (\[.*?\])/)[1]);
                 let sourceSpecificName = str === null || str === void 0 ? void 0 : str.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1];
                 let chpNum = Number(curChapter.Page);
                 let chpPath = curChapter.Chapter.substring(1, 5);
@@ -272,20 +274,17 @@ class scraper {
                     imageDict[i] = chpURL;
                 }
                 let res = {
-                    success: true,
-                    data: {
-                        path: path,
-                        imageURL: imageDict,
-                        allChapters: allChaptersReq,
-                        currentChapter: curChapter
-                    }
+                    imageURL: imageDict,
+                    chapterNumber: curChapter.Chapter,
+                    mangaTitle: null
                 };
                 final = res;
             })
                 .catch((e) => {
                 let res = {
-                    success: false,
-                    data: {}
+                    imageURL: {},
+                    mangaTitle: null,
+                    chapterNumber: null
                 };
                 final = res;
                 return Promise.reject(res);
@@ -294,5 +293,5 @@ class scraper {
         });
     }
 }
-exports.scraper = scraper;
+exports.scraper = Scraper;
 //# sourceMappingURL=mangasee123.js.map

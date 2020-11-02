@@ -6,16 +6,19 @@
 ## Services working :
 
 ```
-- manga/0/hot-updates
-- manga/0/latest-updates
-- manga/0/manga-data?chapterURL=<url>
-- manga/0/search/?keyWord=<query>
-- manga/0/chaps/<manga-name>
+- manga/[source-index]/hot-updates
+- manga/[source-index]/latest-updates
+- manga/[source-index]/manga-data?chapterURL=<url>
+- manga/[source-index]/search/?keyWord=<query>
+- manga/[source-index]/chaps/<manga-name>
+
 ```
 
 ## Sources:
 
-`0:` https://mangasee123.com/
+`0:` https://mangasee123.com/  
+`1:` https://mangakakalot.com/  
+`2:` https://fanfox.net/
 
 
 ## POST /api/signup

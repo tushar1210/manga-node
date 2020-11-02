@@ -19,4 +19,7 @@ const chapToken = (chapNumber: string): string => {
   return token
 }
 
-export { parseChapNumber, chapToken }
+const thumbnail = (indexName: string): string => {
+  return "https://cover.nep.li/cover/" + indexName + '.jpg'
+}
+export { parseChapNumber, chapToken, thumbnail }
