@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [allReq](_src_interfaces_requests_mangasee_.allreq.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [allReq](_src_interfaces_requests_mangasee_.allreq.md)
 
 # Interface: allReq
 
@@ -20,7 +20,7 @@
 
 • **a**: *string[]*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:24](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L24)*
+*Defined in [src/interfaces/requests/mangasee.ts:24](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L24)*
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 • **i**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L22)*
+*Defined in [src/interfaces/requests/mangasee.ts:22](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L22)*
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 • **s**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:23](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L23)*
+*Defined in [src/interfaces/requests/mangasee.ts:23](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L23)*
