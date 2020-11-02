@@ -2,7 +2,7 @@ import * as axios from 'axios'
 import * as cheerio from 'cheerio'
 import * as mainInterface from '../interfaces/responses/main'
 import puppeteer from 'puppeteer'
-import { parseChapNumber, increamentImage } from '../helpers/mangafox'
+import { parseChapNumber } from '../helpers/mangafox'
 class Scraper {
   defaultHeaders: object
   baseURL: string

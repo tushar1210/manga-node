@@ -15,8 +15,4 @@ const parseChapNumber = (chapNumber: number, chapterURL: string, char: string, f
   return chpJSON
 }
 
-const increamentImage = (imageSerialNumber: string): string => {
-  return String(Number(imageSerialNumber) + 1)
-}
-
-export { parseChapNumber, increamentImage }
+export { parseChapNumber }
