@@ -152,12 +152,11 @@ class Scraper {
       page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
       page.setDefaultTimeout(300000)
       await page.goto(chapterURL, { waitUntil: 'networkidle0' })
-      var imageURL: string[]
       var chapterLength = 0
       var appendingChar = ''
       var spanSections = await page.$$('.pager-list.cp-pager-list > .pager-list-left > span > a')
       var isSinglePage = spanSections.length > 0 ? false : true
-      var isImagehyphenSpaced = false
+      var isImageHyphenSpaced = false
       var imageFiles: any = {}
       if (isSinglePage) {
         let imageTags = await page.$$('.reader-main-img')
@@ -172,8 +171,34 @@ class Scraper {
       }
       else {
         chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
+        var imageLink = await page.evaluate(() => document.querySelector('.reader-main-img').getAttribute('src').split('?')[0])
+        let imageLinkComponents = imageLink.split('/')
+        var lastComponent = imageLinkComponents.slice(-1)[0]
+        const imageFormat = lastComponent.split('.').splice(-1)[0]
+        if (/_/gm.test(imageLinkComponents.slice(-1)[0])) {
+          isImageHyphenSpaced = true
+          for (let idx = 0; idx < chapterLength; idx++) {
+            var splittedLastComponent = lastComponent.split('_')
+            let imageNumber = String(Number(splittedLastComponent.splice(-1)[0].replace('.' + imageFormat, '')) + idx)
+            splittedLastComponent.push(imageNumber + `.${imageFormat}`)
+            imageLinkComponents.pop()
+            imageLinkComponents.push(splittedLastComponent.join('_'))
+            imageFiles[idx] = imageLinkComponents.join('/').replace('//', '')
+          }
+        } else {
+          isImageHyphenSpaced = false
+          appendingChar = lastComponent.replace('.' + imageFormat, '').replace(/[0-9]/g, '')
+          imageLinkComponents.pop()
+          let chpURL = imageLinkComponents.join('/')
+          imageFiles = parseChapNumber(chapterLength, chpURL, appendingChar, imageFormat)
+        }
+
       }
-      console.log(chapterLength)
+      res = {
+        imageURL: imageFiles,
+        chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
+        mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
+      }
       await browser.close()
     } catch (error) {
       throw new Error(String(error))
@@ -183,36 +208,3 @@ class Scraper {
 }
 
 export { Scraper as mangafoxScraper }
-
-
-// if(isSinglePage){
-//   imageURL = await page.$eval('.reader-main img', e => e.getAttribute('data-src').replace('//', '').split('/'))
-//   const els = await page.$$('.reader-main img')
-//   chapterLength = els.length
-// }
-// else{
-//   chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
-//   imageURL = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/'))
-//   appendingChar = await page.$eval('.reader-main-img', e => e.getAttribute('src').replace('//', '').split('/')).then((d)=>{
-//     return d.splice(-1)[0].split('.')[0][0]
-//   })
-// }
-// console.log(chapterLength);
-// var imageFiles:any
-// if(/_/gm.test(imageURL.slice(-1)[0])){
-//   var splitted = increamentImage(imageURL.slice(-1)[0].split('_').slice(-1)[0].split('?')[0].replace('.jpg',''))+'.jpg'
-//   var final = imageURL.slice(-1)[0].split('_')
-//   final.pop()
-//   final.push(splitted)
-//   imageURL.pop()
-//   imageURL.push(final.join('_'))
-//   console.log(imageURL.join('/'))
-// }
-// else{
-//   imageFiles = parseChapNumber(chapterLength, imageURL.join('/'), appendingChar)
-// }
-// res = {
-//   imageURL: imageFiles,
-//   chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
-//   mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
-// }
