@@ -23,7 +23,7 @@
 
 • **alternateNames**: *string[]*
 
-*Defined in [src/interfaces/responses/mangasee.ts:41](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L41)*
+*Defined in [src/interfaces/responses/mangasee.ts:41](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L41)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **imageURL**: *string*
 
-*Defined in [src/interfaces/responses/mangasee.ts:38](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L38)*
+*Defined in [src/interfaces/responses/mangasee.ts:38](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L38)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **mangaName**: *string*
 
-*Defined in [src/interfaces/responses/mangasee.ts:37](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L37)*
+*Defined in [src/interfaces/responses/mangasee.ts:37](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L37)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **mangaURL**: *string*
 
-*Defined in [src/interfaces/responses/mangasee.ts:39](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L39)*
+*Defined in [src/interfaces/responses/mangasee.ts:39](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L39)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **source**: *string*
 
-*Defined in [src/interfaces/responses/mangasee.ts:36](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L36)*
+*Defined in [src/interfaces/responses/mangasee.ts:36](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L36)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **sourceSpecificName**: *string*
 
-*Defined in [src/interfaces/responses/mangasee.ts:40](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L40)*
+*Defined in [src/interfaces/responses/mangasee.ts:40](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L40)*

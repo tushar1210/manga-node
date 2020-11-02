@@ -22,7 +22,7 @@
 
 `0:` https://mangasee123.com/  
 `1:` https://mangakakalot.com/  
-`2:` https://fanfox.net/ [WIP]
+`2:` https://fanfox.net/
 
 ## POST /api/signup
 

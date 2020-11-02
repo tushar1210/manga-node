@@ -19,7 +19,7 @@
 
 • **PORT**: *string | 5000* = process.env.PORT || 5000
 
-*Defined in [src/index.ts:13](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L13)*
+*Defined in [src/index.ts:13](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L13)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **app**: *Express‹›* = express()
 
-*Defined in [src/index.ts:14](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L14)*
+*Defined in [src/index.ts:14](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L14)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **mangafoxsc**: *[Scraper](../classes/_src_scrapper_mangasee123_.scraper.md)‹›* = new mangafoxScraper()
 
-*Defined in [src/index.ts:17](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L17)*
+*Defined in [src/index.ts:17](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L17)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • **mangakakalotsc**: *[Scraper](../classes/_src_scrapper_mangasee123_.scraper.md)‹›* = new mangakakalotScrapper()
 
-*Defined in [src/index.ts:16](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L16)*
+*Defined in [src/index.ts:16](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L16)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **mangasee123sc**: *[Scraper](../classes/_src_scrapper_mangasee123_.scraper.md)‹›* = new mangasee123Scrapper()
 
-*Defined in [src/index.ts:15](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L15)*
+*Defined in [src/index.ts:15](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L15)*
 
 ___
 
@@ -59,4 +59,4 @@ ___
 
 • **path**: *any* = require('path')
 
-*Defined in [src/index.ts:8](https://github.com/tushar1210/manga-node/blob/fed3e48/src/index.ts#L8)*
+*Defined in [src/index.ts:8](https://github.com/tushar1210/manga-node/blob/a01e945/src/index.ts#L8)*

@@ -19,7 +19,7 @@
 
 • **data**: *[chapsRes](_src_interfaces_responses_mangasee_.chapsres.md)[]*
 
-*Defined in [src/interfaces/responses/mangasee.ts:54](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L54)*
+*Defined in [src/interfaces/responses/mangasee.ts:54](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L54)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/interfaces/responses/mangasee.ts:53](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L53)*
+*Defined in [src/interfaces/responses/mangasee.ts:53](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L53)*
