@@ -15,7 +15,7 @@
 
 ▸ **login**(`req`: Request, `res`: Response): *Promise‹Response‹any››*
 
-*Defined in [src/sqlz/endpoints/users/users.post.ts:16](https://github.com/tushar1210/manga-node/blob/3ac409b/src/sqlz/endpoints/users/users.post.ts#L16)*
+*Defined in [src/sqlz/endpoints/users/users.post.ts:16](https://github.com/tushar1210/manga-node/blob/fed3e48/src/sqlz/endpoints/users/users.post.ts#L16)*
 
 **Parameters:**
 
@@ -32,7 +32,7 @@ ___
 
 ▸ **signup**(`req`: Request, `res`: Response): *Promise‹Response‹any››*
 
-*Defined in [src/sqlz/endpoints/users/users.post.ts:4](https://github.com/tushar1210/manga-node/blob/3ac409b/src/sqlz/endpoints/users/users.post.ts#L4)*
+*Defined in [src/sqlz/endpoints/users/users.post.ts:4](https://github.com/tushar1210/manga-node/blob/fed3e48/src/sqlz/endpoints/users/users.post.ts#L4)*
 
 **Parameters:**
 

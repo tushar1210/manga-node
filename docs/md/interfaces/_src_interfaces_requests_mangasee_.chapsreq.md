@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [chapsReq](_src_interfaces_requests_mangasee_.chapsreq.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [chapsReq](_src_interfaces_requests_mangasee_.chapsreq.md)
 
 # Interface: chapsReq
 
@@ -22,7 +22,7 @@
 
 • **Chapter**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:30](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L30)*
+*Defined in [src/interfaces/requests/mangasee.ts:30](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L30)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • **ChapterName**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:33](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L33)*
+*Defined in [src/interfaces/requests/mangasee.ts:33](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L33)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **Date**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:32](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L32)*
+*Defined in [src/interfaces/requests/mangasee.ts:32](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L32)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 • **Type**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:31](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L31)*
+*Defined in [src/interfaces/requests/mangasee.ts:31](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L31)*
 
 ___
 
@@ -54,4 +54,4 @@ ___
 
 • **link**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:29](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L29)*
+*Defined in [src/interfaces/requests/mangasee.ts:29](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L29)*

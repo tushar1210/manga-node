@@ -1,6 +1,6 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Requests/mangasee"](_src_interfaces_requests_mangasee_.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/requests/mangasee"](_src_interfaces_requests_mangasee_.md)
 
-# Module: "src/Interfaces/Requests/mangasee"
+# Module: "src/interfaces/requests/mangasee"
 
 ## Index
 

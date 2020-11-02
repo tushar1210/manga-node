@@ -1,9 +1,19 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Scrapper/mangasee123"](_src_scrapper_mangasee123_.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/scrapper/mangasee123"](_src_scrapper_mangasee123_.md)
 
-# Module: "src/Scrapper/mangasee123"
+# Module: "src/scrapper/mangasee123"
 
 ## Index
 
+### References
+
+* [scraper](_src_scrapper_mangasee123_.md#scraper)
+
 ### Classes
 
-* [scraper](../classes/_src_scrapper_mangasee123_.scraper.md)
+* [Scraper](../classes/_src_scrapper_mangasee123_.scraper.md)
+
+## References
+
+###  scraper
+
+• **scraper**:

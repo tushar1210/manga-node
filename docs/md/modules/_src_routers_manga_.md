@@ -1,6 +1,6 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Routers/manga"](_src_routers_manga_.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/routers/manga"](_src_routers_manga_.md)
 
-# Module: "src/Routers/manga"
+# Module: "src/routers/manga"
 
 ## Index
 
@@ -14,4 +14,4 @@
 
 • **router**: *Router‹›* = Router()
 
-*Defined in [src/Routers/manga.ts:8](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Routers/manga.ts#L8)*
+*Defined in [src/routers/manga.ts:8](https://github.com/tushar1210/manga-node/blob/fed3e48/src/routers/manga.ts#L8)*

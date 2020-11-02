@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [curChapterReq](_src_interfaces_requests_mangasee_.curchapterreq.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/requests/mangasee"](../modules/_src_interfaces_requests_mangasee_.md) › [curChapterReq](_src_interfaces_requests_mangasee_.curchapterreq.md)
 
 # Interface: curChapterReq
 
@@ -23,7 +23,7 @@
 
 • **Chapter**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:46](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L46)*
+*Defined in [src/interfaces/requests/mangasee.ts:46](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L46)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **ChapterName**: *string | null*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:51](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L51)*
+*Defined in [src/interfaces/requests/mangasee.ts:51](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L51)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **Date**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:50](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L50)*
+*Defined in [src/interfaces/requests/mangasee.ts:50](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L50)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **Directory**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:49](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L49)*
+*Defined in [src/interfaces/requests/mangasee.ts:49](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L49)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **Page**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:48](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L48)*
+*Defined in [src/interfaces/requests/mangasee.ts:48](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L48)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **Type**: *string*
 
-*Defined in [src/Interfaces/Requests/mangasee.ts:47](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Requests/mangasee.ts#L47)*
+*Defined in [src/interfaces/requests/mangasee.ts:47](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/requests/mangasee.ts#L47)*

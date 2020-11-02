@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Responses/main"](../modules/_src_interfaces_responses_main_.md) › [response](_src_interfaces_responses_main_.response.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/responses/main"](../modules/_src_interfaces_responses_main_.md) › [response](_src_interfaces_responses_main_.response.md)
 
 # Interface: response
 
@@ -10,16 +10,34 @@
 
 ### Properties
 
-* [data](_src_interfaces_responses_main_.response.md#data)
+* [data](_src_interfaces_responses_main_.response.md#optional-data)
+* [error](_src_interfaces_responses_main_.response.md#optional-error)
+* [errorMessage](_src_interfaces_responses_main_.response.md#optional-errormessage)
 * [success](_src_interfaces_responses_main_.response.md#success)
 
 ## Properties
 
-###  data
+### `Optional` data
 
-• **data**: *[hotUpdates](_src_interfaces_responses_main_.hotupdates.md)[] | [latestUpdates](_src_interfaces_responses_main_.latestupdates.md)[]*
+• **data**? : *[chapterData](_src_interfaces_responses_main_.chapterdata.md)[] | [chapterResults](_src_interfaces_responses_main_.chapterresults.md)[] | [searchResults](_src_interfaces_responses_main_.searchresults.md)[] | [latestUpdates](_src_interfaces_responses_main_.latestupdates.md)[] | [hotUpdates](_src_interfaces_responses_main_.hotupdates.md)[] | any*
 
-*Defined in [src/Interfaces/Responses/main.ts:3](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/main.ts#L3)*
+*Defined in [src/interfaces/responses/main.ts:3](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L3)*
+
+___
+
+### `Optional` error
+
+• **error**? : *string*
+
+*Defined in [src/interfaces/responses/main.ts:4](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L4)*
+
+___
+
+### `Optional` errorMessage
+
+• **errorMessage**? : *string*
+
+*Defined in [src/interfaces/responses/main.ts:5](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L5)*
 
 ___
 
@@ -27,4 +45,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/main.ts:2](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/main.ts#L2)*
+*Defined in [src/interfaces/responses/main.ts:2](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/main.ts#L2)*

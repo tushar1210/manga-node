@@ -15,7 +15,7 @@
 
 ▸ **login**(`user`: any): *Promise‹any›*
 
-*Defined in [src/sqlz/controllers/user.ts:11](https://github.com/tushar1210/manga-node/blob/3ac409b/src/sqlz/controllers/user.ts#L11)*
+*Defined in [src/sqlz/controllers/user.ts:11](https://github.com/tushar1210/manga-node/blob/fed3e48/src/sqlz/controllers/user.ts#L11)*
 
 **Parameters:**
 
@@ -31,7 +31,7 @@ ___
 
 ▸ **signup**(`user`: any): *Promise‹any›*
 
-*Defined in [src/sqlz/controllers/user.ts:3](https://github.com/tushar1210/manga-node/blob/3ac409b/src/sqlz/controllers/user.ts#L3)*
+*Defined in [src/sqlz/controllers/user.ts:3](https://github.com/tushar1210/manga-node/blob/fed3e48/src/sqlz/controllers/user.ts#L3)*
 
 **Parameters:**
 

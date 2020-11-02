@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [hotUpResMain](_src_interfaces_responses_mangasee_.hotupresmain.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [hotUpResMain](_src_interfaces_responses_mangasee_.hotupresmain.md)
 
 # Interface: hotUpResMain
 
@@ -19,7 +19,7 @@
 
 • **data**: *[hotUpRes](_src_interfaces_responses_mangasee_.hotupres.md)[]*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:15](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L15)*
+*Defined in [src/interfaces/responses/mangasee.ts:15](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L15)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:14](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L14)*
+*Defined in [src/interfaces/responses/mangasee.ts:14](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L14)*

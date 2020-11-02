@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [latestUpResMain](_src_interfaces_responses_mangasee_.latestupresmain.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [latestUpResMain](_src_interfaces_responses_mangasee_.latestupresmain.md)
 
 # Interface: latestUpResMain
 
@@ -19,7 +19,7 @@
 
 • **data**: *[latestUpRes](_src_interfaces_responses_mangasee_.latestupres.md)[]*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:32](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L32)*
+*Defined in [src/interfaces/responses/mangasee.ts:32](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L32)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:31](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L31)*
+*Defined in [src/interfaces/responses/mangasee.ts:31](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L31)*

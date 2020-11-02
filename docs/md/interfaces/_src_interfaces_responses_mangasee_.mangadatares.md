@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [mangaDataRes](_src_interfaces_responses_mangasee_.mangadatares.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/responses/mangasee"](../modules/_src_interfaces_responses_mangasee_.md) › [mangaDataRes](_src_interfaces_responses_mangasee_.mangadatares.md)
 
 # Interface: mangaDataRes
 
@@ -11,7 +11,6 @@
 ### Properties
 
 * [data](_src_interfaces_responses_mangasee_.mangadatares.md#data)
-* [success](_src_interfaces_responses_mangasee_.mangadatares.md#success)
 
 ## Properties
 
@@ -19,22 +18,12 @@
 
 • **data**: *object*
 
-*Defined in [src/Interfaces/Responses/mangasee.ts:59](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L59)*
+*Defined in [src/interfaces/responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangasee.ts#L58)*
 
 #### Type declaration:
-
-* **allChapters**? : *[allChapterInfoReq](_src_interfaces_requests_mangasee_.allchapterinforeq.md)[]*
 
 * **currentChapter**? : *[curChapterReq](_src_interfaces_requests_mangasee_.curchapterreq.md)*
 
 * **imageURL**? : *object | any*
 
 * **path**? : *string*
-
-___
-
-###  success
-
-• **success**: *boolean*
-
-*Defined in [src/Interfaces/Responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangasee.ts#L58)*

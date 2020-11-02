@@ -1,5 +1,5 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Requests/mangakakalot"](_src_interfaces_requests_mangakakalot_.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/requests/mangakakalot"](_src_interfaces_requests_mangakakalot_.md)
 
-# Module: "src/Interfaces/Requests/mangakakalot"
+# Module: "src/interfaces/requests/mangakakalot"
 
 

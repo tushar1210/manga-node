@@ -1,4 +1,4 @@
-[manga](../README.md) › [Globals](../globals.md) › ["src/Interfaces/Responses/mangakaklot"](../modules/_src_interfaces_responses_mangakaklot_.md) › [hotUpResMain](_src_interfaces_responses_mangakaklot_.hotupresmain.md)
+[manga](../README.md) › [Globals](../globals.md) › ["src/interfaces/responses/mangakaklot"](../modules/_src_interfaces_responses_mangakaklot_.md) › [hotUpResMain](_src_interfaces_responses_mangakaklot_.hotupresmain.md)
 
 # Interface: hotUpResMain
 
@@ -19,7 +19,7 @@
 
 • **data**: *[hotUpRes](_src_interfaces_responses_mangakaklot_.hotupres.md)[]*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:14](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangakaklot.ts#L14)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:14](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L14)*
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **success**: *boolean*
 
-*Defined in [src/Interfaces/Responses/mangakaklot.ts:13](https://github.com/tushar1210/manga-node/blob/3ac409b/src/Interfaces/Responses/mangakaklot.ts#L13)*
+*Defined in [src/interfaces/responses/mangakaklot.ts:13](https://github.com/tushar1210/manga-node/blob/fed3e48/src/interfaces/responses/mangakaklot.ts#L13)*

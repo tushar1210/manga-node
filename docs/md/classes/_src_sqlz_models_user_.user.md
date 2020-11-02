@@ -3047,7 +3047,7 @@ ___
 
 ### `Static` findCreateFind
 
-▸ **findCreateFind**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[]›*
+▸ **findCreateFind**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[M, boolean]›*
 
 *Inherited from [User](_src_sqlz_models_user_.user.md).[findCreateFind](_src_sqlz_models_user_.user.md#static-findcreatefind)*
 
@@ -3067,7 +3067,7 @@ Name | Type |
 `this` | object & typeof Model |
 `options` | FindOrCreateOptions |
 
-**Returns:** *Promise‹[]›*
+**Returns:** *Promise‹[M, boolean]›*
 
 ___
 
@@ -3118,7 +3118,7 @@ ___
 
 ### `Static` findOrBuild
 
-▸ **findOrBuild**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[]›*
+▸ **findOrBuild**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[M, boolean]›*
 
 *Inherited from [User](_src_sqlz_models_user_.user.md).[findOrBuild](_src_sqlz_models_user_.user.md#static-findorbuild)*
 
@@ -3138,13 +3138,13 @@ Name | Type |
 `this` | object & typeof Model |
 `options` | FindOrCreateOptions |
 
-**Returns:** *Promise‹[]›*
+**Returns:** *Promise‹[M, boolean]›*
 
 ___
 
 ### `Static` findOrCreate
 
-▸ **findOrCreate**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[]›*
+▸ **findOrCreate**‹**M**›(`this`: object & typeof Model, `options`: FindOrCreateOptions): *Promise‹[M, boolean]›*
 
 *Inherited from [User](_src_sqlz_models_user_.user.md).[findOrCreate](_src_sqlz_models_user_.user.md#static-findorcreate)*
 
@@ -3171,7 +3171,7 @@ Name | Type |
 `this` | object & typeof Model |
 `options` | FindOrCreateOptions |
 
-**Returns:** *Promise‹[]›*
+**Returns:** *Promise‹[M, boolean]›*
 
 ___
 
@@ -3808,7 +3808,7 @@ ___
 
 ### `Static` update
 
-▸ **update**‹**M**›(`this`: object & typeof Model, `values`: object, `options`: UpdateOptions): *Promise‹[]›*
+▸ **update**‹**M**›(`this`: object & typeof Model, `values`: object, `options`: UpdateOptions): *Promise‹[number, M[]]›*
 
 *Inherited from [User](_src_sqlz_models_user_.user.md).[update](_src_sqlz_models_user_.user.md#static-update)*
 
@@ -3830,7 +3830,7 @@ Name | Type |
 `values` | object |
 `options` | UpdateOptions |
 
-**Returns:** *Promise‹[]›*
+**Returns:** *Promise‹[number, M[]]›*
 
 ___
 
@@ -3874,7 +3874,7 @@ Name | Type |
 
 **Returns:** *Promise‹boolean›*
 
-▸ **upsert**‹**M**›(`this`: object & typeof Model, `values`: object, `options?`: UpsertOptions & object): *Promise‹[]›*
+▸ **upsert**‹**M**›(`this`: object & typeof Model, `values`: object, `options?`: UpsertOptions & object): *Promise‹[M, boolean]›*
 
 *Inherited from [User](_src_sqlz_models_user_.user.md).[upsert](_src_sqlz_models_user_.user.md#static-upsert)*
 
@@ -3892,4 +3892,4 @@ Name | Type |
 `values` | object |
 `options?` | UpsertOptions & object |
 
-**Returns:** *Promise‹[]›*
+**Returns:** *Promise‹[M, boolean]›*
