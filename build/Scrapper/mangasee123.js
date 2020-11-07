@@ -147,15 +147,17 @@ class Scraper {
                 let valid = data.data;
                 let res = [];
                 valid.forEach((element) => {
-                    let obj = {
+                    let searchObject = {
+                        title: element.s,
+                        sourceSpecificName: element.i,
                         imageURL: mangasee_1.thumbnail(element.i),
                         mangaURL: this.baseURL + '/manga/' + element.i,
-                        source: 'https://mangasee123.com',
-                        mangaName: element.s,
-                        sourceSpecificName: element.i,
-                        alternateNames: element.a
+                        source: this.baseURL,
+                        additionalInfo: {
+                            alternateNames: element.a
+                        }
                     };
-                    res.push(obj);
+                    res.push(searchObject);
                 });
                 Fs.writeFileSync('./public/mangasee123-all.json', JSON.stringify(res));
             })
@@ -175,7 +177,7 @@ class Scraper {
             let data = yield this.getAll();
             let res = [];
             data.forEach((element) => {
-                if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
+                if (ss.compareTwoStrings(keyWord.toLowerCase(), element.title.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
                     res.push(element);
                 }
             });

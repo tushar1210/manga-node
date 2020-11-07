@@ -32,6 +32,7 @@ const Fs = __importStar(require("fs"));
 const express_1 = require("express");
 const mangasee123_1 = require("../scrapper/mangasee123");
 const mangakakalot_1 = require("../scrapper/mangakakalot");
+const mangafox_1 = require("../scrapper/mangafox");
 const router = express_1.Router();
 router.get('/:mangaId/hotupdates', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     let mangaId = request.params.mangaId.toString();
@@ -49,7 +50,7 @@ router.get('/:mangaId/hotupdates', (request, response) => __awaiter(void 0, void
             .catch((e) => {
             let res = {
                 success: false,
-                data: []
+                error: e
             };
             response.status(500).json(res);
         });
@@ -68,7 +69,26 @@ router.get('/:mangaId/hotupdates', (request, response) => __awaiter(void 0, void
             .catch((e) => {
             let res = {
                 success: false,
-                data: []
+                error: e
+            };
+            response.status(500).json(res);
+        });
+    }
+    else if (mangaId == '2') {
+        let mangafoxSc = new mangafox_1.mangafoxScraper();
+        yield mangafoxSc
+            .hotUpdates()
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: false,
+                error: e
             };
             response.status(500).json(res);
         });
@@ -90,7 +110,7 @@ router.get('/:mangaId/latestupdates', (request, response) => __awaiter(void 0, v
             .catch((e) => {
             let res = {
                 success: false,
-                data: []
+                error: e
             };
             response.status(500).json(res);
         });
@@ -109,7 +129,26 @@ router.get('/:mangaId/latestupdates', (request, response) => __awaiter(void 0, v
             .catch((e) => {
             let res = {
                 success: false,
-                data: []
+                error: e
+            };
+            response.status(500).json(res);
+        });
+    }
+    else if (mangaId == '2') {
+        let mangafoxSc = new mangafox_1.mangafoxScraper();
+        yield mangafoxSc
+            .latestUpdates()
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: true,
+                error: e
             };
             response.status(500).json(res);
         });
@@ -122,16 +161,18 @@ router.get('/:mangaId/getall', (request, response) => __awaiter(void 0, void 0, 
         yield mangasee
             .getAll()
             .then((data) => {
-            response.status(201).json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
-            response.status(500).json({
+            let res = {
                 success: false,
-                data: []
-            });
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
     else if (mangaId == '1') {
@@ -139,12 +180,18 @@ router.get('/:mangaId/getall', (request, response) => __awaiter(void 0, void 0, 
         yield mangakakalotSc.
             getAll()
             .then((data) => {
-            response.json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
 }));
@@ -156,16 +203,18 @@ router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0,
         yield mangaseesc
             .search(keyWord)
             .then((data) => {
-            response.status(201).json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
-            response.status(500).json({
+            let res = {
                 success: false,
-                data: []
-            });
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
     if (mangaId == '1') {
@@ -173,16 +222,37 @@ router.get('/:mangaId/search/', (request, response) => __awaiter(void 0, void 0,
         yield mangakakalotsc
             .search(keyWord)
             .then((data) => {
-            response.status(201).json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
-            response.status(500).json({
+            let res = {
                 success: false,
                 error: e
-            });
+            };
+            response.status(500).json(res);
+        });
+    }
+    if (mangaId == '2') {
+        let mangafoxSc = new mangafox_1.mangafoxScraper();
+        yield mangafoxSc
+            .search(keyWord)
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
 }));
@@ -204,7 +274,7 @@ router.get('/:mangaId/chapters/:mangaName', (request, response) => __awaiter(voi
             .catch((e) => {
             let res = {
                 success: false,
-                data: []
+                error: e
             };
             response.status(500).json(res);
         });
@@ -214,12 +284,37 @@ router.get('/:mangaId/chapters/:mangaName', (request, response) => __awaiter(voi
         yield mangakakalotSc
             .getChaps(mangaName)
             .then((data) => {
-            response.json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
+        });
+    }
+    else if (mangaId == '2') {
+        let mangafoxSc = new mangafox_1.mangafoxScraper();
+        yield mangafoxSc
+            .getChaps(mangaName)
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
 }));
@@ -238,13 +333,18 @@ router.get('/:mangaId/mangadata', (request, response) => __awaiter(void 0, void 
         yield mangaseesc
             .mangaData(chapterURL)
             .then((data) => {
-            response.status(201).json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
-            response.status(500).json(e);
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
     else if (mangaId == '1') {
@@ -252,18 +352,99 @@ router.get('/:mangaId/mangadata', (request, response) => __awaiter(void 0, void 
         yield mangakakalotSc
             .mangaData(chapterURL)
             .then((data) => {
-            response.json({
+            let res = {
                 success: true,
                 data: data
-            });
+            };
+            response.status(201).json(res);
         })
             .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
+        });
+    }
+    else if (mangaId == '2') {
+        let mangafoxSc = new mangafox_1.mangafoxScraper();
+        yield mangafoxSc
+            .mangaData(chapterURL)
+            .then((data) => {
+            let res = {
+                success: true,
+                data: data
+            };
+            response.status(201).json(res);
+        })
+            .catch((e) => {
+            let res = {
+                success: false,
+                error: e
+            };
+            response.status(500).json(res);
         });
     }
 }));
 router.get('/sources', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     let data = JSON.parse(Fs.readFileSync('./public/sources.json').toString());
     return response.json(data);
+}));
+router.get('/search', (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    let mangaseesc = new mangasee123_1.scraper();
+    let mangakakalotSc = new mangakakalot_1.scraper();
+    let mangafoxSc = new mangafox_1.mangafoxScraper();
+    let keyWord = request.query.keyWord.toString();
+    if (keyWord == undefined || keyWord == 'undefined') {
+        let errorRes = {
+            success: false,
+            error: 'Bad Request',
+            errorMessage: 'Keyword incorrect/missing'
+        };
+        response.status(400).json(errorRes);
+    }
+    let searchDataArray = [];
+    yield mangaseesc
+        .search(keyWord)
+        .then((data) => {
+        searchDataArray = searchDataArray.concat(data);
+    })
+        .catch((e) => {
+        let errorRes = {
+            success: false,
+            error: e
+        };
+        response.status(500).json(errorRes);
+    });
+    yield mangakakalotSc
+        .search(keyWord)
+        .then((data) => {
+        searchDataArray = searchDataArray.concat(data);
+    })
+        .catch((e) => {
+        let errorRes = {
+            success: false,
+            error: e
+        };
+        response.status(500).json(errorRes);
+    });
+    yield mangafoxSc
+        .search(keyWord)
+        .then((data) => {
+        searchDataArray = searchDataArray.concat(data);
+    })
+        .catch((e) => {
+        let errorRes = {
+            success: false,
+            error: e
+        };
+        response.status(500).json(errorRes);
+    });
+    let res = {
+        success: true,
+        data: searchDataArray
+    };
+    response.status(201).json(res);
 }));
 exports.default = router;
 //# sourceMappingURL=manga.js.map

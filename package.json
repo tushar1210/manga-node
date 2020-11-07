@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node -r tsconfig-paths/register build/index.js",
     "dev": "nodemon",
-    "build": "rm -rf ./build && npx tsc",
+    "build": "rm -rf ./build && npx tsc && curl https://intoli.com/install-google-chrome.sh | bash",
     "doc:html": "rm -rf ./docs/html && npx typedoc --plugin none --theme default --tsconfig ./tsconfig.json --out ./docs/html",
     "doc:md": "rm -rf ./docs/md && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json --out ./docs/md",
     "doc:all": "npm run doc:html && npm run doc:md",
