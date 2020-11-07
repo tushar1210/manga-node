@@ -88,6 +88,7 @@ class Scraper {
               sourceSpecificName: elem.nameunsigned,
               imageURL: elem.image,
               mangaURL: this.dataURL + '/manga/' + elem.story_link.split('/').splice(-1)[0],
+              source: this.baseURL,
               additionalInfo: {
                 id: elem.id,
                 author: elem.author,

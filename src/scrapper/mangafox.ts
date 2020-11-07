@@ -101,6 +101,7 @@ class Scraper {
             sourceSpecificName: $(element).children('a').attr('href').split('/').filter(String).splice(-1)[0],
             imageURL: $(element).children('a').children('img').attr('src'),
             mangaURL: this.baseURL + $(element).children('a').attr('href'),
+            source: this.baseURL,
             additionalInfo: {
               status: $(element).children('p').next().first().text(),
               latestChapter: $(element).children('p').next().first().next().next().text(),

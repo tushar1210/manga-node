@@ -140,7 +140,7 @@ router.get('/:mangaId/getall', async (request: Request, response: Response) => {
     let mangasee: mangasee123Scrapper = new mangasee123Scrapper()
     await mangasee
       .getAll()
-      .then((data: mangaseeInterface.allRes[]) => {
+      .then((data: mainInterface.searchResults[]) => {
         let res: mainInterface.response = {
           success: true,
           data: data
@@ -185,7 +185,7 @@ router.get('/:mangaId/search/', async (request: Request, response: Response) => 
     let mangaseesc: mangasee123Scrapper = new mangasee123Scrapper()
     await mangaseesc
       .search(keyWord)
-      .then((data: mangaseeInterface.allRes[]) => {
+      .then((data: mainInterface.searchResults[]) => {
         let res: mainInterface.response = {
           success: true,
           data: data
@@ -378,6 +378,69 @@ router.get('/:mangaId/mangadata', async (request: Request, response: Response) =
 router.get('/sources', async (request: Request, response: Response) => {
   let data = JSON.parse(Fs.readFileSync('./public/sources.json').toString())
   return response.json(data)
+})
+
+router.get('/search', async (request: Request, response: Response) => {
+  let mangaseesc: mangasee123Scrapper = new mangasee123Scrapper()
+  let mangakakalotSc = new mangakakalotScrapper()
+  let mangafoxSc: mangafoxScraper = new mangafoxScraper()
+
+  let keyWord: string = request.query.keyWord.toString()
+  if (keyWord == undefined || keyWord == 'undefined') {
+    let errorRes: mainInterface.response = {
+      success: false,
+      error: 'Bad Request',
+      errorMessage: 'Keyword incorrect/missing'
+    }
+    response.status(400).json(errorRes)
+  }
+  let searchDataArray: mainInterface.searchResults[] = []
+
+  await mangaseesc
+    .search(keyWord)
+    .then((data: mainInterface.searchResults[]) => {
+      searchDataArray = searchDataArray.concat(data)
+    })
+    .catch((e) => {
+      let res: mainInterface.response = {
+        success: false,
+        error: e
+      }
+      response.status(500).json(res)
+    })
+
+  await mangakakalotSc
+    .search(keyWord)
+    .then((data: mainInterface.searchResults[]) => {
+      searchDataArray = searchDataArray.concat(data)
+    })
+    .catch((e) => {
+      let res: mainInterface.response = {
+        success: false,
+        error: e
+      }
+      response.status(500).json(res)
+    })
+
+  await mangafoxSc
+    .search(keyWord)
+    .then((data: mainInterface.searchResults[]) => {
+      searchDataArray = searchDataArray.concat(data)
+    })
+    .catch((e) => {
+      let res: mainInterface.response = {
+        success: false,
+        error: e
+      }
+      response.status(500).json(res)
+    })
+
+  let res: mainInterface.response = {
+    success: true,
+    data: searchDataArray
+  }
+  response.status(201).json(res)
+
 })
 
 export default router
