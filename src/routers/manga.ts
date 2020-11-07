@@ -3,7 +3,6 @@ import { Request, Response, Router } from 'express'
 import { scraper as mangasee123Scrapper } from '../scrapper/mangasee123'
 import { scraper as mangakakalotScrapper } from '../scrapper/mangakakalot'
 import { mangafoxScraper } from '../scrapper/mangafox'
-import * as mangaseeInterface from '../interfaces/responses/mangasee'
 import * as mainInterface from '../interfaces/responses/main'
 const router = Router()
 
@@ -402,11 +401,11 @@ router.get('/search', async (request: Request, response: Response) => {
       searchDataArray = searchDataArray.concat(data)
     })
     .catch((e) => {
-      let res: mainInterface.response = {
+      let errorRes: mainInterface.response = {
         success: false,
         error: e
       }
-      response.status(500).json(res)
+      response.status(500).json(errorRes)
     })
 
   await mangakakalotSc
@@ -415,11 +414,11 @@ router.get('/search', async (request: Request, response: Response) => {
       searchDataArray = searchDataArray.concat(data)
     })
     .catch((e) => {
-      let res: mainInterface.response = {
+      let errorRes: mainInterface.response = {
         success: false,
         error: e
       }
-      response.status(500).json(res)
+      response.status(500).json(errorRes)
     })
 
   await mangafoxSc
@@ -428,11 +427,11 @@ router.get('/search', async (request: Request, response: Response) => {
       searchDataArray = searchDataArray.concat(data)
     })
     .catch((e) => {
-      let res: mainInterface.response = {
+      let errorRes: mainInterface.response = {
         success: false,
         error: e
       }
-      response.status(500).json(res)
+      response.status(500).json(errorRes)
     })
 
   let res: mainInterface.response = {
