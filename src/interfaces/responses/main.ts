@@ -2,7 +2,8 @@ export interface response {
   success: boolean,
   data?: chapterData[] | chapterResults[] | searchResults[] | latestUpdates[] | hotUpdates[] | any,
   error?: string,
-  errorMessage?: string
+  errorMessage?: string,
+  dataLength?: number
 }
 
 export interface hotUpdates {
@@ -30,6 +31,7 @@ export interface searchResults {
   sourceSpecificName: string
   imageURL: string
   mangaURL: string
+  source: string
   additionalInfo?: any
 }
 

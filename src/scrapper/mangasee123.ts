@@ -3,8 +3,7 @@ import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
 import { parseChapNumber, chapToken, thumbnail } from '../helpers/mangasee'
-import { allRes, mangaDataRes, chapsRes } from '../interfaces/responses/mangasee'
-import { hotUpReq, latestUpReq, allReq, curChapterReq, allChapterInfoReq, chapsReq } from '../interfaces/requests/mangasee'
+import { hotUpReq, latestUpReq, allReq, curChapterReq, chapsReq } from '../interfaces/requests/mangasee'
 import * as mainInterface from '../interfaces/responses/main'
 
 class Scraper {
@@ -122,18 +121,20 @@ class Scraper {
       })
       .then((data: axios.AxiosResponse<any>) => {
         let valid: allReq[] = data.data
-        let res: allRes[] = []
+        let res: mainInterface.searchResults[] = []
 
         valid.forEach((element: allReq) => {
-          let obj: allRes = {
+          let searchObject: mainInterface.searchResults = {
+            title: element.s,
+            sourceSpecificName: element.i,
             imageURL: thumbnail(element.i),
             mangaURL: this.baseURL + '/manga/' + element.i,
-            source: 'https://mangasee123.com',
-            mangaName: element.s,
-            sourceSpecificName: element.i,
-            alternateNames: element.a
+            source: this.baseURL,
+            additionalInfo: {
+              alternateNames: element.a
+            }
           }
-          res.push(obj)
+          res.push(searchObject)
         })
         Fs.writeFileSync('./public/mangasee123-all.json', JSON.stringify(res))
       })
@@ -142,16 +143,16 @@ class Scraper {
       })
   }
 
-  async getAll(): Promise<allRes[]> {
-    let data: allRes[] = JSON.parse(Fs.readFileSync('./public/mangasee123-all.json').toString())
+  async getAll(): Promise<mainInterface.searchResults[]> {
+    let data: mainInterface.searchResults[] = JSON.parse(Fs.readFileSync('./public/mangasee123-all.json').toString())
     return data
   }
 
-  async search(keyWord: string): Promise<allRes[]> {
-    let data: allRes[] = await this.getAll()
-    let res: allRes[] = []
-    data.forEach((element: allRes) => {
-      if (ss.compareTwoStrings(keyWord.toLowerCase(), element.mangaName.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
+  async search(keyWord: string): Promise<mainInterface.searchResults[]> {
+    let data: mainInterface.searchResults[] = await this.getAll()
+    let res: mainInterface.searchResults[] = []
+    data.forEach((element: mainInterface.searchResults) => {
+      if (ss.compareTwoStrings(keyWord.toLowerCase(), element.title.toLowerCase()) > 0.4 || ss.compareTwoStrings(keyWord.toLowerCase(), element.sourceSpecificName.toLowerCase()) > 0.5) {
         res.push(element)
       }
     })
