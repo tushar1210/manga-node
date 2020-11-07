@@ -149,7 +149,12 @@ class Scraper {
   async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
     let res: mainInterface.chapterData
     try {
-      let browser = await puppeteer.launch()
+      let browser = await puppeteer.launch({
+        'args': [
+          '--no-sandbox',
+          '--disable-setuid-sandbox'
+        ]
+      })
       const [page] = await browser.pages();
       page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
       page.setDefaultTimeout(300000)
