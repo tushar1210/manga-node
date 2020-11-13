@@ -3,7 +3,6 @@ import { scraper as mangasee123Scrapper } from './scrapper/mangasee123'
 import { scraper as mangakakalotScrapper } from './scrapper/mangakakalot'
 import { mangafoxScraper } from './scrapper/mangafox'
 import mangaRouter from './routers/manga'
-import * as UserRoutes from './routers/user'
 import cron from 'node-cron'
 const path = require('path')
 import { json, urlencoded } from 'body-parser'
@@ -23,8 +22,6 @@ app.use(urlencoded({
 }))
 
 app.use('/manga', mangaRouter)
-
-UserRoutes.routes(app)
 
 app.use("/", (request: express.Request, response: express.Response) => {
   response.sendFile(path.join(__dirname, '../public/index.html'))
