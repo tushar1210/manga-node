@@ -179,7 +179,12 @@ class Scraper {
         return __awaiter(this, void 0, void 0, function* () {
             let res;
             try {
-                let browser = yield puppeteer_1.default.launch();
+                let browser = yield puppeteer_1.default.launch({
+                    'args': [
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox'
+                    ]
+                });
                 const [page] = yield browser.pages();
                 page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36');
                 page.setDefaultTimeout(300000);
