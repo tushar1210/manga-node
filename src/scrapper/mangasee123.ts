@@ -49,6 +49,7 @@ class Scraper {
             imageURL: thumbnail(element.IndexName),
             source: this.baseURL,
             currentChapter: parseChapNumber(element.Chapter),
+            currentChapterURL: `${this.baseURL}/read-online/${element.IndexName}-chapter-${parseChapNumber(element.Chapter)}.html`,
             additionalInfo: {
               id: element.SeriesID,
               date: element.Date,
@@ -92,6 +93,7 @@ class Scraper {
             source: this.baseURL,
             imageURL: thumbnail(element.IndexName),
             currentChapter: parseChapNumber(element.Chapter),
+            currentChapterURL: `${this.baseURL}/read-online/${element.IndexName}-chapter-${parseChapNumber(element.Chapter)}.html`,
             additionalInfo: {
               id: element.SeriesID,
               genres: element.Genres,
@@ -256,6 +258,8 @@ class Scraper {
         let res: mainInterface.chapterData = {
           imageURL: imageDict,
           chapterNumber: curChapter.Chapter,
+          nextChapter: String(Number(curChapter.Chapter.slice(2, 5) + 1)),
+          previousChapter: String((Number(curChapter.Chapter) / 10 - 1)).slice(-3),
           mangaTitle: null
         }
         final = res

@@ -26,45 +26,81 @@
 </head>
 
 <body>
-  <h1> Manga </h1>
-  <h2>Welcome!</h2>
+  <p>
+    <h1>Manga </h1>
+    <h2>Welcome!</h2>
+  </p>
+  
+  <p>
+    <table>
+      <tr>
+        <th>Route</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td>manga/:mangaId/hotupdates</td>
+        <td> - </td>
+      </tr>
+      <tr>
+        <td>manga/:mangaId/latestupdates</td>
+        <td> - </td>
+      </tr>
+      <tr>
+        <td>manga/:mangaId/mangadata?chapterURL=</url>
+        </td>
+        <td>manga/:mangaId/mangadata?chapterURL=https://mangasee123.com/read-online/Monster-chapter-162.html</td>
+      </tr>
+      <tr>
+        <td>manga/:mangaId/search/?keyWord=<query>
+        </td>
+        <td>manga/:mangaId/search/?keyWord=loli</td>
+      </tr>
+      <tr>
+        <td>manga/:mangaId/chapters/<manga-name>
+        </td>
+        <td>manga/:mangaId/chapters/Monster</td>
+      </tr>
+    </table>
+  </p>
 
-  <table>
-    <tr>
-      <th>MSP</th>
-      <th>Route</th>
-      <th>Example</th>
-    </tr>
-    <tr>
-      <td>Mangasee</td>
-      <td>manga/0/hot-updates</td>
-      <td> - </td>
-    </tr>
-    <tr>
-      <td>Mangasee</td>
-      <td>manga/0/latest-updates</td>
-      <td> - </td>
-    </tr>
-    <tr>
-      <td>Mangasee</td>
-      <td>manga/0/manga-data?chapterURL=</url>
-      </td>
-      <td>manga/0/manga-data?chapterURL=https://mangasee123.com/read-online/Monster-chapter-162.html</td>
-    </tr>
-    <tr>
-      <td>Mangasee</td>
-      <td>manga/0/search/?keyWord=<query>
-      </td>
-      <td>manga/0/search/?keyWord=loli</td>
-    </tr>
-    <tr>
-      <td>Mangasee</td>
-      <td>manga/0/chaps/<manga-name>
-      </td>
-      <td>manga/0/chaps/Monster</td>
-    </tr>
+<br>
+  <p>
+    <table>
+      <tr>
+        <th>Manga Id</th>
+        <th>Source</th>
+        <th></th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td><a href="https://mangasee123.com">mangasee123</a></td>
+        <td>🟢</td>
+        <td>Stable</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><a href="https://mangakakalot.com">mangakakalot</a></td>
+        <td>🟠</td>
+        <td>Unstable , error in fetching mangaData</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><a href="https://fanfox.net">mangafox</a></td>
+        <td>🟢</td>
+        <td>Stable   </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a href="https://manhuaplus.com">manhua plus</a></td>
+        <td>🔵</td>
+        <td>WIP</td>
+      </tr>
+      
+    </table>
+  </p>
 
-  </table>
+
 </body>
 
 </html>

@@ -148,68 +148,92 @@ class Scraper {
 
   async mangaData(chapterURL: string): Promise<mainInterface.chapterData> {
     let res: mainInterface.chapterData
+    let browser: puppeteer.Browser
     try {
-      let browser = await puppeteer.launch({
+      browser = await puppeteer.launch({
         'args': [
           '--no-sandbox',
           '--disable-setuid-sandbox'
         ]
       })
-      const [page] = await browser.pages();
-      page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
-      page.setDefaultTimeout(300000)
-      await page.goto(chapterURL, { waitUntil: 'networkidle0' })
-      var chapterLength = 0
-      var appendingChar = ''
-      var spanSections = await page.$$('.pager-list.cp-pager-list > .pager-list-left > span > a')
-      var isSinglePage = spanSections.length > 0 ? false : true
-      var isImageHyphenSpaced = false
-      var imageFiles: any = {}
-      if (isSinglePage) {
-        let imageTags = await page.$$('.reader-main-img')
-        chapterLength = imageTags.length
-        var count = 0
-        for (let imageTag of imageTags) {
-          await page.evaluate(el => el.getAttribute('data-src'), imageTag).then((imageLink: string) => {
-            imageFiles[count] = imageLink.replace('//', '')
-            count += 1
-          })
-        }
-      }
-      else {
-        chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
-        var imageLink = await page.evaluate(() => document.querySelector('.reader-main-img').getAttribute('src').split('?')[0])
-        let imageLinkComponents = imageLink.split('/')
-        var lastComponent = imageLinkComponents.slice(-1)[0]
-        const imageFormat = lastComponent.split('.').splice(-1)[0]
-        if (/_/gm.test(imageLinkComponents.slice(-1)[0])) {
-          isImageHyphenSpaced = true
-          for (let idx = 0; idx < chapterLength; idx++) {
-            var splittedLastComponent = lastComponent.split('_')
-            let imageNumber = String(Number(splittedLastComponent.splice(-1)[0].replace('.' + imageFormat, '')) + idx)
-            splittedLastComponent.push(imageNumber + `.${imageFormat}`)
-            imageLinkComponents.pop()
-            imageLinkComponents.push(splittedLastComponent.join('_'))
-            imageFiles[idx] = imageLinkComponents.join('/').replace('//', '')
-          }
-        } else {
-          isImageHyphenSpaced = false
-          appendingChar = lastComponent.replace('.' + imageFormat, '').replace(/[0-9]/g, '')
-          imageLinkComponents.pop()
-          let chpURL = imageLinkComponents.join('/')
-          imageFiles = parseChapNumber(chapterLength, chpURL, appendingChar, imageFormat)
-        }
-
-      }
-      res = {
-        imageURL: imageFiles,
-        chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
-        mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent)
-      }
-      await browser.close()
     } catch (error) {
       throw new Error(String(error))
     }
+    const [page] = await browser.pages();
+    page.setUserAgent('Mozilla/5.0 (Macintosh Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36')
+    page.setDefaultTimeout(300000)
+    await page.goto(chapterURL, { waitUntil: 'networkidle0' })
+    var chapterLength = 0
+    var appendingChar = ''
+    var spanSections = await page.$$('.pager-list.cp-pager-list > .pager-list-left > span > a')
+    var isSinglePage = spanSections.length > 0 ? false : true
+    var isImageHyphenSpaced = false
+    var nextChapterURLArray = await page.$$('.chapter')
+    var chapterURLSet = new Set()
+    var nextChapterURL: string | null
+    var previousChapterURL: string | null
+    var ctr = 0
+    for (let chp of nextChapterURLArray) {
+      await page.evaluate(el => el.getAttribute('href'), chp).then((url: string) => {
+        chapterURLSet.add(url)
+        if (ctr === 0) {
+          previousChapterURL = this.baseURL + url
+        } else if (ctr == 1 && chapterURLSet.size > 1) {
+          nextChapterURL = this.baseURL + url
+        }
+        else if (ctr == 1 && chapterURLSet.size == 1) {
+          nextChapterURL = null
+        }
+        ctr += 1
+      })
+    }
+    var imageFiles: any = {}
+    if (isSinglePage) {
+      let imageTags = await page.$$('.reader-main-img')
+      chapterLength = imageTags.length
+      var count = 0
+      for (let imageTag of imageTags) {
+        await page.evaluate(el => el.getAttribute('data-src'), imageTag).then((imageLink: string) => {
+          imageFiles[count] = imageLink.replace('//', '')
+          count += 1
+        })
+      }
+    }
+    else {
+      chapterLength = Number(await page.evaluate(() => document.querySelector('.pager-list-left span').textContent.replace(/\./g, '').split(' ').filter(Number).splice(-1)[0]))
+      var imageLink = await page.evaluate(() => document.querySelector('.reader-main-img').getAttribute('src').split('?')[0])
+      let imageLinkComponents = imageLink.split('/')
+      var lastComponent = imageLinkComponents.slice(-1)[0]
+      const imageFormat = lastComponent.split('.').splice(-1)[0]
+      if (/_/gm.test(imageLinkComponents.slice(-1)[0])) {
+        isImageHyphenSpaced = true
+        for (let idx = 0; idx < chapterLength; idx++) {
+          var splittedLastComponent = lastComponent.split('_')
+          let imageNumber = String(Number(splittedLastComponent.splice(-1)[0].replace('.' + imageFormat, '')) + idx)
+          splittedLastComponent.push(imageNumber + `.${imageFormat}`)
+          imageLinkComponents.pop()
+          imageLinkComponents.push(splittedLastComponent.join('_'))
+          imageFiles[idx] = imageLinkComponents.join('/').replace('//', '')
+        }
+      } else {
+        isImageHyphenSpaced = false
+        appendingChar = lastComponent.replace('.' + imageFormat, '').replace(/[0-9]/g, '')
+        imageLinkComponents.pop()
+        let chpURL = imageLinkComponents.join('/')
+        imageFiles = parseChapNumber(chapterLength, chpURL, appendingChar, imageFormat)
+      }
+
+    }
+    res = {
+      imageURL: imageFiles,
+      chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
+      mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent),
+      nextChapter: nextChapterURL,
+      previousChapter: previousChapterURL
+    }
+    console.log(res);
+
+    await browser.close()
     return res
   }
 
