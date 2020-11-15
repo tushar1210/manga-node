@@ -46,5 +46,7 @@ export interface chapterResults {
 export interface chapterData {
   imageURL: any
   chapterNumber: string | null,
-  mangaTitle: string | null
+  mangaTitle: string | null,
+  nextChapter?: string,
+  previousChapter?: string
 }
