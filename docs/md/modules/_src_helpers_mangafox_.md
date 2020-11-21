@@ -14,7 +14,7 @@
 
 ▸ **parseChapNumber**(`chapNumber`: number, `chapterURL`: string, `char`: string, `format`: string): *any*
 
-*Defined in [src/helpers/mangafox.ts:1](https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangafox.ts#L1)*
+*Defined in [src/helpers/mangafox.ts:1](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangafox.ts#L1)*
 
 **Parameters:**
 

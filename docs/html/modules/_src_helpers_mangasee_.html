@@ -74,7 +74,10 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#chaptoken" class="tsd-kind-icon">chap<wbr>Token</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#currentchapter" class="tsd-kind-icon">current<wbr>Chapter</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#nextchapter" class="tsd-kind-icon">next<wbr>Chapter</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#parsechapnumber" class="tsd-kind-icon">parse<wbr>Chap<wbr>Number</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#previouschapter" class="tsd-kind-icon">previous<wbr>Chapter</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_src_helpers_mangasee_.html#thumbnail" class="tsd-kind-icon">thumbnail</a></li>
 							</ul>
 						</section>
@@ -93,13 +96,68 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L13">src/helpers/mangasee.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L15">src/helpers/mangasee.ts:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chapNumber: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="currentchapter" class="tsd-anchor"></a>
+					<h3>current<wbr>Chapter</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">current<wbr>Chapter<span class="tsd-signature-symbol">(</span>allChapterJSON<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span>, curChp<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L24">src/helpers/mangasee.ts:24</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>allChapterJSON: <a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>curChp: <a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="nextchapter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> next<wbr>Chapter</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">next<wbr>Chapter<span class="tsd-signature-symbol">(</span>sourceSpecificName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, chapterIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span>, allChapterJSON<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L39">src/helpers/mangasee.ts:39</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sourceSpecificName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>chapterIndex: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>allChapterJSON: <a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -116,13 +174,42 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L1">src/helpers/mangasee.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L3">src/helpers/mangasee.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chapNumber: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="previouschapter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> previous<wbr>Chapter</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">previous<wbr>Chapter<span class="tsd-signature-symbol">(</span>sourceSpecificName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, chapterIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span>, allChapterJSON<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L49">src/helpers/mangasee.ts:49</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sourceSpecificName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>chapterIndex: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>allChapterJSON: <a href="../interfaces/_src_interfaces_requests_mangasee_.curchapterreq.html" class="tsd-signature-type">curChapterReq</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -139,7 +226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/a01e945/src/helpers/mangasee.ts#L22">src/helpers/mangasee.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/tushar1210/manga-node/blob/6ab85fc/src/helpers/mangasee.ts#L35">src/helpers/mangasee.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,9 +284,6 @@
 						<a href="_src_routers_manga_.html">&quot;src/routers/manga&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="_src_routers_user_.html">&quot;src/routers/user&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="_src_scrapper_mangafox_.html">&quot;src/scrapper/mangafox&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -207,30 +291,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="_src_scrapper_mangasee123_.html">&quot;src/scrapper/mangasee123&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_config_config_.html">&quot;src/sqlz/config/config&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_controllers_index_.html">&quot;src/sqlz/controllers/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_controllers_user_.html">&quot;src/sqlz/controllers/user&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_endpoints_index_.html">&quot;src/sqlz/endpoints/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_endpoints_users_index_.html">&quot;src/sqlz/endpoints/users/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_endpoints_users_users_post_.html">&quot;src/sqlz/endpoints/users/users.post&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_models_index_.html">&quot;src/sqlz/models/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="_src_sqlz_models_user_.html">&quot;src/sqlz/models/user&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="_src_utilities_ratelimiter_.html">&quot;src/utilities/ratelimiter&quot;</a>
@@ -243,7 +303,16 @@
 						<a href="_src_helpers_mangasee_.html#chaptoken" class="tsd-kind-icon">chap<wbr>Token</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_src_helpers_mangasee_.html#currentchapter" class="tsd-kind-icon">current<wbr>Chapter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_src_helpers_mangasee_.html#nextchapter" class="tsd-kind-icon">next<wbr>Chapter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_src_helpers_mangasee_.html#parsechapnumber" class="tsd-kind-icon">parse<wbr>Chap<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_src_helpers_mangasee_.html#previouschapter" class="tsd-kind-icon">previous<wbr>Chapter</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_src_helpers_mangasee_.html#thumbnail" class="tsd-kind-icon">thumbnail</a>
@@ -263,11 +332,10 @@
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 			</ul>
 		</div>
 	</div>
