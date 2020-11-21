@@ -169,24 +169,25 @@ class Scraper {
     var isSinglePage = spanSections.length > 0 ? false : true
     var isImageHyphenSpaced = false
     var nextChapterURLArray = await page.$$('.chapter')
-    var chapterURLSet = new Set()
-    var nextChapterURL: string | null
-    var previousChapterURL: string | null
+    var nextChapterURL: string | null = null
+    var previousChapterURL: string | null = null
     var ctr = 0
+    var chpArr: string[] = []
     for (let chp of nextChapterURLArray) {
       await page.evaluate(el => el.getAttribute('href'), chp).then((url: string) => {
-        chapterURLSet.add(url)
-        if (ctr === 0) {
-          previousChapterURL = this.baseURL + url
-        } else if (ctr == 1 && chapterURLSet.size > 1) {
-          nextChapterURL = this.baseURL + url
-        }
-        else if (ctr == 1 && chapterURLSet.size == 1) {
-          nextChapterURL = null
-        }
-        ctr += 1
+        chpArr.push(url)
       })
     }
+
+    if (chpArr.length == 1) {
+      nextChapterURL = chpArr[0]
+    } else if (chpArr.length == 3) {
+      nextChapterURL = chpArr[1]
+      previousChapterURL = chpArr[0]
+    } else if (chpArr.length == 2) {
+      previousChapterURL = chpArr[0]
+    }
+
     var imageFiles: any = {}
     if (isSinglePage) {
       let imageTags = await page.$$('.reader-main-img')
@@ -228,10 +229,9 @@ class Scraper {
       imageURL: imageFiles,
       chapterNumber: await page.$eval('.reader-header-title-2', e => e.textContent),
       mangaTitle: await page.$eval('.reader-header-title-1', e => e.textContent),
-      nextChapter: nextChapterURL,
-      previousChapter: previousChapterURL
+      nextChapter: this.baseURL + nextChapterURL,
+      previousChapter: this.baseURL + previousChapterURL
     }
-    console.log(res);
 
     await browser.close()
     return res
@@ -272,7 +272,6 @@ class Scraper {
         })
     }
     Fs.writeFile('./public/mangafox-all.json', JSON.stringify(res), (e: NodeJS.ErrnoException) => {
-      console.log("completed")
       if (e != null) {
         throw new Error(e.message)
       }
