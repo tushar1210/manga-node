@@ -13,6 +13,7 @@
 * [additionalInfo](_src_interfaces_responses_main_.searchresults.md#optional-additionalinfo)
 * [imageURL](_src_interfaces_responses_main_.searchresults.md#imageurl)
 * [mangaURL](_src_interfaces_responses_main_.searchresults.md#mangaurl)
+* [source](_src_interfaces_responses_main_.searchresults.md#source)
 * [sourceSpecificName](_src_interfaces_responses_main_.searchresults.md#sourcespecificname)
 * [title](_src_interfaces_responses_main_.searchresults.md#title)
 
@@ -22,7 +23,7 @@
 
 • **additionalInfo**? : *any*
 
-*Defined in [src/interfaces/responses/main.ts:33](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L33)*
+*Defined in [src/interfaces/responses/main.ts:35](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L35)*
 
 ___
 
@@ -30,7 +31,7 @@ ___
 
 • **imageURL**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:31](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L31)*
+*Defined in [src/interfaces/responses/main.ts:32](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L32)*
 
 ___
 
@@ -38,7 +39,15 @@ ___
 
 • **mangaURL**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:32](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L32)*
+*Defined in [src/interfaces/responses/main.ts:33](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L33)*
+
+___
+
+###  source
+
+• **source**: *string*
+
+*Defined in [src/interfaces/responses/main.ts:34](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L34)*
 
 ___
 
@@ -46,7 +55,7 @@ ___
 
 • **sourceSpecificName**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:30](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L30)*
+*Defined in [src/interfaces/responses/main.ts:31](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L31)*
 
 ___
 
@@ -54,4 +63,4 @@ ___
 
 • **title**: *string*
 
-*Defined in [src/interfaces/responses/main.ts:29](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/main.ts#L29)*
+*Defined in [src/interfaces/responses/main.ts:30](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/main.ts#L30)*

@@ -8,6 +8,7 @@
 
 * [chapterData](../interfaces/_src_interfaces_responses_main_.chapterdata.md)
 * [chapterResults](../interfaces/_src_interfaces_responses_main_.chapterresults.md)
+* [getChaptersResponse](../interfaces/_src_interfaces_responses_main_.getchaptersresponse.md)
 * [hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)
 * [latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)
 * [response](../interfaces/_src_interfaces_responses_main_.response.md)

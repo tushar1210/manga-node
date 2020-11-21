@@ -33,7 +33,7 @@
 
 \+ **new Scraper**(): *[Scraper](_src_scrapper_mangafox_.scraper.md)*
 
-*Defined in [src/scrapper/mangafox.ts:9](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L9)*
+*Defined in [src/scrapper/mangafox.ts:9](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L9)*
 
 **Returns:** *[Scraper](_src_scrapper_mangafox_.scraper.md)*
 
@@ -43,7 +43,7 @@
 
 • **baseURL**: *string*
 
-*Defined in [src/scrapper/mangafox.ts:9](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L9)*
+*Defined in [src/scrapper/mangafox.ts:9](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L9)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • **defaultHeaders**: *object*
 
-*Defined in [src/scrapper/mangafox.ts:8](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L8)*
+*Defined in [src/scrapper/mangafox.ts:8](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L8)*
 
 ## Methods
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **getAll**(): *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
-*Defined in [src/scrapper/mangafox.ts:210](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L210)*
+*Defined in [src/scrapper/mangafox.ts:240](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L240)*
 
 **Returns:** *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **getChaps**(`mangaName`: string): *Promise‹[chapterResults](../interfaces/_src_interfaces_responses_main_.chapterresults.md)[]›*
 
-*Defined in [src/scrapper/mangafox.ts:120](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L120)*
+*Defined in [src/scrapper/mangafox.ts:121](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L121)*
 
 **Parameters:**
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **hotUpdates**(): *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
-*Defined in [src/scrapper/mangafox.ts:21](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L21)*
+*Defined in [src/scrapper/mangafox.ts:21](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L21)*
 
 **Returns:** *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **latestUpdates**(): *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
-*Defined in [src/scrapper/mangafox.ts:52](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L52)*
+*Defined in [src/scrapper/mangafox.ts:52](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L52)*
 
 **Returns:** *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **mangaData**(`chapterURL`: string): *Promise‹[chapterData](../interfaces/_src_interfaces_responses_main_.chapterdata.md)›*
 
-*Defined in [src/scrapper/mangafox.ts:148](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L148)*
+*Defined in [src/scrapper/mangafox.ts:149](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L149)*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **scrapeAll**(): *Promise‹void›*
 
-*Defined in [src/scrapper/mangafox.ts:214](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L214)*
+*Defined in [src/scrapper/mangafox.ts:244](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L244)*
 
 **Returns:** *Promise‹void›*
 
@@ -131,7 +131,7 @@ ___
 
 ▸ **search**(`keyword`: string): *Promise‹[searchResults](../interfaces/_src_interfaces_responses_main_.searchresults.md)[]›*
 
-*Defined in [src/scrapper/mangafox.ts:82](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangafox.ts#L82)*
+*Defined in [src/scrapper/mangafox.ts:82](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangafox.ts#L82)*
 
 **Parameters:**
 
