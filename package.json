@@ -11,10 +11,7 @@
     "doc:md": "rm -rf ./docs/md && npx typedoc --plugin typedoc-plugin-markdown --tsconfig ./tsconfig.json --out ./docs/md",
     "doc:all": "npm run doc:html && npm run doc:md",
     "tslint": "gulp tslint",
-    "prettify": "npx tsfmt -r --baseDir ./src",
-    "sqlz:migrate": "npx sequelize db:migrate",
-    "sqlz:undo": "npx sequelize db:migrate:undo",
-    "sqlz:new": "npx sequelize migration:create"
+    "prettify": "npx tsfmt -r --baseDir ./src"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -36,6 +33,7 @@
     "@types/mongoose": "^5.7.24",
     "@types/node": "^14.6.1",
     "@types/node-cron": "^2.0.3",
+    "@types/puppeteer": "^3.0.2",
     "@types/string-similarity": "^3.0.0",
     "@types/validator": "^13.1.0",
     "axios": "^0.19.2",
@@ -45,19 +43,15 @@
     "express": "^4.17.1",
     "node-cron": "^2.0.3",
     "nodemon": "^2.0.4",
-    "pg": "^8.3.3",
-    "pg-hstore": "^2.3.3",
     "puppeteer": "^5.4.0",
     "query-string": "^6.13.5",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "5.21.5",
     "string-similarity": "^4.0.2",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   },
   "devDependencies": {
-    "@types/puppeteer": "^3.0.2",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-tslint": "^8.1.4",

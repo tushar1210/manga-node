@@ -2,7 +2,7 @@ import * as axios from 'axios'
 import * as Fs from 'fs'
 import * as cheerio from 'cheerio'
 import * as ss from 'string-similarity'
-import { parseChapNumber, chapToken, thumbnail } from '../helpers/mangasee'
+import { parseChapNumber, chapToken, thumbnail, nextChapter, previousChapter, currentChapter } from '../helpers/mangasee'
 import { hotUpReq, latestUpReq, allReq, curChapterReq, chapsReq } from '../interfaces/requests/mangasee'
 import * as mainInterface from '../interfaces/responses/main'
 
@@ -49,6 +49,7 @@ class Scraper {
             imageURL: thumbnail(element.IndexName),
             source: this.baseURL,
             currentChapter: parseChapNumber(element.Chapter),
+            currentChapterURL: `${this.baseURL}/read-online/${element.IndexName}-chapter-${parseChapNumber(element.Chapter)}.html`,
             additionalInfo: {
               id: element.SeriesID,
               date: element.Date,
@@ -92,6 +93,7 @@ class Scraper {
             source: this.baseURL,
             imageURL: thumbnail(element.IndexName),
             currentChapter: parseChapNumber(element.Chapter),
+            currentChapterURL: `${this.baseURL}/read-online/${element.IndexName}-chapter-${parseChapNumber(element.Chapter)}.html`,
             additionalInfo: {
               id: element.SeriesID,
               genres: element.Genres,
@@ -208,7 +210,7 @@ class Scraper {
       url: url,
       headers: this.defaultHeaders
     })
-      .then((data: axios.AxiosResponse<any>) => {
+      .then(async (data: axios.AxiosResponse<any>) => {
         let str: any, $ = cheerio.load(data.data, { xmlMode: true })
         if ($('script:not([src])').length != 6) {
           throw new Error("Illegal chapterURL")
@@ -216,7 +218,9 @@ class Scraper {
         str = $('script:not([src])')[5].children[0].data?.toString()
         let path: string = str?.match(/vm.CurPathName = (\".*?\")/)[1].split(/"*"/)[1]
         let curChapter: curChapterReq = JSON.parse(str?.match(/vm.CurChapter = (\{.*?\})/)[1])
-        let sourceSpecificName: any = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
+        let sourceSpecificName: string = str?.match(/vm.IndexName = (\".*?\")/)[1].split(/"*"/)[1]
+        let allChapters: curChapterReq[] = JSON.parse(str?.match(/vm.CHAPTERS = (\[.*?\])/)[0].split('vm.CHAPTERS = ')[1])
+
         let chpNum: number = Number(curChapter.Page)
         let chpPath: string = curChapter.Chapter.substring(1, 5)
 
@@ -238,6 +242,26 @@ class Scraper {
 
         let imageDict: any = {}
 
+        let chapterIndex = await currentChapter(allChapters, curChapter)
+          .then((data: number) => {
+            return data
+          })
+          .catch((e) => [
+          ])
+        var preChapter: string
+        var nexChapter: string
+        if (allChapters.length > 1) {
+          if (chapterIndex == allChapters.length - 1) {
+            preChapter = previousChapter(sourceSpecificName, chapterIndex, allChapters)
+          } else if (chapterIndex == 0) {
+            nexChapter = nextChapter(sourceSpecificName, chapterIndex, allChapters)
+          }
+          else {
+            preChapter = previousChapter(sourceSpecificName, chapterIndex, allChapters)
+            nexChapter = nextChapter(sourceSpecificName, chapterIndex, allChapters)
+          }
+        }
+
         for (let index = 1; index <= chpNum; index++) {
           let chpURL: string = imgURL
           if (index >= 1 && index <= 9) {
@@ -256,7 +280,9 @@ class Scraper {
         let res: mainInterface.chapterData = {
           imageURL: imageDict,
           chapterNumber: curChapter.Chapter,
-          mangaTitle: null
+          nextChapter: nexChapter,
+          previousChapter: preChapter,
+          mangaTitle: sourceSpecificName.split('-').join(' ')
         }
         final = res
       })

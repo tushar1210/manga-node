@@ -23,7 +23,7 @@
 
 • **Chapter**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:37](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L37)*
+*Defined in [src/interfaces/requests/mangasee.ts:37](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L37)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **ChapterName**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:42](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L42)*
+*Defined in [src/interfaces/requests/mangasee.ts:42](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L42)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **Date**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:41](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L41)*
+*Defined in [src/interfaces/requests/mangasee.ts:41](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L41)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **Directory**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:40](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L40)*
+*Defined in [src/interfaces/requests/mangasee.ts:40](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L40)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **Page**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:39](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L39)*
+*Defined in [src/interfaces/requests/mangasee.ts:39](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L39)*
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 • **Type**: *string*
 
-*Defined in [src/interfaces/requests/mangasee.ts:38](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/requests/mangasee.ts#L38)*
+*Defined in [src/interfaces/requests/mangasee.ts:38](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/requests/mangasee.ts#L38)*

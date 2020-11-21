@@ -36,7 +36,7 @@
 
 \+ **new Scraper**(): *[Scraper](_src_scrapper_mangakakalot_.scraper.md)*
 
-*Defined in [src/scrapper/mangakakalot.ts:11](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L11)*
+*Defined in [src/scrapper/mangakakalot.ts:11](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L11)*
 
 **Returns:** *[Scraper](_src_scrapper_mangakakalot_.scraper.md)*
 
@@ -46,7 +46,7 @@
 
 • **baseURL**: *string*
 
-*Defined in [src/scrapper/mangakakalot.ts:10](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L10)*
+*Defined in [src/scrapper/mangakakalot.ts:10](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L10)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 • **dataURL**: *string*
 
-*Defined in [src/scrapper/mangakakalot.ts:11](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L11)*
+*Defined in [src/scrapper/mangakakalot.ts:11](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L11)*
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 • **defaultHeaders**: *object*
 
-*Defined in [src/scrapper/mangakakalot.ts:9](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L9)*
+*Defined in [src/scrapper/mangakakalot.ts:9](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L9)*
 
 ## Methods
 
@@ -70,7 +70,7 @@ ___
 
 ▸ **getAll**(): *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
-*Defined in [src/scrapper/mangakakalot.ts:165](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L165)*
+*Defined in [src/scrapper/mangakakalot.ts:174](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L174)*
 
 **Returns:** *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **getChaps**(`mangaName`: string): *Promise‹[chapterResults](../interfaces/_src_interfaces_responses_main_.chapterresults.md)[]›*
 
-*Defined in [src/scrapper/mangakakalot.ts:110](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L110)*
+*Defined in [src/scrapper/mangakakalot.ts:111](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L111)*
 
 **Parameters:**
 
@@ -96,7 +96,7 @@ ___
 
 ▸ **hotUpdates**(): *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
-*Defined in [src/scrapper/mangakakalot.ts:24](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L24)*
+*Defined in [src/scrapper/mangakakalot.ts:24](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L24)*
 
 **Returns:** *Promise‹[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]›*
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **latestUpdates**(): *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
-*Defined in [src/scrapper/mangakakalot.ts:51](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L51)*
+*Defined in [src/scrapper/mangakakalot.ts:51](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L51)*
 
 **Returns:** *Promise‹[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]›*
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **mangaData**(`chapterURL`: string): *Promise‹[chapterData](../interfaces/_src_interfaces_responses_main_.chapterdata.md)›*
 
-*Defined in [src/scrapper/mangakakalot.ts:136](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L136)*
+*Defined in [src/scrapper/mangakakalot.ts:137](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L137)*
 
 **Parameters:**
 
@@ -132,7 +132,7 @@ ___
 
 ▸ **scrapeAll**(): *Promise‹void›*
 
-*Defined in [src/scrapper/mangakakalot.ts:169](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L169)*
+*Defined in [src/scrapper/mangakakalot.ts:178](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L178)*
 
 **Returns:** *Promise‹void›*
 
@@ -142,7 +142,7 @@ ___
 
 ▸ **scrapeHotUpdates**(`data`: AxiosResponse): *[hotUpdates](../interfaces/_src_interfaces_responses_main_.hotupdates.md)[]*
 
-*Defined in [src/scrapper/mangakakalot.ts:198](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L198)*
+*Defined in [src/scrapper/mangakakalot.ts:207](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L207)*
 
 **Parameters:**
 
@@ -158,7 +158,7 @@ ___
 
 ▸ **scrapeLatestUpdates**(`data`: AxiosResponse): *[latestUpdates](../interfaces/_src_interfaces_responses_main_.latestupdates.md)[]*
 
-*Defined in [src/scrapper/mangakakalot.ts:223](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L223)*
+*Defined in [src/scrapper/mangakakalot.ts:232](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L232)*
 
 **Parameters:**
 
@@ -174,7 +174,7 @@ ___
 
 ▸ **search**(`keyWord`: string): *Promise‹[searchResults](../interfaces/_src_interfaces_responses_main_.searchresults.md)[]›*
 
-*Defined in [src/scrapper/mangakakalot.ts:76](https://github.com/tushar1210/manga-node/blob/a01e945/src/scrapper/mangakakalot.ts#L76)*
+*Defined in [src/scrapper/mangakakalot.ts:76](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/scrapper/mangakakalot.ts#L76)*
 
 **Parameters:**
 

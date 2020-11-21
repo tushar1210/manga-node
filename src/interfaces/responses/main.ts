@@ -35,6 +35,14 @@ export interface searchResults {
   additionalInfo?: any
 }
 
+export interface getChaptersResponse {
+  chapterLinks: chapterResults[]
+  author?: string[]
+  genre?: string[],
+  additionalInfo?: any
+}
+
+
 export interface chapterResults {
   link: string
   chapterNumber: string
@@ -46,5 +54,7 @@ export interface chapterResults {
 export interface chapterData {
   imageURL: any
   chapterNumber: string | null,
-  mangaTitle: string | null
+  mangaTitle: string | null,
+  nextChapter?: string,
+  previousChapter?: string
 }

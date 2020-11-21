@@ -18,7 +18,7 @@
 
 • **data**: *object*
 
-*Defined in [src/interfaces/responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/a01e945/src/interfaces/responses/mangasee.ts#L58)*
+*Defined in [src/interfaces/responses/mangasee.ts:58](https://github.com/tushar1210/manga-node/blob/6ab85fc/src/interfaces/responses/mangasee.ts#L58)*
 
 #### Type declaration:
 

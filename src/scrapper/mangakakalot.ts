@@ -138,6 +138,8 @@ class Scraper {
     var chapterData: any = {}
     var chapterNumber: string
     var mangaName: string
+    var previousChapterURL: string | null = null
+    var nextChapterURL: string | null = null
     await axios.default({
       url: chapterURL,
       headers: this.defaultHeaders,
@@ -152,13 +154,19 @@ class Scraper {
         })
         chapterNumber = $('.panel-breadcrumb').children('a').last().html().replace(/^\D+/g, '')
         mangaName = $('.panel-breadcrumb').children('a').first().next().next().text()
+        previousChapterURL = $('.navi-change-chapter-btn-prev').first().attr('href')
+        nextChapterURL = $('.navi-change-chapter-btn-next').first().attr('href')
       })
       .catch((e) => {
       })
+    console.log(nextChapterURL);
+
     var mangaDataDict: mainInterface.chapterData = {
       imageURL: chapterData,
       chapterNumber: chapterNumber,
-      mangaTitle: mangaName
+      mangaTitle: mangaName,
+      previousChapter: previousChapterURL,
+      nextChapter: nextChapterURL
     }
     return mangaDataDict
   }
