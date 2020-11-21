@@ -12,6 +12,7 @@
 - manga/[source-index]/search/?keyWord=<query>
 - manga/[source-index]/chaps/<manga-name>
 - manga/search/?keyWord=<query>
+- /manga/sources
 
 ```
 
