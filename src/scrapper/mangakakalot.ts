@@ -117,6 +117,11 @@ class Scraper {
     })
       .then((data: axios.AxiosResponse) => {
         var $ = cheerio.load(data.data)
+        //#129
+        var genres: string[] = []
+
+
+
         $('.row-content-chapter').children('li').each((_: number, elem: cheerio.Element) => {
           let chapterItem: mainInterface.chapterResults = {
             chapterNumber: $('a', elem).attr('href').split('_').splice(-1)[0],

@@ -35,7 +35,7 @@ export interface searchResults {
   additionalInfo?: any
 }
 
-export interface getChaptersResponse {
+export interface chaptersResponse {
   chapterLinks: chapterResults[]
   author?: string[]
   genre?: string[],
