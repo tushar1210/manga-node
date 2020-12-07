@@ -128,6 +128,9 @@ class Scraper {
     })
       .then((data: axios.AxiosResponse) => {
         var $ = cheerio.load(data.data)
+        // #129
+        let genres = $('')
+        // end #129
         $('.detail-main-list').children('li').each((_: number, elem: cheerio.Element) => {
           let chp = $(elem).children('a').children('div').children('p').first().text().split('-')
           let chapter: mainInterface.chapterResults = {
@@ -136,12 +139,13 @@ class Scraper {
             chapterName: (chp.length == 2) ? chp[1] : '',
             type: '',
             date: $(elem).children('a').children('div').children('p').first().next().text()
+
           }
           res.push(chapter)
         })
       })
       .catch((e: axios.AxiosError) => {
-
+        return new Error(e.message)
       })
     return res
   }
